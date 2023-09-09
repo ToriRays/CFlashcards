@@ -7,15 +7,15 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CFlashcards.Areas.Identity.Data;
 
-// Add profile data for application users by adding properties to the FlashcardsUser class
+// TODO Add identity role for the users, so they won't be able to change cards of the other user
 public class FlashcardsUser : IdentityUser
 {
     [PersonalData]
-    [Column(TypeName="nvarchar(100)")]  //atribute collumn assigned with datatype TypeName
+    [Column(TypeName="nvarchar(100)")]  
     public string FirstName { get; set; }
     //next property
     [PersonalData]
-    [Column(TypeName = "nvarchar(100)")]  //atribute collumn assigned with datatype TypeName
+    [Column(TypeName = "nvarchar(100)")]  
     public string LastName { get; set; }
 }
 

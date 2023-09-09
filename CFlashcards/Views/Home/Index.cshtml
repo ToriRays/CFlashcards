@@ -1,4 +1,8 @@
-﻿@{
+﻿@using CFlashcards.Areas.Identity.Data;
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<FlashcardsUser> SignInManager
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -7,3 +11,12 @@
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <p>User Id : @ViewData["UserID"]</p> @*UserID achived with coresponding @ViewData[]*@
 </div>
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <span>Logged In</span>
+}
+else
+{
+    <span>Something went wrong</span>
+}

@@ -1,8 +1,11 @@
 ﻿using CFlashcards.Areas.Identity.Data;
+using CFlashcards.Areas.Identity.Services.Email;
 using CFlashcards.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using System.Diagnostics;
 
 namespace CFlashcards.Controllers
@@ -11,16 +14,26 @@ namespace CFlashcards.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger; //for ILogger down there it is coresponding private readonly property which is assigned within parameter logger in brackets
-        private readonly UserManager<FlashcardsUser> _userManager;  
+        private readonly UserManager<FlashcardsUser> _userManager;
+        private readonly IEmailSender _emailSender;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<FlashcardsUser> userManager)
+        public HomeController(ILogger<HomeController> logger, UserManager<FlashcardsUser> userManager, IEmailSender emailSender)
         {
             _logger = logger;
             this._userManager = userManager;
+            this._emailSender = emailSender;
         }
 
         public IActionResult Index()
         {
+
+
+           // var receiver = "mail";
+            //var subject = "Test";
+            //var message = "Hello";
+
+            //await _emailSender.SendEmailAsync(receiver, subject, message);
+
             ViewData["UserID"]= _userManager.GetUserId(this.User); //.User details of the user saved during login operation
             return View();
         }
