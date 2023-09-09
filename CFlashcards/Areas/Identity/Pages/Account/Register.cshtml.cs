@@ -112,6 +112,10 @@ namespace CFlashcards.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)  //Method called to load form(writing names)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                Response.Redirect("/");
+            }//so if user is authenticated but will try to register page then he will be redirected back to welcome page
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
