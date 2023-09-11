@@ -7,7 +7,7 @@
         public string Answer { get; set; } = string.Empty;
         public string? Notes { get; set; }
         //navigation property
-        public virtual Deck Deck { get; set; } = default!;
+        public virtual Deck Deck { get; set; } = default!; //Virtual keyword used for lazy loading
     }
 }
 

@@ -1,4 +1,5 @@
 ﻿using CFlashcards.DAL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CFlashcards.Controllers
@@ -14,6 +15,7 @@ namespace CFlashcards.Controllers
             _logger = logger;
         }
 
+        [Authorize]
         public IActionResult Decks()
         {
             return View();
