@@ -1,6 +1,4 @@
-﻿using CFlashcards.Areas.Identity.Data;
-
-namespace CFlashcards.Models
+﻿namespace CFlashcards.Models
 {
     public class Deck
     {

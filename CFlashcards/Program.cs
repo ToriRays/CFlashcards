@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using CFlashcards.Data;
-using CFlashcards.Areas.Identity.Data;
 using Microsoft.Build.Framework;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using CFlashcards.Areas.Identity.Services.Email;
 using System.Configuration;
+using CFlashcards.DAL;
+using CFlashcards.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("AuthDbContextConnection") ?? throw new InvalidOperationException("Connection string 'AuthDbContextConnection' not found.");
