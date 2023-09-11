@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Flashcard>
+
+<div id="flashcardCarousel" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+        @foreach (var flashcard in Model)
+        {
+            <div class="carousel-item">
+                <div class="card"> <!-- style="width: 18rem;" -->
+                    <div class="card-body">
+                        <h5 class="card-title">FlashcardId:@flashcard.FlashcardId</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        <p class="card-text">Question:@flashcard.Question</p>
+                        <p class="card-text">Answer:@flashcard.Answer</p>
+                        <a asp-action="Update" asp-route-id="@flashcard.FlashcardId" class="card-link">Update</a>
+                        <a a asp-action="Delete" asp-route-id="@flashcard.FlashcardId" class="card-link">Delete</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

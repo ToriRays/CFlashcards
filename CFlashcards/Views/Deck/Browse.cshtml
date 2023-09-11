@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Deck>
+
+<h1>List of Decks</h1>
+
+<div class="container-fluid">
+    @foreach (var deck in Model)
+    {
+        <div class="row-cols-1">
+            <h3>DeckId:@deck.DeckId Title:@deck.Title</h3>
+            <p>Description:@deck.Description</p>
+            <partial name="_FlashcardCarousel" model="deck.Flashcards">
+        </div>
+    }
+</div>

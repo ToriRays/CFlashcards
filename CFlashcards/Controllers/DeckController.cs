@@ -1,4 +1,5 @@
 ﻿using CFlashcards.DAL;
+using CFlashcards.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,9 +17,15 @@ namespace CFlashcards.Controllers
         }
 
         [Authorize]
-        public IActionResult Decks()
+        public async Task<IActionResult> Browse()
         {
-            return View();
+            var decks = await _deckRepository.GetAll();
+            if (decks == null)
+            {
+                _logger.LogError("[DeckController] Deck list not found while executing _itemRepository.GetAll()");
+                return NotFound("Deck list not found.");
+            }
+            return View(decks);
         }
     }
 }

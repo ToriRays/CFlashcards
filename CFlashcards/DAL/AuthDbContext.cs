@@ -11,7 +11,6 @@ public class AuthDbContext : IdentityDbContext<FlashcardsUser>
         : base(options)
     {
     }
-
     public DbSet<Flashcard> Flashcards { get; set; }
     public DbSet<Deck> Decks { get; set; }
 
