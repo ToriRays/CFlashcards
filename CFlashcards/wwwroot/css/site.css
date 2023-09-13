@@ -27,13 +27,13 @@ body {
     padding: 0px 0px 12px 0px;
 }
 
-.login-logout-card ul.nav-tabs{
+.login-logout-card ul.nav-tabs {
     margin: 0px 0px -12px 0px;
 }
 
 .login-logout-card li.nav-item {
     width: 50%;
-}
+ }
 
 .login-logout-card a.nav-link {
     font-size: 1rem;
@@ -45,4 +45,3 @@ body {
 .login-logout-card .card-body {
     padding:10px 20px;
 }
-                                                                                                                                       

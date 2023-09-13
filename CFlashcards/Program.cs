@@ -8,6 +8,7 @@ using CFlashcards.DAL;
 using CFlashcards.Models;
 using Serilog;
 using Serilog.Events;
+using WebPWrecover.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("AuthDbContextConnection") ?? throw new InvalidOperationException("Connection string 'AuthDbContextConnection' not found.");
@@ -25,6 +26,7 @@ builder.Services.AddControllers().AddNewtonsoftJson(options => //This stops infi
 });
 
 // builder.Services.AddScoped<IDeckRepository,DeckRepository>();
+
 
 builder.Services.AddSession(options =>
 {

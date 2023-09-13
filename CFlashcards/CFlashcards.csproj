@@ -39,6 +39,7 @@
 
   <ItemGroup>
     <Folder Include="Logs\" />
+    <Folder Include="wwwroot\html\" />
   </ItemGroup>
 
 </Project>
