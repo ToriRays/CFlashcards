@@ -4,7 +4,7 @@ namespace CFlashcards.DAL
 {
     public interface IDeckRepository
     {
-        Task<IEnumerable<Deck>?> GetAll();
+        Task<IEnumerable<Deck>?> GetAll(string flashcardsUserId);
         Task<Deck?> GetDeckById(int id);
         Task<bool> Create(Deck deck);
         Task<bool> Update(Deck deck);

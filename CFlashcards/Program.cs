@@ -19,12 +19,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddRazorPages();
 
-builder.Services.AddControllers().AddNewtonsoftJson(options => //This stops infinite reference loops in the database. For example deck reference flashcard that reference deck that reference flashcard and so on
-{
-    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-});
-
-// builder.Services.AddScoped<IDeckRepository,DeckRepository>();
+builder.Services.AddScoped<IDeckRepository, DeckRepository>();
 
 builder.Services.AddSession(options =>
 {
@@ -66,7 +61,8 @@ if (!app.Environment.IsDevelopment())
     app.UseMigrationsEndPoint();
 }
 else
-{ 
+{
+    DBInit.Seed(app);
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();

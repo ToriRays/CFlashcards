@@ -18,16 +18,11 @@ namespace CFlashcards.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Title = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: true),
-                    FlashcardsUserId = table.Column<string>(type: "TEXT", nullable: true)
+                    FlashcardUserId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Decks", x => x.DeckId);
-                    table.ForeignKey(
-                        name: "FK_Decks_AspNetUsers_FlashcardsUserId",
-                        column: x => x.FlashcardsUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -51,11 +46,6 @@ namespace CFlashcards.Migrations
                         principalColumn: "DeckId",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Decks_FlashcardsUserId",
-                table: "Decks",
-                column: "FlashcardsUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Flashcards_DeckId",

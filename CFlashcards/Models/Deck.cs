@@ -8,6 +8,6 @@
         //navigation property
         public virtual List<Flashcard>? Flashcards { get; set; } //Virtual keyword used for lazy loading
         //navigation property
-        public virtual FlashcardsUser FlashcardsUser { get; set; } = default!; //Virtual keyword used for lazy loading
+        public string FlashcardUserId { get; set; }
     }
 }

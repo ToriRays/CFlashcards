@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CFlashcards.DAL
 {
-    public class DeckRepository
+    public class DeckRepository : IDeckRepository
     {
         private readonly AuthDbContext _db;
         private readonly ILogger<DeckRepository> _logger;
@@ -14,11 +14,11 @@ namespace CFlashcards.DAL
             _logger = logger;
         }
 
-        public async Task<IEnumerable<Deck>?> GetAll()
+        public async Task<IEnumerable<Deck>?> GetAll(string flashcardsUserId)
         {
             try
             {
-                return await _db.Decks.ToListAsync();
+                return await _db.Decks.Where(x => x.FlashcardUserId == flashcardsUserId).ToListAsync();
             }
             catch (Exception e)
             {
@@ -29,6 +29,7 @@ namespace CFlashcards.DAL
 
         public async Task<Deck?> GetDeckById(int id)
         {
+            //implement check on flashcardUserId
             try
             {
                 return await _db.Decks.FindAsync(id);

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CFlashcards.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20230911134353_FlashcardDbExpanded")]
+    [Migration("20230912183851_FlashcardDbExpanded")]
     partial class FlashcardDbExpanded
     {
         /// <inheritdoc />
@@ -33,7 +33,8 @@ namespace CFlashcards.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("FlashcardsUserId")
+                    b.Property<string>("FlashcardUserId")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
@@ -41,8 +42,6 @@ namespace CFlashcards.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("DeckId");
-
-                    b.HasIndex("FlashcardsUserId");
 
                     b.ToTable("Decks");
                 });
@@ -276,15 +275,6 @@ namespace CFlashcards.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("CFlashcards.Models.Deck", b =>
-                {
-                    b.HasOne("CFlashcards.Models.FlashcardsUser", "FlashcardsUser")
-                        .WithMany()
-                        .HasForeignKey("FlashcardsUserId");
-
-                    b.Navigation("FlashcardsUser");
                 });
 
             modelBuilder.Entity("CFlashcards.Models.Flashcard", b =>
