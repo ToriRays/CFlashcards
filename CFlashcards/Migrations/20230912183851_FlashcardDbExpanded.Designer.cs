@@ -11,16 +11,69 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CFlashcards.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20230907190424_Initial Create")]
-    partial class InitialCreate
+    [Migration("20230912183851_FlashcardDbExpanded")]
+    partial class FlashcardDbExpanded
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.10");
+            modelBuilder
+                .HasAnnotation("ProductVersion", "7.0.10")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true);
 
-            modelBuilder.Entity("CFlashcards.Areas.Identity.Data.FlashcardsUser", b =>
+            modelBuilder.Entity("CFlashcards.Models.Deck", b =>
+                {
+                    b.Property<int>("DeckId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FlashcardUserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("DeckId");
+
+                    b.ToTable("Decks");
+                });
+
+            modelBuilder.Entity("CFlashcards.Models.Flashcard", b =>
+                {
+                    b.Property<int>("FlashcardId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Answer")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("DeckId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Question")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("FlashcardId");
+
+                    b.HasIndex("DeckId");
+
+                    b.ToTable("Flashcards");
+                });
+
+            modelBuilder.Entity("CFlashcards.Models.FlashcardsUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
@@ -224,6 +277,17 @@ namespace CFlashcards.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("CFlashcards.Models.Flashcard", b =>
+                {
+                    b.HasOne("CFlashcards.Models.Deck", "Deck")
+                        .WithMany("Flashcards")
+                        .HasForeignKey("DeckId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Deck");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -235,7 +299,7 @@ namespace CFlashcards.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("CFlashcards.Areas.Identity.Data.FlashcardsUser", null)
+                    b.HasOne("CFlashcards.Models.FlashcardsUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -244,7 +308,7 @@ namespace CFlashcards.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("CFlashcards.Areas.Identity.Data.FlashcardsUser", null)
+                    b.HasOne("CFlashcards.Models.FlashcardsUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -259,7 +323,7 @@ namespace CFlashcards.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CFlashcards.Areas.Identity.Data.FlashcardsUser", null)
+                    b.HasOne("CFlashcards.Models.FlashcardsUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -268,11 +332,16 @@ namespace CFlashcards.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("CFlashcards.Areas.Identity.Data.FlashcardsUser", null)
+                    b.HasOne("CFlashcards.Models.FlashcardsUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("CFlashcards.Models.Deck", b =>
+                {
+                    b.Navigation("Flashcards");
                 });
 #pragma warning restore 612, 618
         }

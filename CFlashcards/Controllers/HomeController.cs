@@ -1,5 +1,4 @@
-﻿using CFlashcards.Areas.Identity.Data;
-using CFlashcards.Areas.Identity.Services.Email;
+﻿using CFlashcards.Areas.Identity.Services.Email;
 using CFlashcards.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;

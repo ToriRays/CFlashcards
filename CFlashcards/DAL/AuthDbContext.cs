@@ -1,15 +1,22 @@
-﻿using CFlashcards.Areas.Identity.Data;
+﻿using CFlashcards.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace CFlashcards.Data;
+namespace CFlashcards.DAL;
 
 public class AuthDbContext : IdentityDbContext<FlashcardsUser>
 {
     public AuthDbContext(DbContextOptions<AuthDbContext> options)
         : base(options)
     {
+    }
+    public DbSet<Flashcard> Flashcards { get; set; }
+    public DbSet<Deck> Decks { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseLazyLoadingProxies();
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
