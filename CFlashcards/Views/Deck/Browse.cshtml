@@ -8,7 +8,12 @@
         <div class="row-cols-1">
             <h3>DeckId:@deck.DeckId Title:@deck.Title</h3>
             <p>Description:@deck.Description</p>
-            <partial name="_FlashcardCarousel" model="deck.Flashcards">
+                <div id="@("flashcardCarousel" + deck.DeckId)" class="carousel slide" data-bs-ride="carousel">
+                    @{
+                        FlashcardListViewModel flashcardListViewModel = new FlashcardListViewModel(deck.Flashcards, deck.DeckId);
+                    }
+                <partial name="_FlashcardCarousel" model="@flashcardListViewModel" />
+            </div>
         </div>
     }
 </div>

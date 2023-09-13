@@ -30,7 +30,8 @@ namespace CFlashcards.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("FlashcardsUserId")
+                    b.Property<string>("FlashcardUserId")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
@@ -38,8 +39,6 @@ namespace CFlashcards.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("DeckId");
-
-                    b.HasIndex("FlashcardsUserId");
 
                     b.ToTable("Decks");
                 });
@@ -273,15 +272,6 @@ namespace CFlashcards.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
-                });
-
-            modelBuilder.Entity("CFlashcards.Models.Deck", b =>
-                {
-                    b.HasOne("CFlashcards.Models.FlashcardsUser", "FlashcardsUser")
-                        .WithMany()
-                        .HasForeignKey("FlashcardsUserId");
-
-                    b.Navigation("FlashcardsUser");
                 });
 
             modelBuilder.Entity("CFlashcards.Models.Flashcard", b =>

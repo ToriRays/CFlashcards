@@ -17,8 +17,5 @@ public class FlashcardsUser : IdentityUser
     [PersonalData]
     [Column(TypeName = "nvarchar(100)")]
     public string LastName { get; set; }
-    [PersonalData]
-    //navigation property
-    public virtual List<Deck>? Decks { get; set; }
 }
 
