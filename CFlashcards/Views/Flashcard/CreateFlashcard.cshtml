@@ -1,0 +1,26 @@
+﻿@model Flashcard
+
+<h2>Create New Item</h2>
+<!--Have no idea if this works-->
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-action="CreateFlashcard" asp-route-id="Model">
+    <input type="hidden" asp-for="DeckId" value="@ViewBag.AdditionalData" />
+    <div class="form-group">
+        <label asp-for="Question"></label><span class="text-danger">*</span>
+        <input asp-for="Question" class="form-control" />
+        <span asp-validation-for="Question" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Answer"></label><span class="text-danger">*</span>
+        <input asp-for="Answer" class="form-control" />
+        <span asp-validation-for="Answer" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Notes"></label>
+        <input asp-for="Notes" class="form-control" />
+        <span asp-validation-for="Notes" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+    <a asp-action="Table" class="btn btn-secondary">Back to Carousel View</a>
+</form>

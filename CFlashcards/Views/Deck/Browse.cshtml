@@ -11,8 +11,13 @@
                     <h5 class="card-title">Title:@deck.Title</h5>
                     <p class="card-text">@deck.Description</p>
                     <a class="btn btn-primary" asp-controller="Deck" asp-action="Carousel" asp-route-id="@deck.DeckId">Browse the deck</a>
-                    <a class="btn btn-secondary" asp-controller="Deck" asp-action="UpdateDeck" asp-route-id="@deck.DeckId">Update the deck information</a>
-                    <a class="btn btn-danger" asp-controller="Deck" asp-action="DeleteDeck" asp-route-id="@deck.DeckId">Delete the deck</a>
+                    @{
+                        if(deck.FlashcardUserId != "demo")
+                        {
+                            <a class="btn btn-secondary" asp-controller="Deck" asp-action="UpdateDeck" asp-route-id="@deck.DeckId">Update the deck information</a>
+                            <a class="btn btn-danger" asp-controller="Deck" asp-action="DeleteDeck" asp-route-id="@deck.DeckId">Delete the deck</a>
+                        }
+                    }
                 </div>
             </div>
         </div>

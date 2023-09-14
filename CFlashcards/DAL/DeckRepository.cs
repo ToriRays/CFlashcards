@@ -18,7 +18,7 @@ namespace CFlashcards.DAL
         {
             try
             {
-                return await _db.Decks.Where(x => x.FlashcardUserId == flashcardsUserId).ToListAsync();
+                return await _db.Decks.Where(x => x.FlashcardUserId == flashcardsUserId | x.FlashcardUserId == "demo" ).ToListAsync();
             }
             catch (Exception e)
             {

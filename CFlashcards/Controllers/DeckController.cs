@@ -87,10 +87,13 @@ namespace CFlashcards.Controllers
         [Authorize]
         public async Task<IActionResult> UpdateDeck(Deck deck)
         {
-            bool returnOk = await _deckRepository.Update(deck);
-            if (returnOk)
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Browse));
+                bool returnOk = await _deckRepository.Update(deck);
+                if (returnOk)
+                {
+                    return RedirectToAction(nameof(Browse));
+                }
             }
             _logger.LogWarning("[DeckController] Deck update failed {@deck}", deck);
             return View(deck);

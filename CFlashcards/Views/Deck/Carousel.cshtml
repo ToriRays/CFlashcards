@@ -22,7 +22,7 @@
                                 <p class="card-text">Answer:@flashcard.Answer</p>
                                 <p class="card-text">Notes:@flashcard.Notes</p>
                                 <p>
-                                    <a class="btn btn-secondary" asp-controller="Flashcard" asp-action="Edit" asp-route-id="@flashcard.FlashcardId">Edit card</a>
+                                    <a class="btn btn-secondary" asp-controller="Flashcard" asp-action="Details" asp-route-id="@flashcard.FlashcardId">Inspect card</a>
                                 </p>
                             </div>
                         </div>
@@ -41,3 +41,4 @@
 </a>
 </div>
 <a class="btn btn-primary" asp-controller="Deck" asp-action="Browse">Back to deck browsing.</a>
+<a class="btn btn-primary" asp-controller="Flashcard" asp-action="CreateFlashcard" asp-route-id="@Model.DeckId">Create flashcard</a>
