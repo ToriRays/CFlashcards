@@ -9,6 +9,7 @@ using CFlashcards.Models;
 using Serilog;
 using Serilog.Events;
 using WebPWrecover.Services;
+using CFlashcards.DAL.NewFolder;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("AuthDbContextConnection") ?? throw new InvalidOperationException("Connection string 'AuthDbContextConnection' not found.");
@@ -21,6 +22,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<IDeckRepository, DeckRepository>();
+
+builder.Services.AddScoped<IFileService, FileService>();
 
 
 builder.Services.AddSession(options =>
