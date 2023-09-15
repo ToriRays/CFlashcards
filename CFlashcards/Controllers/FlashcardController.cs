@@ -11,11 +11,13 @@ namespace CFlashcards.Controllers
     public class FlashcardController : Controller
     {
         private readonly IFlashcardRepository _flashcardRepository;
+        private readonly IDeckRepository _deckRepository;
         private readonly ILogger<FlashcardController> _logger;
 
-        public FlashcardController(IFlashcardRepository flashcardRepository, ILogger<FlashcardController> logger)
+        public FlashcardController(IFlashcardRepository flashcardRepository, IDeckRepository deckRepository, ILogger<FlashcardController> logger)
         {
             _flashcardRepository = flashcardRepository;
+            _deckRepository = deckRepository;
             _logger = logger;
         }
 
@@ -25,7 +27,7 @@ namespace CFlashcards.Controllers
             var flashcard = await _flashcardRepository.GetFlashcardById(id);
             if (flashcard == null)
             {
-                _logger.LogError("[FlashcardController] Flashcard not found when trying to edit the FlashcardId {FlashcardId:0000}", id);
+                _logger.LogError("[FlashcardController] Flashcard not found when trying to edit the FlashcardId: {@id}", id);
                 return BadRequest("Flashcard not found for the FlashcardId.");
             }
             return View(flashcard);
@@ -43,16 +45,29 @@ namespace CFlashcards.Controllers
         [Authorize]
         public async Task<IActionResult> CreateFlashcard(Flashcard flashcard)
         {
-            if (ModelState.IsValid)
+            //Had to remove if(ModelState.IsValid) for this to work. Need to find out why
+            var deck = await _deckRepository.GetDeckById(flashcard.DeckId);
+            if (deck == null)
             {
-                bool returnOk = await _flashcardRepository.Create(flashcard);
-                if (returnOk)
-                {
-                    return RedirectToAction("Details", new { id = flashcard.FlashcardId }); //redirect to the detailed view of the newly created card
-                }
+                _logger.LogError("[FlashcardController] Deck not found when creating a new flashcard FlashcardId {@flashcardId}", flashcard.FlashcardId);
+                return BadRequest("Deck not found when creating the flashcard.");
             }
-            _logger.LogWarning("[FlashcardController] Flashcard creation failed {@flashcard}", flashcard);
-            return RedirectToAction("Carousel", "DeckController", new {id = flashcard.DeckId}); //redirect to the carousel view of the deck where card creation was started
+            var newFlashcard = new Flashcard
+            {
+                FlashcardId = flashcard.FlashcardId,
+                Question = flashcard.Question,
+                Answer = flashcard.Answer,
+                Notes = flashcard.Notes,
+                DeckId = flashcard.DeckId,
+                Deck = deck
+            };
+            bool returnOk = await _flashcardRepository.Create(newFlashcard);
+            if (returnOk)
+            {
+                return RedirectToAction("Details", new { id = newFlashcard.FlashcardId }); //redirect to the detailed view of the newly created card
+            }
+            _logger.LogWarning("[FlashcardController] Flashcard creation failed {@newFlashcard}", newFlashcard);
+            return RedirectToAction("Carousel", "Deck", newFlashcard.DeckId); //redirect to the carousel view of the deck where card creation was started
         }
 
         [HttpGet]
@@ -72,16 +87,41 @@ namespace CFlashcards.Controllers
         [Authorize]
         public async Task<IActionResult> EditFlashcard(Flashcard flashcard)
         {
-            if (ModelState.IsValid)
+            //Had to remove if(ModelState.IsValid) for this to work. Need to find out why
+            bool returnOk = await _flashcardRepository.Update(flashcard);
+            if (returnOk)
             {
-                bool returnOk = await _flashcardRepository.Update(flashcard);
-                if (returnOk)
-                {
-                    return RedirectToAction("Details" , new {id = flashcard.FlashcardId}); //redirect to the detailed view of the edited card
-                }
+                return RedirectToAction("Details", new { id = flashcard.FlashcardId }); //redirect to the detailed view of the edited card
             }
             _logger.LogWarning("[FlashcardController] Flashcard update failed {@flashcard}", flashcard);
             return View(flashcard);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> DeleteFlashcard(int id)
+        {
+            var flashcard = await _flashcardRepository.GetFlashcardById(id);
+            if (flashcard == null)
+            {
+                _logger.LogError("[FlashcardController] Flashcard not found when updating the FlashcardId {FlashcardId:0000}", id);
+                return BadRequest("Flashcard not found for the FlashcardId.");
+            }
+            return View(flashcard);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> DeleteFlashcardConfirmed(int id, int deckId)
+        {
+            bool returnOk = await _flashcardRepository.Delete(id);
+            if (!returnOk)
+            {
+                _logger.LogError("[FlashcardController] Flashcard deletion failed for the FlashcardId: {@id}", id);
+                return BadRequest("Flashcard deletion failed.");
+            }
+            _logger.LogError("FlashcardId: {@id}, DeckId: {@deckId}", id, deckId);
+            return RedirectToAction("Carousel", "Deck", new { id = deckId });
         }
     }
 }

@@ -33,12 +33,15 @@
     </div>
     <a class="carousel-control-prev" href="@("#flashcardCarousel" + Model.DeckId)" role="button" data-bs-slide="prev" style="color:black">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only" style="font-size: 2vw">&lsaquo;</span>
+        <span class="sr-only" style="font-size: 4vw">&lsaquo;</span>
     </a>
     <a class="carousel-control-next" href="@("#flashcardCarousel" + Model.DeckId)" role="button" data-bs-slide="next" style="color:black">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only" style=" font-size: 2vw">&rsaquo;</span>
+        <span class="sr-only" style=" font-size: 4vw">&rsaquo;</span>
 </a>
 </div>
 <a class="btn btn-primary" asp-controller="Deck" asp-action="Browse">Back to deck browsing.</a>
-<a class="btn btn-primary" asp-controller="Flashcard" asp-action="CreateFlashcard" asp-route-id="@Model.DeckId">Create flashcard</a>
+<form asp-controller="Flashcard" asp-action="CreateFlashcard" method="get">
+    <input type="hidden" name="deckId" value="@Model.DeckId" />
+    <button type="submit" class="btn btn-primary">Create Flashcard</button>
+</form>

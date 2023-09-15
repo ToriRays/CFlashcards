@@ -39,8 +39,9 @@ namespace CFlashcards.Controllers
             var deck = await _deckRepository.GetDeckById(id);
             if (deck == null)
             {
-                _logger.LogError("[DeckController] Deck not found while executing _deckRepository.GetDeckById() DeckId {DeckId:0000}", id);
-                return BadRequest("Deck not found for the DeckId.");
+                _logger.LogError("[DeckController] Deck not found while executing _deckRepository.GetDeckById() DeckId:{id}", id);
+                var badRequest = "Deck not found for the DeckId: " + id;
+                return BadRequest(badRequest);
             }
             return View(deck);
         }
@@ -49,6 +50,7 @@ namespace CFlashcards.Controllers
         [Authorize]
         public IActionResult CreateDeck()
         {
+            ViewBag.AdditionalData = _userManager.GetUserId(User) ?? "";
             return View();
         }
 
@@ -107,7 +109,7 @@ namespace CFlashcards.Controllers
             if (deck == null)
             {
                 _logger.LogError("[DeckController] Deck not found when updating the DeckId {DeckId:0000}", id);
-                return BadRequest("Decknot found for the DeckId.");
+                return BadRequest("Deck not found for the DeckId.");
             }
             return View(deck);
         }

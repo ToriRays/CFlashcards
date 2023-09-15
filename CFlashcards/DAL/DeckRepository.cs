@@ -36,7 +36,7 @@ namespace CFlashcards.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[DeckRepository] FindAsync() failed when GetDeckById() was called for DeckId {DeckId:0000} error message:{e}", id, e.Message);
+                _logger.LogError("[DeckRepository] FindAsync() failed when GetDeckById() was called for DeckId {DeckId:@id} error message:{e}", id, e.Message);
                 return null;
             }
         }
