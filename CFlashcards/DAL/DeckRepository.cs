@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CFlashcards.DAL
 {
+    //TODO Add deck list service for being able search and for pagination
     public class DeckRepository : IDeckRepository
     {
         private readonly AuthDbContext _db;
@@ -91,5 +92,22 @@ namespace CFlashcards.DAL
                 return false;
             }
         }
+
+        public async Task<IEnumerable<Deck>?> SearchDecksByTitle(string flashcardsUserId, string term)
+        {
+            try
+            {
+                return await _db.Decks
+                    .Where(deck => deck.FlashcardUserId == flashcardsUserId && deck.Title.Contains(term))
+                    .ToListAsync();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("[DeckRepository] SearchDecksByTitle() failed for UserId {UserId:@flashcardsUserId} with error message:{e}", flashcardsUserId, e.Message);
+                // return View(decks);
+                return null;
+            }
+        }
+
     }
 }
