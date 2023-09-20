@@ -18,14 +18,14 @@ public static class DBInit
                 new Deck
                 {
                     Title = "Norwegian flashcards",
-                    Description = "A deck containing basic Norwegian language cards for learning.",
-                    FlashcardUserId = "cc0fc40e-f142-41d4-8ef3-4066365c2a11"
+                    Description = "This is a demo deck: A deck containing basic Norwegian language cards for learning.",
+                    FlashcardUserId = "demo"
                 },
                 new Deck
                 {
                     Title = "Science quiz flashcard",
-                    Description = "A deck containing science questions and answers ",
-                    FlashcardUserId = "cc0fc40e-f142-41d4-8ef3-4066365c2a11"
+                    Description = "This is a demo deck: A deck containing science questions and answers ",
+                    FlashcardUserId = "demo"
                 }
             };
             context.AddRange(decks);

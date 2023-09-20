@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CFlashcards.DAL
 {
+    //TODO Add deck list service for being able search and for pagination
     public class DeckRepository : IDeckRepository
     {
         private readonly AuthDbContext _db;
@@ -18,7 +19,7 @@ namespace CFlashcards.DAL
         {
             try
             {
-                return await _db.Decks.Where(x => x.FlashcardUserId == flashcardsUserId).ToListAsync();
+                return await _db.Decks.Where(x => x.FlashcardUserId == flashcardsUserId | x.FlashcardUserId == "demo" ).ToListAsync();
             }
             catch (Exception e)
             {
@@ -36,7 +37,7 @@ namespace CFlashcards.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[DeckRepository] FindAsync() failed when GetDeckById() was called for DeckId {DeckId:0000} error message:{e}", id, e.Message);
+                _logger.LogError("[DeckRepository] FindAsync() failed when GetDeckById() was called for DeckId {DeckId:@id} error message:{e}", id, e.Message);
                 return null;
             }
         }
@@ -91,5 +92,22 @@ namespace CFlashcards.DAL
                 return false;
             }
         }
+
+        public async Task<IEnumerable<Deck>?> SearchDecksByTitle(string flashcardsUserId, string term)
+        {
+            try
+            {
+                return await _db.Decks
+                    .Where(deck => deck.FlashcardUserId == flashcardsUserId && deck.Title.Contains(term))
+                    .ToListAsync();
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("[DeckRepository] SearchDecksByTitle() failed for UserId {UserId:@flashcardsUserId} with error message:{e}", flashcardsUserId, e.Message);
+                // return View(decks);
+                return null;
+            }
+        }
+
     }
 }
