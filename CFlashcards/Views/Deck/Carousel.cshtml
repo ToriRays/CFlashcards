@@ -1,5 +1,23 @@
 ﻿@model Deck
 
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Card Slider</title>
+    <title>Text to Speech Converter</title>
+    <link rel="stylesheet" href="style.css" />
+
+
+    <!--CSS-->
+    <link href="~/css/carouself.css" rel="stylesheet" />
+
+</head>
+<body>
+
 <div id="@("flashcardCarousel" + Model.DeckId)" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner" align="center">
         @{
@@ -10,6 +28,8 @@
                 if (!Model.Flashcards.Any()) //Check if the flashcardlist if empty
                 {
                     <h5 class="card-title">It looks like this deck is empty. Go ahead and create some cards :).</h5>
+                    <img src="~/css/images/emty box.png"/>
+
                 }
                 else
                 {
@@ -22,6 +42,11 @@
                                 first = false;
                             }
                             <div class="card">
+                                    <div class="container">
+                                        <header>Text to Speech Converter</header>
+                                        <textarea placeholder="Enter text">@flashcard.Question</textarea>
+                                        <button class="btn btn-primary speech-button" data-speech-button data-speech-text="@flashcard.Question">Convert to Speech</button>
+                                    </div>
                                 <div class="card-body align-content-center">
                                     <h5 class="card-title">FlashcardId:@flashcard.FlashcardId</h5>
                                     <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
@@ -56,3 +81,6 @@
     <input type="hidden" name="deckId" value="@Model.DeckId" />
     <button type="submit" class="btn btn-primary">Create Flashcard</button>
 </form>
+    <script src="~/js/site.js" defer></script>
+</body>
+</html>

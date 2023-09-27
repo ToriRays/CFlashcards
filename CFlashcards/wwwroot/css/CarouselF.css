@@ -1,0 +1,87 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.card{
+    width:520px;
+   border-radius: 25px;
+   background-color: #FFF;
+}
+
+.carousel-inner{
+    margin: 0 40px;
+}
+
+.card-body align-content-center{
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    padding: 10px 14px;
+}
+
+
+.card-title{
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+}
+
+.card-subtitle mb-2 text-muted{
+    font-size:14px;
+    color: #707070;
+    text-align:center;
+}
+
+.btn btn-secondary{
+    border: none;
+    font-size:16px;
+    color: #FFF;
+    padding: 8px 16px;
+    background-color:peru;
+    border-radius:6px;
+    margin: 14px;
+}
+
+.container {
+    position: relative;
+    max-width: 750px;
+    width: 100%;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    font-size: 18px;
+    color: #333;
+    font-weight: 500;
+    text-align: center;
+}
+
+textarea {
+    width: 100%;
+    height: 180px;
+    border-radius: 8px;
+    margin: 20px 0;
+    padding: 10px 15px;
+    resize: none;
+    outline: none;
+    border: 1px solid #aaa;
+}
+
+btn btn-primary speech-button {
+    width: 100%;
+    padding: 14px 0;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    background: #6e93f7;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    button:hover {
+        background: #4070f4;
+    }
