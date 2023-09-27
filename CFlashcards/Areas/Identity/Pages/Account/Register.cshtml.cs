@@ -182,18 +182,18 @@ namespace CFlashcards.Areas.Identity.Pages.Account
             {
                 MailMessage message = new();
                 SmtpClient smtpClient = new();
-                message.From = new MailAddress("piotkop52@gmail.com");
+                message.From = new MailAddress("webapplicationp50@gmail.com");
                 message.To.Add(email);
                 message.Subject = subject;
                 message.IsBodyHtml = true;
                 message.Body = confirmLink;
 
                 smtpClient.Port = 587;
-                smtpClient.Host = "smtp-relay.sendinblue.com";
+                smtpClient.Host = "smtp.gmail.com";
 
                 smtpClient.EnableSsl = true;
                 smtpClient.UseDefaultCredentials = false;
-                smtpClient.Credentials = new NetworkCredential("piotkop52@gmail.com", "x5VM2TIZYKQWnHs7");
+                smtpClient.Credentials = new NetworkCredential("webapplicationp50@gmail.com", "rukj bnjc oksp fblu");
                 smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                 smtpClient.Send(message);
                 return true;
