@@ -20,6 +20,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 builder.Services.AddScoped<IDeckRepository, DeckRepository>();
+builder.Services.AddScoped<IFlashcardRepository, FlashcardRepository>();
 
 builder.Services.AddSession(options =>
 {

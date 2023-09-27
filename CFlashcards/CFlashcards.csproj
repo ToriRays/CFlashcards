@@ -10,9 +10,12 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'https' " />
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'http' " />
   <ItemGroup>
-    <Compile Remove="Controllers\FlashcardController.cs" />
     <Compile Remove="DAL\AuthRepository.cs" />
     <Compile Remove="DAL\IAuthRepository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Shared\_FlashcardCarousel.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

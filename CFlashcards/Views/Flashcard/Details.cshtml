@@ -1,0 +1,19 @@
+﻿@model Flashcard
+
+<div class="card">
+    <div class="card-body align-content-center">
+        <h5 class="card-title">FlashcardId:@Model.FlashcardId</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+        <p class="card-text">Question:@Model.Question</p>
+        <p class="card-text">Answer:@Model.Answer</p>
+        <p class="card-text">Notes:@Model.Notes</p>
+    </div>
+</div>
+@{
+    if(Model.Deck.FlashcardUserId != "demo")
+    {
+        <a class="btn btn-secondary" asp-controller="Flashcard" asp-action="EditFlashcard" asp-route-id="@Model.FlashcardId">Edit the card</a>
+        <a class="btn btn-danger" asp-controller="Flashcard" asp-action="DeleteFlashcard" asp-route-id="@Model.FlashcardId">Delete the card</a>
+    } //Note to myself: Maybe grey out the buttons instead.
+}
+<a class="btn btn-primary" asp-controller="Deck" asp-action="Carousel" asp-route-id="@Model.DeckId">Browse other cards</a>
