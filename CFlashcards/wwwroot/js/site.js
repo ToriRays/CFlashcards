@@ -1,16 +1,15 @@
 ﻿const textarea = document.querySelector("textarea");
-const button = document.querySelector(".speech-button");
+const buttonQuestion = document.querySelector(".speech-button");
+const buttonAnswer = document.querySelectorAll(".speech-button-answer");
 let isSpeaking = false;
 let speechSynthesis = window.speechSynthesis;
 let intervalId;
 
-const textToSpeech = () => {
-    const text = textarea.value;
-
+const textToSpeech = (text) => {
     if (isSpeaking) {
         speechSynthesis.cancel();
         isSpeaking = false;
-        button.innerText = "Convert to Speech";
+        buttonQuestion.innerText = "Convert to Speech";
         clearInterval(intervalId);
         return;
     }
@@ -19,16 +18,25 @@ const textToSpeech = () => {
         const utterance = new SpeechSynthesisUtterance(text);
         speechSynthesis.speak(utterance);
         isSpeaking = true;
-        button.innerText = "Pause";
+        buttonQuestion.innerText = "Pause";
     }
-}; 
+};
 
-button.addEventListener("click", textToSpeech);
+buttonQuestion.addEventListener("click", () => {
+    textToSpeech(textarea.value);
+});
+
+buttonAnswer.forEach((button) => {
+    button.addEventListener("click", () => {
+        const answerText = button.getAttribute("data-answer");
+        textToSpeech(answerText);
+    });
+});
 
 intervalId = setInterval(() => {
     if (!speechSynthesis.speaking && isSpeaking) {
         isSpeaking = false;
-        button.innerText = "Convert to Speech";
+        buttonQuestion.innerText = "Convert to Speech";
         clearInterval(intervalId);
     }
-}); // Adjust the interval duration as needed
+});
