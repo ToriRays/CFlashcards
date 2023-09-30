@@ -38,7 +38,7 @@ namespace XunitTestCFlashcards.Controllers
         };
 
         // A function that will prevent reuse of code in the unit tests.
-        private static DeckController CreateDeckController(Mock<IDeckRepository> deckRepositoryMock)
+        private static DeckController CreateDeckController(Mock<IDeckRepository> mockDeckRepository)
         {
             // Create a mock UserStore that is needed to create a mock UserManager.
             var mockUserStore = new Mock<IUserStore<FlashcardsUser>>();
@@ -46,8 +46,8 @@ namespace XunitTestCFlashcards.Controllers
             var mockUserManager = new Mock<UserManager<FlashcardsUser>>(
                 mockUserStore.Object, null, null, null, null, null, null, null, null);
             // Create a mock logger
-            var loggerMock = new Mock<ILogger<DeckController>>();
-            return new DeckController(deckRepositoryMock.Object, loggerMock.Object, mockUserManager.Object);
+            var mockLogger = new Mock<ILogger<DeckController>>();
+            return new DeckController(mockDeckRepository.Object, mockLogger.Object, mockUserManager.Object);
         }
 
         [Fact]
@@ -94,7 +94,7 @@ namespace XunitTestCFlashcards.Controllers
         }
 
         [Fact]
-        public async Task TestCreateFunctionFails()
+        public async Task TestCreateDeckFunctionFails()
         {
             // Arrange
             var mockDeckRepository = new Mock<IDeckRepository>();
@@ -111,7 +111,7 @@ namespace XunitTestCFlashcards.Controllers
         }
 
         [Fact]
-        public async Task TestCreateFunctionPasses()
+        public async Task TestCreateDeckFunctionPasses()
         {
             // Arrange
             var mockDeckRepository = new Mock<IDeckRepository>();
@@ -128,7 +128,7 @@ namespace XunitTestCFlashcards.Controllers
         }
 
         [Fact]
-        public async Task TestUpdateFunctionFails()
+        public async Task TestUpdateDeckFunctionFails()
         {
             // Arrange
             var mockDeckRepository = new Mock<IDeckRepository>();
@@ -146,7 +146,7 @@ namespace XunitTestCFlashcards.Controllers
         }
 
         [Fact]
-        public async Task TestUpdateFunctionPasses()
+        public async Task TestUpdateDeckFunctionPasses()
         {
             // Arrange
             var mockDeckRepository = new Mock<IDeckRepository>();
@@ -163,7 +163,7 @@ namespace XunitTestCFlashcards.Controllers
         }
 
         [Fact]
-        public async Task TestDeleteFunctionFails()
+        public async Task TestDeleteDeckConfirmedFunctionFails()
         {
             var testId = 1;
             // Arrange
@@ -172,14 +172,14 @@ namespace XunitTestCFlashcards.Controllers
             var deckController = CreateDeckController(mockDeckRepository);
 
             // Act
-            var result = await deckController.DeleteDeck(testId);
+            var result = await deckController.DeleteDeckConfirmed(testId);
 
             // Assert
             var viewResult = Assert.IsType<BadRequestObjectResult>(result);
         }
 
         [Fact]
-        public async Task TestDeleteFunctionPasses()
+        public async Task TestDeleteDeckConfirmedFunctionPasses()
         {
             var testId = 1;
             // Arrange
