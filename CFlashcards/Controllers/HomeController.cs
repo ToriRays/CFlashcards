@@ -1,4 +1,4 @@
-﻿using CFlashcards.Areas.Identity.Services.Email;
+﻿//using CFlashcards.Areas.Identity.Services.Email;
 using CFlashcards.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 namespace CFlashcards.Controllers
 {
-    [Authorize] // so the userID will be showned only when we looged in, otherwise redirection to LogReg box on the welcome page
+    // so the userID will be showned only when we looged in, otherwise redirection to LogReg box on the welcome page
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger; //for ILogger down there it is coresponding private readonly property which is assigned within parameter logger in brackets
@@ -23,6 +23,7 @@ namespace CFlashcards.Controllers
             this._emailSender = emailSender;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
 

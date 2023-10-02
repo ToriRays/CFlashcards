@@ -19,6 +19,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using CFlashcards.Models;
+using System.Net.Mail;
+using System.Security.Cryptography.X509Certificates;
+using System.Net;
 
 namespace CFlashcards.Areas.Identity.Pages.Account
 {
@@ -148,7 +151,9 @@ namespace CFlashcards.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                        //$"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    await SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
@@ -169,6 +174,35 @@ namespace CFlashcards.Areas.Identity.Pages.Account
 
             // If we got this far, something failed, redisplay form
             return Page();
+        }
+
+        private async Task<bool> SendEmailAsync(string email, string subject, string confirmLink)
+        {
+            try
+            {
+                MailMessage message = new();
+                SmtpClient smtpClient = new();
+                message.From = new MailAddress("webapplicationp50@gmail.com");
+                message.To.Add(email);
+                message.Subject = subject;
+                message.IsBodyHtml = true;
+                message.Body = confirmLink;
+
+                smtpClient.Port = 587;
+                smtpClient.Host = "smtp.gmail.com";
+
+                smtpClient.EnableSsl = true;
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = new NetworkCredential("webapplicationp50@gmail.com", "rukj bnjc oksp fblu");
+                smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtpClient.Send(message);
+                return true;
+            }
+            catch (Exception)
+            {
+                _logger.LogError("[Register.cshtml.cs] The confirmation email could not be sent to {@email}", email);
+                return false;
+            }
         }
 
         private FlashcardsUser CreateUser()

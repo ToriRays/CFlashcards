@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Build.Framework;
 using Microsoft.AspNetCore.Identity.UI.Services;
-using CFlashcards.Areas.Identity.Services.Email;
+//using CFlashcards.Areas.Identity.Services.Email;
 using System.Configuration;
 using CFlashcards.DAL;
 using CFlashcards.Models;
@@ -26,7 +26,7 @@ builder.Services.AddSession(options =>
 {
     options.Cookie.Name = ".AdventureWorks.Session"; // set any name u prefer
     options.IdleTimeout = TimeSpan.FromSeconds(1800); //Session expires after 1800 seconds of being inactive
-    options.Cookie.IsEssential = true; //Indicates that the session cookie is essential for the application.
+    options.Cookie.IsEssential = false; //Indicates that the session cookie is essential for the application.
 });
 
 var loggerConfiguration = new LoggerConfiguration()
@@ -41,11 +41,11 @@ var logger = loggerConfiguration.CreateLogger();
 builder.Logging.AddSerilog(logger);
 
 //////////////////////////////////////////////////////  Identity /////////////////////////////////////////////////////////////////////////////////
-builder.Services.AddDefaultIdentity<FlashcardsUser>(options => options.SignIn.RequireConfirmedAccount = false)
+builder.Services.AddDefaultIdentity<FlashcardsUser>(options => options.SignIn.RequireConfirmedAccount = true) //options => options.SignIn.RequireConfirmedAccount = false
     .AddEntityFrameworkStores<AuthDbContext>(); // I turned off confirmation/verification of the account
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddTransient<IEmailSender, EmailSender>();
+// builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
