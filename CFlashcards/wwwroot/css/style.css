@@ -1,0 +1,163 @@
+/** {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--bg-color);*/
+    /* padding:0 3rem; */
+    /*display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}*/
+
+
+
+/* Base button styles */
+.btn.btn-secondary {
+    background: linear-gradient(45deg, #FF00FF, #FF0080); 
+    color: #fff; /* text color */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+    /* Hover effect */
+    .btn.btn-secondary:hover {
+        background: linear-gradient(45deg, #FF0080, #FF00FF); 
+        transform: scale(1.05); 
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    }
+
+.container {
+    width: 100%;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 0 2%;
+}
+
+    .search-bar input[type="text"] {
+        padding: 0.7rem;
+        border: 1px solid lightgray;
+        border-radius: 0.25rem;
+        font-size: 1rem;
+        width: 25%;
+    }
+
+    .search-bar button {
+        border-radius: 0.25rem;
+        font-size: 1rem;
+        padding: 0.7rem 0.9rem;
+        border: none;
+        background: linear-gradient(45deg, #FF6B6B, #FF8E53);
+        color: black;
+        cursor: pointer;
+    }
+
+/* Pagination links */
+.pagination {
+    display: flex;
+    justify-content: right;
+}
+
+    .pagination a {
+        color: black;
+        padding: 8px 16px;
+        text-decoration: none;
+        transition: background-color .3s;
+    }
+
+        /* Style the active/current link */
+        .pagination a.active {
+            background-color: rgb(169, 30, 255);
+            color: white;
+        }
+
+        /* Add a grey background color on mouse-over */
+        .pagination a:hover:not(.active) {
+            background-color: #ddd;
+        }
+
+.cards-list {
+    z-index: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card {
+    margin: 30px auto;
+    width: 300px;
+    height: 300px;
+    border-radius: 40px;
+    box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+    .card .card_image {
+        width: inherit;
+        height: inherit;
+        border-radius: 40px;
+    }
+
+        .card .card_image img {
+            width: inherit;
+            height: inherit;
+            border-radius: 40px;
+            object-fit: cover;
+        }
+
+    .card .card_title {
+        text-align: center;
+        border-radius: 0px 0px 40px 40px;
+        font-family: sans-serif;
+        font-weight: bold;
+        font-size: 30px;
+        margin-top: -80px;
+        height: 40px;
+    }
+
+    .card:hover {
+        transform: scale(0.9, 0.9);
+        box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25), -5px -5px 30px 15px rgba(0,0,0,0.22);
+    }
+
+.title-white {
+    color: white;
+}
+
+.title-black {
+    color: black;
+}
+
+@media all and (max-width: 500px) {
+    .card-list {
+        /* On small screens, we are no longer using row direction but column */
+        flex-direction: column;
+    }
+}
+
+.card {
+    margin: 30px auto;
+    width: 300px;
+    height: 300px;
+    border-radius: 40px;
+    background-image: url('https://i.redd.it/b3esnz5ra34y.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+    transition: 0.4s;
+}
