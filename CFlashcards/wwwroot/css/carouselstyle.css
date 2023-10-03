@@ -5,8 +5,8 @@
 }
 .card{
     width:520px;
-   border-radius: 25px;
-   background-color: #FFF;
+    border-radius: 25px;
+    background-color: #FFF;
 }
 
 .carousel-inner{
@@ -60,7 +60,6 @@ btn btn-primary speech-button {
     border-radius: 8px;
     color: #fff;
     background: #6e93f7;
-    cursor: pointer;
     transition: all 0.3s ease;
 }
 
@@ -77,7 +76,6 @@ btn btn-primary speech-button {
     display: flex;
     justify-content: center;
     align-items: center;
-  
 }
 
 
