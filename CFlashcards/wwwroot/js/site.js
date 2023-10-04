@@ -1,6 +1,4 @@
-﻿const textarea = document.querySelector("textarea");
-const buttonQuestion = document.querySelector(".speech-button");
-const buttonAnswer = document.querySelectorAll(".speech-button-answer");
+﻿const buttonAnswer = document.querySelectorAll(".speech-button-answer");
 let isSpeaking = false;
 let speechSynthesis = window.speechSynthesis;
 let intervalId;
@@ -9,7 +7,7 @@ const textToSpeech = (text, lang) => {
     if (isSpeaking) {
         speechSynthesis.cancel();
         isSpeaking = false;
-        buttonQuestion.innerText = "Convert to Speech";
+        buttonAnswer.innerText = "Convert to Speech";
         clearInterval(intervalId);
         return;
     }
@@ -19,16 +17,9 @@ const textToSpeech = (text, lang) => {
         utterance.lang = lang; // Set the language of the utterance to Norwegian
         speechSynthesis.speak(utterance);
         isSpeaking = true;
-        buttonQuestion.innerText = "Pause";
+        buttonAnswer.innerText = "Pause";
     }
 };
-
-buttonQuestion.addEventListener("click", () => {
-    const text = textarea.value;
-    // Set the language code for Norwegian (Norway)
-    const lang = 'no-NO';
-    textToSpeech(text, lang);
-});
 
 buttonAnswer.forEach((button) => {
     button.addEventListener("click", () => {
@@ -42,7 +33,7 @@ buttonAnswer.forEach((button) => {
 intervalId = setInterval(() => {
     if (!speechSynthesis.speaking && isSpeaking) {
         isSpeaking = false;
-        buttonQuestion.innerText = "Convert to Speech";
+        buttonAnswer.innerText = "Convert to Speech";
         clearInterval(intervalId);
     }
 });

@@ -42,15 +42,8 @@
                             @{
                                 first = false;
                             }
-                            <div class="card">
-                                    <div class="container">
-                                        <header>Text to Speech Converter</header>
-                                        <textarea placeholder="Enter text">@flashcard.Question</textarea>
-                                        <button class="btn btn-primary speech-button" data-speech-button data-speech-text="@flashcard.Question">Convert to Speech</button>                                     
-                                        </div>
-                                <div class="card-body align-content-center">
-                                    <h5 class="card-title">FlashcardId:@flashcard.FlashcardId</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                            <div class="card"> 
+                                <div>
                                     <p class="card-text">Question:@flashcard.Question</p>
                                         <p class="card-text">
                                             Answer: @flashcard.Answer
@@ -58,7 +51,6 @@
                                                 <i class="fas fa-volume-up"></i> 
                                             </button>
                                         </p>
-
 
                                         <p class="card-text">Notes:@flashcard.Notes</p>
                                     <p>
@@ -68,7 +60,6 @@
                             </div>
                         </div>
                     }
-
                     <a class="carousel-control-prev" href="@("#flashcardCarousel" + Model.DeckId)" role="button" data-bs-slide="prev" style="color:black">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="sr-only" style="font-size: 4vw">&lsaquo;</span>
@@ -77,6 +68,7 @@
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="sr-only" style=" font-size: 4vw">&rsaquo;</span>
                     </a>
+
                 }
             }
         }
