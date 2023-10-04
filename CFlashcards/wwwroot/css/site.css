@@ -46,4 +46,55 @@ body {
 .login-logout-card .card-body {
     padding:10px 20px;
 }
-                                                                                                                                       
+
+/* Custom styles for the carousel */
+.carousel-inner {
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    padding: 20px; /* Adds padding inside carousel items */
+}
+
+.card-body-f {
+    padding: 1.25rem;
+}
+
+/* Styles for carousel control buttons */
+.carousel-control-prev,
+.carousel-control-next {
+    color: #000;
+    font-size: 24px;
+    width: auto;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.carousel-control-prev {
+    left: 30px;
+}
+
+.carousel-control-next {
+    right: 30px;
+}
+
+/* Styles for carousel indicators */
+.carousel-indicators {
+    margin-bottom: 20px;
+}
+
+    .carousel-indicators button {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #007bff;
+    }
+
+    .carousel-indicators .active {
+        background-color: #0056b3;
+    }
+
+
+
+
+
