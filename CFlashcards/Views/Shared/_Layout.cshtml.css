@@ -4,7 +4,7 @@ for details on configuring this project to bundle and minify static web assets. 
 a.navbar-brand {
   white-space: normal;
   text-align: center;
-  word-break: break-all;
+  /*word-break: break-all;*/
 }
 
 a {
@@ -23,7 +23,32 @@ a {
   border-color: #1861ac;
 }
 
-.border-top {
+.navbar {
+    background-color: black;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.navbar-toggler {
+    background-color: black;
+}
+
+.navbar-toggler-icon {
+    display: inline-block;
+    background-color: transparent;
+    position: relative;
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
+/*.border-top {
   border-top: 1px solid #e5e5e5;
 }
 .border-bottom {
@@ -32,7 +57,7 @@ a {
 
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
+}*/
 
 button.accept-policy {
   font-size: 1rem;
@@ -40,9 +65,15 @@ button.accept-policy {
 }
 
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+    background-color: black;
+}
+
+.container-fluid {
+    padding: 0;
+    margin: 0;
 }
