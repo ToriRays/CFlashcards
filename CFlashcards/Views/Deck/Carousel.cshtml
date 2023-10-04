@@ -12,10 +12,12 @@
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/langdetect/1.0.8/langdetect.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
     <!--CSS-->
     <link href="~/css/carouselstyle.css" rel="stylesheet" />
-
+    <link href="~/css/test.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -30,53 +32,49 @@
                 {
                     foreach (var flashcard in Model.Flashcards)
                     {
-                        <section class="p-5">
+                        <div class="@(first == true ? "carousel-item active" : "carousel-item")">
+                            <!-- TThe first class needs to be active for this to work.  -->
+                            @{
+                                first = false;
+                            }
+                            <div class="settings">
+                                <ul>
+                                   <li class="list">
+                                        <a href="#">
+                                                <span class="icon"><ion-icon name="language-outline"></ion-icon></span>
+                                            <span class="text">Language</span>
+                                            <span class="circle"></span>
+                                        </a>
+                                   </li>
+                                        <li class="list">
+                                            <a href="#">
+                                                <span class="icon"><ion-icon name="barcode-outline"></ion-icon></span>
+                                                <span class="text">Voice</span>
+                                                <span class="circle"></span>
+                                            </a>
+                                        </li>
 
-                            <div class="card mb-3" align="center">
-                                <div class="card">
-                                    <h5 class="card-title">FlashcardId: @flashcard.FlashcardId</h5>
+                                        <li class="list">
+                                            <a href="#">
+                                                <span class="icon"><ion-icon name="speedometer-outline"></ion-icon></span>
+                                                <span class="text">Speed</span>
+                                                <span class="circle"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                            
+                            
+                            </div>
 
-                                    <div id="flashcardCarousel_@(flashcard.FlashcardId)" class="carousel">
-                                        <div class="carousel-indicators">
-                                            <button type="button" data-bs-target="#flashcardCarousel_@(flashcard.FlashcardId)" data-bs-slide-to="0"
-                                                    class="active" aria-current="true" aria-label="Slide 1"></button>
-                                            <button type="button" data-bs-target="#flashcardCarousel_@(flashcard.FlashcardId)" data-bs-slide-to="1"
-                                                    aria-label="Slide 2"></button>
-                                            <button type="button" data-bs-target="#flashcardCarousel_@(flashcard.FlashcardId)" data-bs-slide-to="2"
-                                                    aria-label="Slide 3"></button>
-                                        </div>
-                                        <div class="carousel-inner">
-                                            <div class="carousel-item active a-obj">
-                                                <div class="card b-obj">
-                                                    <div class="card-body-f">
-                                                        <h6 class="card-subtitle mb-2 text-muted">Question: @flashcard.Question</h6>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="carousel-item a-obj">
-                                                <div class="card b-obj">
-                                                    <div class="card-body-f">
-                                                        <h6 class="card-subtitle mb-2 text-muted">Answer: @flashcard.Answer</h6>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="carousel-item a-obj">
-                                                <div class="card b-obj">
-                                                    <div class="card-body-f">
-                                                        <h6 class="card-subtitle mb-2 text-muted">Notes: @flashcard.Notes</h6>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button class="carousel-control-prev" type="button" data-bs-target="#flashcardCarousel_@(flashcard.FlashcardId)"
-                                                data-bs-slide="prev">
-                                            <span class="bi bi-chevron-left"></span> Previous
-                                        </button>
-                                        <button class="carousel-control-next" type="button" data-bs-target="#flashcardCarousel_@(flashcard.FlashcardId)"
-                                                data-bs-slide="next">
-                                            Next <span class="bi bi-chevron-right"></span>
-                                        </button>
-                                    </div>
+                            <div class="card"> 
+                                <div>
+                                    <p class="card-text">Question:@flashcard.Question</p>
+                                        <p class="card-text">
+                                            Answer: @flashcard.Answer
+                                            <button class="btn btn-primary speech-button-answer" data-answer="@flashcard.Answer">
+                                                <i class="fas fa-volume-up"></i> 
+                                            </button>
+                                        </p>
 
                                     <a class="btn btn-secondary" asp-controller="Flashcard" asp-action="Details" asp-route-id="@flashcard.FlashcardId">Inspect card</a>
 
