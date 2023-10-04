@@ -14,25 +14,22 @@ namespace CFlashcards.Controllers
     {
         private readonly ILogger<HomeController> _logger; //for ILogger down there it is coresponding private readonly property which is assigned within parameter logger in brackets
         private readonly UserManager<FlashcardsUser> _userManager;
-        private readonly IEmailSender _emailSender;
+        private readonly SignInManager<FlashcardsUser> _signInManager;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<FlashcardsUser> userManager, IEmailSender emailSender)
+        public HomeController(ILogger<HomeController> logger, UserManager<FlashcardsUser> userManager, SignInManager<FlashcardsUser> signInManager)
         {
             _logger = logger;
-            this._userManager = userManager;
-            this._emailSender = emailSender;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         //[Authorize]
         public IActionResult Index()
         {
-
-
-           // var receiver = "mail";
-            //var subject = "Test";
-            //var message = "Hello";
-
-            //await _emailSender.SendEmailAsync(receiver, subject, message);
+            if (_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Browse", "Deck");
+            }
 
             ViewData["UserID"]= _userManager.GetUserId(this.User); //.User details of the user saved during login operation
             return View();
