@@ -1,4 +1,4 @@
-* {
+/** {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -7,13 +7,13 @@
 body {
     width: 100%;
     min-height: 100vh;
-    background-color: var(--bg-color);
+    background-color: var(--bg-color);*/
     /* padding:0 3rem; */
-    display: flex;
+    /*display: flex;
     flex-direction: column;
     justify-content: space-between;
     
-}
+}*/
 
 
 

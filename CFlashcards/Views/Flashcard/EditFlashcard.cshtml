@@ -1,0 +1,28 @@
+﻿@model Flashcard
+
+<h2>Update Item</h2>
+
+<form asp-action="EditFlashcard">
+    <input type="hidden" asp-for="FlashcardId" />
+    <input type="hidden" asp-for="DeckId" />
+    <input type="hidden" asp-for="Deck" />
+    <div class="form-group">
+        <label asp-for="Question"></label><span class="text-danger">*</span>
+        <input asp-for="Question" class="form-control" />
+        <span asp-validation-for="Question" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Answer"></label><span class="text-danger">*</span>
+        <input asp-for="Answer" class="form-control" />
+        <span asp-validation-for="Answer" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Notes"></label>
+        <input asp-for="Notes" class="form-control" />
+        <span asp-validation-for="Notes" class="text-danger"></span>
+    </div>
+    <a asp-action="EditFlashcard" asp-route-id="@Model.FlashcardId" class="btn btn-primary">
+        <i class="fa-solid fa-save"></i> Save Changes
+    </a>
+    <a asp-controller="Flashcard" asp-action="Details" asp-route-id="@Model.FlashcardId" class="btn btn-secondary">Cancel</a>
+</form>

@@ -63,7 +63,7 @@ namespace XunitTestCFlashcards.Controllers
 
         [Fact]
         public void TestIndexLoginCheckFails()
-        {
+    {
             // Arrange
             _mockSignInManager.Setup(m => m.IsSignedIn(It.IsAny<ClaimsPrincipal>())).Returns(false);
 
