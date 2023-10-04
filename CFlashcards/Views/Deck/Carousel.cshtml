@@ -1,5 +1,71 @@
 ﻿@model Deck
 
+@if (Model.Flashcards == null || !Model.Flashcards.Any())
+{
+    <h5 class="card-title">It looks like this deck is empty. Go ahead and create some cards :).</h5>
+}
+else
+{
+    foreach (var flashcard in Model.Flashcards)
+    {
+        <section class="p-5">
+
+            <div class="card mb-3" align="center">
+                <div class="card">
+                    <h5 class="card-title">FlashcardId: @flashcard.FlashcardId</h5>
+
+                    <div id="flashcardCarousel_@(flashcard.FlashcardId)" class="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#flashcardCarousel_@(flashcard.FlashcardId)" data-bs-slide-to="0"
+                                    class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#flashcardCarousel_@(flashcard.FlashcardId)" data-bs-slide-to="1"
+                                    aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#flashcardCarousel_@(flashcard.FlashcardId)" data-bs-slide-to="2"
+                                    aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active a-obj">
+                                <div class="card b-obj">
+                                    <div class="card-body-f">
+                                        <h6 class="card-subtitle mb-2 text-muted">Question: @flashcard.Question</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item a-obj">
+                                <div class="card b-obj">
+                                    <div class="card-body-f">
+                                        <h6 class="card-subtitle mb-2 text-muted">Answer: @flashcard.Answer</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item a-obj">
+                                <div class="card b-obj">
+                                    <div class="card-body-f">
+                                        <h6 class="card-subtitle mb-2 text-muted">Notes: @flashcard.Notes</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#flashcardCarousel_@(flashcard.FlashcardId)"
+                                data-bs-slide="prev">
+                            <span class="bi bi-chevron-left"></span> Previous
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#flashcardCarousel_@(flashcard.FlashcardId)"
+                                data-bs-slide="next">
+                            Next <span class="bi bi-chevron-right"></span>
+                        </button>
+                    </div>
+
+                    <a class="btn btn-secondary" asp-controller="Flashcard" asp-action="Details" asp-route-id="@flashcard.FlashcardId">Inspect card</a>
+
+
+                </div>
+            </div>
+        </section>
+
+    }
+}
+
 <!DOCTYPE html>
 
 <html lang="en">
