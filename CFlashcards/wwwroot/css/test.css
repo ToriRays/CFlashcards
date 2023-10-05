@@ -1,0 +1,70 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.settings {
+    position: relative;
+    width: 300px;
+    height: 70px;
+    background: linear-gradient(45deg, #437ee2, #c71b42);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+    .settings ul {
+        display: flex;
+        width: 350px;
+    }
+
+        .settings ul li {
+            position: relative;
+            width: 55px;
+            height: 55px;
+            list-style: none;
+            z-index: 1;
+        }
+
+            .settings ul li a {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                font-weight: 500;
+            }
+
+                .settings ul li a .icon {
+                    position: relative;
+                    display: block;
+                    line-height: 75px;
+                    font-size: 1.5em;
+                    text-align: center;
+                    color: #fff;
+                    transition: .5s; /*icon's speed animation transition*/
+                }
+
+            .settings ul li:hover a .icon {
+                transform: translateY(-32px); /*transformation-animation*/
+            }
+
+            .settings ul li a .text {
+                position: absolute;
+                color: #fff;
+                font-weight: 400;
+                font-size: .75em;
+                letter-spacing: .05em;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: .5s;
+            }
+
+            .settings ul li:hover a .text{
+                opacity: 1;
+                transform: translateY(10px);
+            }
