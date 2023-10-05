@@ -52,27 +52,19 @@ namespace CFlashcards.Controllers
                 _logger.LogError("[FlashcardController] Deck not found when creating a new flashcard FlashcardId {@flashcardId}", flashcard.FlashcardId);
                 return BadRequest("Deck not found when creating the flashcard.");
             }
-            var newFlashcard = new Flashcard
-            {
-                FlashcardId = flashcard.FlashcardId,
-                Question = flashcard.Question,
-                Answer = flashcard.Answer,
-                Notes = flashcard.Notes,
-                DeckId = flashcard.DeckId,
-                Deck = deck
-            };
-            bool returnOk = await _flashcardRepository.Create(newFlashcard);
+            flashcard.Deck = deck;
+            bool returnOk = await _flashcardRepository.Create(flashcard);
             if (returnOk)
             {
-                return RedirectToAction("Details", new { id = newFlashcard.FlashcardId }); //redirect to the detailed view of the newly created card
+                return RedirectToAction("Details", new { id = flashcard.FlashcardId }); //redirect to the detailed view of the newly created card
             }
-            _logger.LogWarning("[FlashcardController] Flashcard creation failed {@newFlashcard}", newFlashcard);
-            return RedirectToAction("Carousel", "Deck", newFlashcard.DeckId); //redirect to the carousel view of the deck where card creation was started
+            _logger.LogWarning("[FlashcardController] Flashcard creation failed {@flashcard}", flashcard);
+            return RedirectToAction("Carousel", "Deck", flashcard.DeckId); //redirect to the carousel view of the deck where card creation was started
         }
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> EditFlashcard(int id)
+        public async Task<IActionResult> UpdateFlashcard(int id)
         {
             var flashcard = await _flashcardRepository.GetFlashcardById(id);
             if (flashcard == null)
@@ -85,7 +77,7 @@ namespace CFlashcards.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> EditFlashcard(Flashcard flashcard)
+        public async Task<IActionResult> UpdateFlashcard(Flashcard flashcard)
         {
             //Had to remove if(ModelState.IsValid) for this to work. Need to find out why
             bool returnOk = await _flashcardRepository.Update(flashcard);
