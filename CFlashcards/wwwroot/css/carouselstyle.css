@@ -3,14 +3,143 @@
     padding: 0;
     box-sizing: border-box;
 }
-.card{
-    width:520px;
-    border-radius: 25px;
-    background-color: #FFF;
+
+
+.settings {
+    position: relative;
+    width: 300px;
+    height: 70px;
+    background: linear-gradient(45deg, #437ee2, #c71b42);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
 }
 
-.carousel-inner{
+    .settings ul {
+        display: flex;
+        width: 350px;
+    }
+
+        .settings ul li {
+            position: relative;
+            width: 55px;
+            height: 55px;
+            list-style: none;
+            z-index: 1;
+        }
+
+            .settings ul li a {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+                font-weight: 500;
+            }
+
+                .settings ul li a .icon {
+                    position: relative;
+                    display: block;
+                    line-height: 75px;
+                    font-size: 1.5em;
+                    text-align: center;
+                    color: #fff;
+                    transition: .5s; /*icon's speed animation transition*/
+                }
+
+            .settings ul li.active a .icon {
+                transform: translateY(-32px); /*transformation-animation*/
+            }
+
+            .settings ul li a .text {
+                position: absolute;
+                color: #fff;
+                font-weight: 400;
+                font-size: .75em;
+                letter-spacing: .05em;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.5s, transform 0.5s;
+            }
+
+            .settings ul li.active a .text {
+                opacity: 1;
+                transform: translateY(10px);
+            }
+
+            .settings ul li a .circle {
+                position: absolute;
+                display: block;
+                width: 50px;
+                height: 50px;
+                background: transparent;
+                border-radius: 50%;
+                border: 1.8px solid #fff;
+                transform: translateY(-37px) scale(0); /*!!!*/
+                transition: transform .5s; /*!!!*/
+            }
+
+            .settings ul li.active a .circle {
+                transform: scale(1); /* Adjusted the transformation value */ /*!!!*/
+            }
+/*so it can't see .circle
+    icon isn't in the middle of the indicator-circle and doesn't move
+*/
+
+/*transparent squares with cutted borders*/
+
+.indicator {
+    position: absolute;
+    top: -50%;
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(45deg, #437ee2, #c71b42);
+    border: 6px solid #0b080c;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .indicator::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: -22px;
+        width: 20px;
+        height: 20px;
+        background: transparent;
+        border-top-right-radius: 20px;
+        box-shadow: 1px -10px #0b080c;
+    }
+
+    .indicator::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: -22px;
+        width: 20px;
+        height: 20px;
+        background: transparent;
+        border-top-left-radius: 20px;
+        box-shadow: -1px -10px #0b080c;
+    }
+
+
+
+.card {
+    width: 520px;
+    border-radius: 25px;
+    background-color: #FFF;
+    z-index: 2
+}
+
+.carousel-inner {
     margin: 0 40px;
+    z-index:2
 }
 
 .card-body align-content-center{
