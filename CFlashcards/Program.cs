@@ -74,7 +74,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseSession();
-//app.UseAuthentication();
+app.UseAuthentication();
 app.UseAuthorization();
 //app.MapDefaultControllerRoute();
 app.MapControllerRoute(

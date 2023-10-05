@@ -81,7 +81,6 @@ namespace CFlashcards.Controllers
         {
             //Had to remove if(ModelState.IsValid) for this to work. Need to find out why
             bool returnOk = await _flashcardRepository.Update(flashcard);
-            System.Diagnostics.Debug.WriteLine("ReturnOk: " + returnOk);
             if (returnOk)
             {
                 return RedirectToAction("Details", new { id = flashcard.FlashcardId }); //redirect to the detailed view of the edited card
