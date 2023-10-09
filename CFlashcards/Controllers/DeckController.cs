@@ -21,15 +21,31 @@ namespace CFlashcards.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> Browse()
+        public async Task<IActionResult> Browse(string searchString)
         {
             var flashcardUserId = _userManager.GetUserId(this.User) ?? ""; //Avoids null reference warnings
-            var decks = await _deckRepository.GetAll(flashcardUserId);
-            if (decks == null)
+            IEnumerable<Deck>? decks;
+
+            if (string.IsNullOrEmpty(searchString))
             {
-                _logger.LogError("[DeckController] Deck list not found while executing _deckRepository.GetAll()");
-                return NotFound("Deck list not found.");
+                decks = await _deckRepository.GetAll(flashcardUserId);
+                if (decks == null)
+                {
+                    _logger.LogError("[DeckController] Deck list not found while executing _deckRepository.GetAll()");
+                    return NotFound("Deck list not found.");
+                }
             }
+            else
+            {
+                decks = await _deckRepository.SearchDecksByTitle(flashcardUserId, searchString);
+                if (decks == null)
+                {
+                    _logger.LogError("[DeckController] Deck list not found while executing _deckRepository.SearchDecksByTitle()");
+                    return NotFound("Deck list not found.");
+                }
+            }
+
+            ViewData["SearchTerm"] = searchString;
             return View(decks);
         }
 

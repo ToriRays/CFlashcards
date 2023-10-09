@@ -93,18 +93,18 @@ namespace CFlashcards.DAL
             }
         }
 
-        public async Task<IEnumerable<Deck>?> SearchDecksByTitle(string flashcardsUserId, string term)
+        public async Task<IEnumerable<Deck>?> SearchDecksByTitle(string flashcardsUserId, string searchString)
         {
             try
             {
-                return await _db.Decks
-                    .Where(deck => deck.FlashcardUserId == flashcardsUserId && deck.Title.Contains(term))
-                    .ToListAsync();
+                // Converting the searchString and the Title to lowercase such that the search is case-insesitive.
+                searchString = searchString.ToLower();
+                return await _db.Decks.Where(deck => (deck.FlashcardUserId == "demo" || deck.FlashcardUserId == flashcardsUserId)
+                && deck.Title.ToLower().Contains(searchString)).ToListAsync();
             }
             catch (Exception e)
             {
                 _logger.LogError("[DeckRepository] SearchDecksByTitle() failed for UserId {UserId:@flashcardsUserId} with error message:{e}", flashcardsUserId, e.Message);
-                // return View(decks);
                 return null;
             }
         }

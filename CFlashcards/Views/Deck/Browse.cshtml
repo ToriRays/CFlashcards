@@ -54,8 +54,8 @@
     <div class="container">
         <section class="search-bar">
           <form method="get" asp-action="Browse">
-                <input type="text" name="term" placeholder="search here" >
-          <button type="submit"><i class="fa fa-search"></i></button>
+                <input type="text" name="searchString" placeholder="search here" value="@ViewData["SearchString"]">
+                <button type="submit"><i class="fa fa-search"></i></button>
          </form>
         </section>
     </div>
