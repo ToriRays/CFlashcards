@@ -176,7 +176,12 @@ namespace CFlashcards.Areas.Identity.Pages.Account
             return Page();
         }
 
+        
         private async Task<bool> SendEmailAsync(string email, string subject, string confirmLink)
+        // Function for sending confirmation email.
+        // inputs:
+        // returns:
+        // error handling:
         {
             try
             {

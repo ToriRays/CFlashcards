@@ -32,7 +32,8 @@ namespace CFlashcards.Controllers
             }
 
             ViewData["UserID"]= _userManager.GetUserId(this.User); //.User details of the user saved during login operation
-            return View();
+            // The name in the return view is needed for unit tests.
+            return View("Index");
         }
 
         public IActionResult Privacy()
