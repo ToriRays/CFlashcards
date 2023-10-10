@@ -51,7 +51,7 @@ namespace XunitTestCFlashcards.Controllers
         }
 
         [Fact]
-        public async Task TestBrowse()
+        public async Task TestBrowseWithoutSearch()
         {
             // Arrange
             var deckList = new List<Deck>()
@@ -66,7 +66,34 @@ namespace XunitTestCFlashcards.Controllers
             var deckController = CreateDeckController(mockDeckRepository);
 
             // Act
-            var result = await deckController.Browse();
+            var result = await deckController.Browse("");
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var viewDeckList = Assert.IsAssignableFrom<IEnumerable<Deck>>(viewResult.ViewData.Model);
+            Assert.Equal(2, viewDeckList.Count());
+            Assert.Equal(deckList, viewDeckList);
+        }
+
+        [Fact]
+        public async Task TestBrowseWithSearch()
+        {
+            // Arrange
+            var deckList = new List<Deck>()
+            {
+                deck1, deck2
+            };
+
+            var searchString = "test";
+
+            var mockDeckRepository = new Mock<IDeckRepository>();
+            // The flashcardUserId passed in to the GetAll function in the controller will be an empty string "",
+            // so for the test to work, an empty string needs to be passed in here as well.
+            mockDeckRepository.Setup(repo => repo.SearchDecksByTitle("",searchString)).ReturnsAsync(deckList);
+            var deckController = CreateDeckController(mockDeckRepository);
+
+            // Act
+            var result = await deckController.Browse(searchString);
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);

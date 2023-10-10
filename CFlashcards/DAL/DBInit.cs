@@ -43,34 +43,39 @@ public static class DBInit
                     Question = "Fiskestang",
                     Answer = "Fishing rod",
                     Notes = "Important to know before going on a fishing trip. :)",
-                    DeckId = 1
+                    DeckId = 1,
+                    IsLanguageFlashcard = true
                 },
                 new Flashcard
                 {
                     Question = "Brunost",
                     Answer = "Brown cheese",
                     Notes = "A national Norwegian chewy cheese with a brown colour and sweet taste.",
-                    DeckId = 1
+                    DeckId = 1,
+                    IsLanguageFlashcard = true
                 },
                 new Flashcard
                 {
                     Question = "Benk",
                     Answer = "Bench",
                     Notes = "Just a Bench :O",
-                    DeckId = 1
+                    DeckId = 1,
+                    IsLanguageFlashcard = true
                 },
                 new Flashcard
                 {
                     Question = "What is Newton's second law of physics?",
                     Answer = "F = ma",
                     Notes = "The acceleration of an object depends on the mass of the object and the amount of force applied.",
-                    DeckId = 2
+                    DeckId = 2,
+                    IsLanguageFlashcard = false
                 },
                 new Flashcard
                 {
                     Question = "What is photosynthesis?",
                     Answer = "The process by which green plants and some other organisms use sunlight to synthesize nutrients from carbon dioxide and water.",
-                    DeckId = 2
+                    DeckId = 2,
+                    IsLanguageFlashcard = false
                 },
 
             };
