@@ -20,6 +20,9 @@
     align-items: center;
     padding: 10px 14px;
 }
+.carousel-item{
+    justify-content: center;
+}
 
 .btn.btn-secondary {
     border: none;

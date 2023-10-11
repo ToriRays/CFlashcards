@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
-using ReflectionIT.Mvc.Paging;
 
 namespace CFlashcards.Controllers
 {
