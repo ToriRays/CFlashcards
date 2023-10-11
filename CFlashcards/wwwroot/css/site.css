@@ -15,7 +15,7 @@ html {
     font-size: 14px;
   }
 
-    section {
+    .section-intro {
         padding: 60px 5vw;
     }
 }
@@ -40,11 +40,11 @@ h1 {
     font-size: calc(1.375rem + 1.1vw);
 }
 
-section {
+.section-intro {
     position: relative;
     display: flex;
     flex-direction: row;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     align-content: space-around;
     justify-content: space-around;
     align-items: flex-start;
@@ -54,14 +54,6 @@ section {
     margin: 0 auto;
     padding: 60px 5vw;
 }
-
-/*.bottom-layers {
-    padding-top: 31.25%;
-    width: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    position: relative;
-}*/
 
 #visual {
     /*display: block;*/
