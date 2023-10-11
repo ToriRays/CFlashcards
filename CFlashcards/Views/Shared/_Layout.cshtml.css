@@ -65,12 +65,13 @@ button.accept-policy {
 }
 
 .footer {
-    position: absolute;
-    bottom: 0;
+    /*position: relative;
+    bottom: 0;*/
     width: 100%;
     white-space: nowrap;
     line-height: 60px;
     background-color: black;
+    /*z-index: 1;*/
 }
 
 .container-fluid {

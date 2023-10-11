@@ -36,8 +36,8 @@ body {
 
 
 h1 {
-    font-size: 2rem;
-   /* font-size: calc(1.375rem + 1.5vw);*/
+    /*font-size: 2rem;*/
+    font-size: calc(1.375rem + 1.1vw);
 }
 
 section {
@@ -55,17 +55,16 @@ section {
     padding: 60px 5vw;
 }
 
-.spacer {
+/*.bottom-layers {
     padding-top: 31.25%;
     width: 100%;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: cover;
-    /*    position: relative;*/
-}
+    position: relative;
+}*/
 
 #visual {
-    display: block;
+    /*display: block;*/
     width: 100%;
     height: auto;
 }
@@ -106,9 +105,9 @@ section {
     animation: move-down 22s infinite;
 }
 
-.layer2 {
+/*.layer2 {
     background-image: url('/images/layer13b.svg');
-}
+}*/
 
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
