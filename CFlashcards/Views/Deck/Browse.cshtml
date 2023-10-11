@@ -5,6 +5,7 @@
     int currentPage = 1;
     var paginatedDecks = Model.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,9 +61,9 @@
         </section>
     </div>
     <div class="pagination">
-        <a href="#">&laquo;</a>
-        <a href="#">1</a>
-        <a class="active" href="#">2</a>
+        <a href="#">&laquo;</a>      
+        <a class="active" href="#">1</a>
+        <a href="#">2</a>
         <a href="#">3</a>
         <a href="#">4</a>
         <a href="#">5</a>
