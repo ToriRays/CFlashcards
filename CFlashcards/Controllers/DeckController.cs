@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
+using ReflectionIT.Mvc.Paging;
 
 namespace CFlashcards.Controllers
 {
@@ -21,7 +22,7 @@ namespace CFlashcards.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> Browse(string searchString)
+        public async Task<IActionResult> Browse(string searchString, int? pageNumber)
         {
             var flashcardUserId = _userManager.GetUserId(this.User) ?? ""; //Avoids null reference warnings
             IEnumerable<Deck>? decks;
@@ -46,12 +47,14 @@ namespace CFlashcards.Controllers
                     return NotFound("Deck list not found.");
                 }
             }
- 
-
-
+           
             ViewData["SearchTerm"] = searchString;
-           // var paginatedDecks = await PaginatedList<Deck>.CreateAsync(decks.AsQueryable(), pageNumber, 5);
-            return View(decks);
+            // var paginatedDecks = await PaginatedList<Deck>.CreateAsync(decks.AsQueryable(), pageNumber, 5);
+            
+            int pageSize = 6;
+
+            return View(PaginatedList<Deck>.Create((await _deckRepository.GetAll(flashcardUserId)).ToList(), pageNumber ?? 1, pageSize));
+
         }
 
         [Authorize]
