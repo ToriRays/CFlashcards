@@ -11,8 +11,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
-    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    @* <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" /> *@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CFlashcards.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="/css/style.css">
@@ -36,31 +36,34 @@
             <div class="col">
                 <div class="card text-center" style="width: 18rem;">
                     <div class="card-body">
-                        <h5 class="card-title">Title:@deck.Title</h5>
+                        <h2 class=" fs-3 card-title">@deck.Title</h2>
                         <p class="card-text">@deck.Description</p>
-                        <a class="btn btn-primary" asp-controller="Deck" asp-action="Carousel" asp-route-id="@deck.DeckId">Browse the deck</a>
-                        @{
-                            if (deck.FlashcardUserId != "demo")
-                            {
-                                <a class="btn btn-secondary" asp-controller="Deck" asp-action="UpdateDeck" asp-route-id="@deck.DeckId">
-                                    <i class="fas fa-pen-to-square"></i>
-                                </a>
-
-                                <a class="btn btn-danger" asp-controller="Deck" asp-action="DeleteDeck" asp-route-id="@deck.DeckId">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
+                            <a class="btn btn-primary mt-2" asp-controller="Deck" asp-action="Carousel" asp-route-id="@deck.DeckId">
+                            View <i class="fas fa-arrow-alt-circle-right"></i>
+                            </a>
+                            @{
+                                if (deck.FlashcardUserId != "demo")
+                                {
+                                        <a class="btn btn-secondary mt-2" asp-controller="Deck" asp-action="UpdateDeck" asp-route-id="@deck.DeckId">
+                                             <i class="fas fa-pen-to-square"></i>
+                                        </a>
+                                        <a class="btn btn-danger mt-2" asp-controller="Deck" asp-action="DeleteDeck" asp-route-id="@deck.DeckId">
+                                             <i class="fa-solid fa-trash"></i>     
+                                        </a>     
+                                }
                             }
-                        }
                     </div>
                 </div>
             </div>
         }
     </div>
-   
-    <p align="center" style="padding-top: 5vh">
-        <a class="btn btn-outline-primary" asp-controller="Deck" asp-action="CreateDeck">Create New Deck</a>
-    </p>
-    
+
+    <div class="create-deck-section">
+        <p>
+            <a class="btn btn-outline-primary" asp-controller="Deck" asp-action="CreateDeck">Create New Deck</a>
+        </p>
+    </div>
+
     <div class="pagination">
         <a href="#">&laquo;</a>
         <a href="#">1</a>

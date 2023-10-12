@@ -10,8 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200&display=swap" rel="stylesheet"><!--font-->
-   @*  <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
-    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    @* <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" /> *@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CFlashcards.styles.css" asp-append-version="true" />
     <link rel="icon" type="image/svg" href="~/css/images/catIcon.svg">
@@ -52,14 +52,6 @@
                 </div>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial.cshtml"/>
-                    @*<ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>*@
                 </div>
             </div>
         </nav>
@@ -105,7 +97,6 @@
             <path id="orange" d="M0 134L22.8 135.2C45.7 136.3 91.3 138.7 137 138.7C182.7 138.7 228.3 136.3 274 134.8C319.7 133.3 365.3 132.7 411.2 132.3C457 132 503 132 548.8 133.2C594.7 134.3 640.3 136.7 686 138.2C731.7 139.7 777.3 140.3 823 139.3C868.7 138.3 914.3 135.7 937.2 134.3L960 133L960 151L937.2 151C914.3 151 868.7 151 823 151C777.3 151 731.7 151 686 151C640.3 151 594.7 151 548.8 151C503 151 457 151 411.2 151C365.3 151 319.7 151 274 151C228.3 151 182.7 151 137 151C91.3 151 45.7 151 22.8 151L0 151Z" fill="#001122"></path>
         </svg>
     </div>
-
     <footer class="footer text-muted">
         <div class="container">
             &copy; 2023 - CFlashcards - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
