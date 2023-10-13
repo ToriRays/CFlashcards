@@ -1,25 +1,15 @@
 ﻿@model Deck
 
-<!DOCTYPE html>
+@{
+    ViewData["Title"] = "Responsive Card Slider and Text to Speech Converter";
+}
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Card Slider</title>
-    <title>Text to Speech Converter</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/langdetect/1.0.8/langdetect.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
-    <!--CSS-->
+@section Styles{
+    <link rel="stylesheet" href="~/css/style.css" />
     <link href="~/css/carouselstyle.css" rel="stylesheet" />
     <link href="~/css/test.css" rel="stylesheet" />
-</head>
-<body>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet"> 
+}
 
 <div id="@("flashcardCarousel" + Model.DeckId)" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner" align="center">
@@ -30,7 +20,7 @@
             {
                 if (!Model.Flashcards.Any()) //Check if the flashcardlist if empty
                 {
-                    <h5 class="card-title">It looks like this deck is empty. Go ahead and create some cards :).</h5>
+                    <h1 class="card-title">It looks like this deck is empty. Go ahead and create some cards :).</h1>
                     <img src="~/css/images/emty box.png"/>
 
                 }
@@ -105,9 +95,8 @@
         }
     </div>
 </div>
-<br>
-<br>
-<a class="btn btn-primary" asp-controller="Deck" asp-action="Browse">Back to deck browsing.</a>
+
+<a class="btn btn-primary mx-5 mt-5" asp-controller="Deck" asp-action="Browse">Back to deck browsing.</a>
 
 @if (Model.FlashcardUserId != "demo")// Let the user create new flashcard only if the deck is not a demo deck.
 {
@@ -116,6 +105,11 @@
         <button type="submit" class="btn btn-primary">Create Flashcard</button>
     </form>
 }
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/langdetect/1.0.8/langdetect.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="~/js/site.js" defer></script>
-</body>
-</html>
+}
+    
