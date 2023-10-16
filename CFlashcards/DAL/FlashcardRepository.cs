@@ -41,6 +41,24 @@ namespace CFlashcards.DAL
             }
         }
 
+        public async Task<IEnumerable<Flashcard>?> GetFlashcardsByDeckId(int deckId)
+        {
+            try
+            {
+                var flashcards = await _db.Flashcards.Where(flashcard => flashcard.DeckId == deckId).ToListAsync();
+                if (flashcards == null)
+                {
+                    _logger.LogError("The flashcard list is null in GetFlashcardsByDeckId");
+                }
+                return flashcards;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("[FlashcardRepository] FindAsync() Where() failed when GetFlashcardsByDeckId() was called for DeckId {@deckId}, error message: {@e}", deckId, e.Message);
+                return null;
+            }
+        }
+
         public async Task<bool> Create(Flashcard flashcard)
         {
             try

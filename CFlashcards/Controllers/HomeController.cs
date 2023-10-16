@@ -28,7 +28,7 @@ namespace CFlashcards.Controllers
         {
             if (_signInManager.IsSignedIn(User))
             {
-                return RedirectToAction("Browse", "Deck");
+                return RedirectToAction("BrowseDecks", "Deck");
             }
 
             ViewData["UserID"]= _userManager.GetUserId(this.User); //.User details of the user saved during login operation
