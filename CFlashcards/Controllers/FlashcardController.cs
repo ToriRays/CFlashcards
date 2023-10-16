@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
-namespace CFlashcards.Controllers
-a    public class FlashcardController : Controller
+namespace CFlashcards.Controllers 
+{
+    public class FlashcardController : Controller
     {
         private readonly IFlashcardRepository _flashcardRepository;
         private readonly IDeckRepository _deckRepository;
