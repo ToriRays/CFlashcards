@@ -1,10 +1,5 @@
-﻿@model IEnumerable<Deck>
+﻿@model PaginatedList<Deck>
 
-@{
-    int pageSize = 6; // Number of decks to display per page
-    int currentPage = 1;
-    var paginatedDecks = Model.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
-}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,21 +18,21 @@
     <h1>Browse your decks!</h1>
 
     <div class="row row-cols-1 row-cols-md-3 g-4">
-        @foreach (var deck in paginatedDecks)
+        @foreach (var deck in Model)
         {
             <div class="col">
                 <div class="card text-center" style="width: 18rem;">
                     <div class="card-body">
                         <h5 class="card-title">Title:@deck.Title</h5>
                         <p class="card-text">@deck.Description</p>
-                        <a class="btn btn-primary" asp-controller="Deck" asp-action="Carousel" asp-route-id="@deck.DeckId">Browse the deck</a>
+                        <a class="btn btn-primary" asp-controller="Flashcard" asp-action="BrowseFlashcards" asp-route-deckId="@deck.DeckId">Browse the deck</a>
                         @{
                             if (deck.FlashcardUserId != "demo")
                             {
                                 <a class="btn btn-secondary" asp-controller="Deck" asp-action="UpdateDeck" asp-route-id="@deck.DeckId">
-                                    <i class="fas fa-pen-to-square"></i> 
+                                    <i class="fas fa-pen-to-square"></i>
                                 </a>
-                                
+
                                 <a class="btn btn-danger" asp-controller="Deck" asp-action="DeleteDeck" asp-route-id="@deck.DeckId">
                                     <i class="fa-solid fa-trash"></i>
                                 </a>
@@ -51,23 +46,24 @@
     <p align="center" style="padding-top: 5vh">
         <a class="btn btn-outline-primary" asp-controller="Deck" asp-action="CreateDeck">Create New Deck</a>
     </p>
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+    <a asp-action="BrowseDecks" asp-route-pageNumber="@(Model.PageIndex-1)" class="btn btn-default @prevDisabled">
+        Previous
+    </a>
+    <a asp-action="BrowseDecks" asp-route-pageNumber="@(Model.PageIndex+1)" class="btn btn-default @nextDisabled">
+        Next
+    </a>
     <div class="container">
         <section class="search-bar">
-          <form method="get" asp-action="Browse">
+            <form method="get" asp-action="BrowseDecks">
                 <input type="text" name="searchString" placeholder="search here" value="@ViewData["SearchString"]">
                 <button type="submit"><i class="fa fa-search"></i></button>
-         </form>
+            </form>
         </section>
     </div>
-    <div class="pagination">
-        <a href="#">&laquo;</a>
-        <a href="#">1</a>
-        <a class="active" href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">6</a>
-        <a href="#">&raquo;</a>
-    </div>
+
 </body>
 </html>

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
+using System.Drawing.Printing;
 
 namespace CFlashcards.Controllers
 {
@@ -21,7 +22,7 @@ namespace CFlashcards.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> Browse(string searchString)
+        public async Task<IActionResult> BrowseDecks(string searchString, int? pageNumber)
         {
             var flashcardUserId = _userManager.GetUserId(this.User) ?? ""; //Avoids null reference warnings
             IEnumerable<Deck>? decks;
@@ -45,22 +46,12 @@ namespace CFlashcards.Controllers
                 }
             }
 
+            var pageSize = 6;
+
             ViewData["SearchTerm"] = searchString;
-            return View(decks);
+            return View(PaginatedList<Deck>.Create(decks.ToList(), pageNumber ?? 1, pageSize));
         }
 
-        [Authorize]
-        public async Task<IActionResult> Carousel(int id)
-        {
-            var deck = await _deckRepository.GetDeckById(id);
-            if (deck == null)
-            {
-                _logger.LogError("[DeckController] Deck not found while executing _deckRepository.GetDeckById() DeckId:{id}", id);
-                var badRequest = "Deck not found for the DeckId: " + id;
-                return BadRequest(badRequest);
-            }
-            return View(deck);
-        }
 
         [HttpGet]
         [Authorize]
@@ -80,7 +71,7 @@ namespace CFlashcards.Controllers
                 bool returnOk = await _deckRepository.Create(deck);
                 if (returnOk)
                 {
-                    return RedirectToAction(nameof(Browse));
+                    return RedirectToAction(nameof(BrowseDecks));
                 }
             }
             _logger.LogWarning("[DeckController] Deck creation failed {@deck}", deck);
@@ -110,7 +101,7 @@ namespace CFlashcards.Controllers
                 bool returnOk = await _deckRepository.Update(deck);
                 if (returnOk)
                 {
-                    return RedirectToAction(nameof(Browse));
+                    return RedirectToAction(nameof(BrowseDecks));
                 }
             }
             _logger.LogWarning("[DeckController] Deck update failed {@deck}", deck);
@@ -140,7 +131,7 @@ namespace CFlashcards.Controllers
                 _logger.LogError("[DeckController] Deck deletion failed for the DeckId {DeckId:0000}", id);
                 return BadRequest("Deck deletion failed.");
             }
-            return RedirectToAction(nameof(Browse));
+            return RedirectToAction(nameof(BrowseDecks));
         }
     }
 }

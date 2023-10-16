@@ -37,7 +37,7 @@
     <p>Aditional data: @ViewBag.AdditionalData</p>
     <button type="submit" class="btn btn-primary">Create</button>
 </form>
-<form asp-controller="Deck" asp-action="Carousel" method="get">
-    <input type="hidden" name="id" value="@ViewBag.AdditionalData" />
+<form asp-action="BrowseFlashcards" method="get">
+    <input type="hidden" name="deckId" value="@ViewBag.AdditionalData" />
     <button type="submit" class="btn btn-primary">Cancel</button>
 </form>
