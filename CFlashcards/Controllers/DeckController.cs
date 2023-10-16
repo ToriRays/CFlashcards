@@ -26,8 +26,6 @@ namespace CFlashcards.Controllers
         {
             var flashcardUserId = _userManager.GetUserId(this.User) ?? ""; //Avoids null reference warnings
             IEnumerable<Deck>? decks;
-           
-
 
             if (string.IsNullOrEmpty(searchString))
             {
@@ -48,8 +46,10 @@ namespace CFlashcards.Controllers
                 }
             }
 
+            var pageSize = 6;
+
             ViewData["SearchTerm"] = searchString;
-            return View(decks);
+            return View(PaginatedList<Deck>.Create(decks.ToList(), pageNumber ?? 1, pageSize));
         }
 
 
@@ -90,8 +90,8 @@ namespace CFlashcards.Controllers
             }
             return View(deck);
         }
-        
-        
+
+
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> UpdateDeck(Deck deck)
