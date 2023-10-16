@@ -46,6 +46,16 @@
     <p align="center" style="padding-top: 5vh">
         <a class="btn btn-outline-primary" asp-controller="Deck" asp-action="CreateDeck">Create New Deck</a>
     </p>
+    @{
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+    <a asp-action="BrowseDecks" asp-route-pageNumber="@(Model.PageIndex-1)" class="btn btn-default @prevDisabled">
+        Previous
+    </a>
+    <a asp-action="BrowseDecks" asp-route-pageNumber="@(Model.PageIndex+1)" class="btn btn-default @nextDisabled">
+        Next
+    </a>
     <div class="container">
         <section class="search-bar">
             <form method="get" asp-action="BrowseDecks">
@@ -54,15 +64,6 @@
             </form>
         </section>
     </div>
-    <div class="pagination">
-        <a href="#">&laquo;</a>
-        <a href="#">1</a>
-        <a class="active" href="#">2</a>
-        <a href="#">3</a>
-        <a href="#">4</a>
-        <a href="#">5</a>
-        <a href="#">6</a>
-        <a href="#">&raquo;</a>
-    </div>
+
 </body>
 </html>
