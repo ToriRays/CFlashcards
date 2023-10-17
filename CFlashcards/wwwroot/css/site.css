@@ -286,9 +286,9 @@ h1 {
 
 /* Animations on user landing page */
 
-.cont{
+.cont {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -296,7 +296,7 @@ h1 {
 .heading {
     flex: 1;
     padding-right: 20px;
-    color: white;
+    color: white;  
 }
 
 .bulb-and-cat {
@@ -330,10 +330,12 @@ h1 {
     align-items: center;
     z-index: 1;
     transform-origin: top;
-    animation: swing 10s ease-in-out infinite;
+    border-top: solid black;
+    animation: swing 0s ease-in-out infinite;
 }
 
 .wire {
+
     left: auto;
     width: 2px;
     height: 250px;
