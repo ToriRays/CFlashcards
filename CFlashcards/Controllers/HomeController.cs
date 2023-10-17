@@ -28,17 +28,12 @@ namespace CFlashcards.Controllers
         {
             if (_signInManager.IsSignedIn(User))
             {
-                return RedirectToAction("Index1", "Home");
+                return RedirectToAction("Browse", "Deck");
             }
 
             ViewData["UserID"]= _userManager.GetUserId(this.User); //.User details of the user saved during login operation
             // The name in the return view is needed for unit tests.
             return View("Index");
-        }
-
-        public IActionResult Index1()
-        {
-            return View("Index1");
         }
 
         public IActionResult Privacy()
