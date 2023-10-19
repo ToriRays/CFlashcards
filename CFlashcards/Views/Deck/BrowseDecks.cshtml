@@ -1,21 +1,5 @@
 ﻿@model PaginatedList<Deck>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@300;400;700&display=swap" rel="stylesheet">
-@{
-    int pageSize = 6; // Number of decks to display per page
-    int currentPage = 1;
-    var paginatedDecks = Model.Skip((currentPage - 1) * pageSize).Take(pageSize).ToList();
-}
-
 
 @section Styles{
     <link rel="stylesheet" href="~/css/style.css" />
@@ -24,61 +8,51 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 }
     
-    <section class="search-bar">
-        <h1>Browse your decks</h1>
-        <form method="get" asp-action="Browse">
-            <input type="text" name="searchString" placeholder="search here" value="@ViewData["SearchString"]">
-            <button type="submit"><i class="fa fa-search"></i></button>
-        </form>
-    </section>
+<section class="search-bar">
+    <h1>Browse your decks</h1>
+    <form method="get" asp-action="BrowseDecks">
+        <input type="text" name="searchString" placeholder="search here" value="@ViewData["SearchString"]">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+</section>
 
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        @foreach (var deck in Model)
-        {
-            <div class="col">
-                <div class="card text-center" style="width: 18rem;">
-                    <div class="card-body">
-                        <h2 class=" fs-3 card-title">@deck.Title</h2>
-                        <p class="card-text">@deck.Description</p>
-                        <a class="btn btn-primary" asp-controller="Flashcard" asp-action="BrowseFlashcards" asp-route-deckId="@deck.DeckId">Browse the deck</a>
-                        @{
-                            if (deck.FlashcardUserId != "demo")
-                            {
-                                <a class="btn btn-secondary" asp-controller="Deck" asp-action="UpdateDeck" asp-route-id="@deck.DeckId">
-                                    <i class="fas fa-pen-to-square"></i>
-                                </a>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var deck in Model)
+    {
+        <div class="col">
+            <div class="card text-center" style="width: 18rem;">
+                <div class="card-body">
+                    <h2 class=" fs-3 card-title">@deck.Title</h2>
+                    <p class="card-text">@deck.Description</p>
+                    <a class="btn btn-primary mt-2" asp-controller="Flashcard" asp-action="BrowseFlashcards" asp-route-deckId="@deck.DeckId">View
+                        <i class="fas fa-arrow-alt-circle-right"></i></a>
+                    @{
+                        if (deck.FlashcardUserId != "demo")
+                        {
+                            <a class="btn btn-secondary mt-2" asp-controller="Deck" asp-action="UpdateDeck" asp-route-id="@deck.DeckId">
+                                <i class="fas fa-pen-to-square"></i>
+                            </a>
 
-                                <a class="btn btn-danger" asp-controller="Deck" asp-action="DeleteDeck" asp-route-id="@deck.DeckId">
-                                    <i class="fa-solid fa-trash"></i>
-                                </a>
-                            }
+                            <a class="btn btn-danger mt-2" asp-controller="Deck" asp-action="DeleteDeck" asp-route-id="@deck.DeckId">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
                         }
-                    </div>
+                    }
                 </div>
             </div>
-        }
-    </div>
-    <p align="center" style="padding-top: 5vh">
-        <a class="btn btn-outline-primary" asp-controller="Deck" asp-action="CreateDeck">Create New Deck</a>
-    </p>
-    @{
-        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        </div>
     }
-    <a asp-action="BrowseDecks" asp-route-pageNumber="@(Model.PageIndex-1)" class="btn btn-default @prevDisabled">
-        Previous
-    </a>
-    <a asp-action="BrowseDecks" asp-route-pageNumber="@(Model.PageIndex+1)" class="btn btn-default @nextDisabled">
-        Next
-    </a>
-    <div class="container">
-        <section class="search-bar">
-            <form method="get" asp-action="BrowseDecks">
-                <input type="text" name="searchString" placeholder="search here" value="@ViewData["SearchString"]">
-                <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
-        </section>
-    </div>
-
-</body>
-</html>
+</div>
+<div class="create-deck-section">
+    <a class="btn btn-outline-primary" asp-controller="Deck" asp-action="CreateDeck">Create New Deck</a>
+</div>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<a asp-action="BrowseDecks" asp-route-pageNumber="@(Model.PageIndex-1)" class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="BrowseDecks" asp-route-pageNumber="@(Model.PageIndex+1)" class="btn btn-default @nextDisabled">
+    Next
+</a>

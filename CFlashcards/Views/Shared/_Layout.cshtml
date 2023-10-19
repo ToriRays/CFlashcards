@@ -33,7 +33,8 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        @if (SignInManager.IsSignedIn(User))
+                        @{
+                        if (SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Deck" asp-action="BrowseDecks">Decks</a>
@@ -44,18 +45,13 @@
                                     <a class="nav-link text-light" asp-area="" asp-controller="Admin" asp-action="UserTable">UserTable</a>
                                 </li>
                             }
-                        }
-                                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Deck" asp-action="Browse">Decks</a>
-                            </li>
-                        }
+                        }      
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Demo" asp-action="Index">Demo</a>
+                                <a class="nav-link text-light" asp-area="" asp-controller="Demo" asp-action="Demo">Demo</a>
                             </li>
+                        }
                         }
 
                     </ul>
