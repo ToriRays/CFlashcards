@@ -37,6 +37,8 @@ intervalId = setInterval(() => {
         clearInterval(intervalId);
     }
 });
+
+
 // Initialize the KUTE.js morph animation between blob1 and blob2
 const tween = KUTE.fromTo(
     '#blob1',
@@ -47,3 +49,6 @@ const tween = KUTE.fromTo(
 
 // Start the animation
 tween.start();
+
+
+
