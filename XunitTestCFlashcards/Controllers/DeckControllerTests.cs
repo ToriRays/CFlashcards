@@ -37,6 +37,7 @@ namespace XunitTestCFlashcards.Controllers
             FlashcardUserId = ""
         };
 
+
         // A function that will prevent reuse of code in the unit tests.
         private static DeckController CreateDeckController(Mock<IDeckRepository> mockDeckRepository)
         {
@@ -63,7 +64,7 @@ namespace XunitTestCFlashcards.Controllers
             var mockDeckRepository = new Mock<IDeckRepository>();
             // The flashcardUserId passed in to the GetAll function in the controller will be an empty string "",
             // so for the test to work, an empty string needs to be passed in here as well.
-            mockDeckRepository.Setup(repo => repo.GetAll("")).ReturnsAsync(paginatedDeckList);
+            mockDeckRepository.Setup(repo => repo.GetAll("")).ReturnsAsync(deckList);
             var deckController = CreateDeckController(mockDeckRepository);
 
             // Act
@@ -71,19 +72,23 @@ namespace XunitTestCFlashcards.Controllers
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
-            var viewPaginatedDeckList = Assert.IsAssignableFrom<IEnumerable<Deck>>(viewResult.ViewData.Model);
-            Assert.Equal(2, viewPaginatedDeckList.Count());
-            Assert.Equal(paginatedDeckList ?? new PaginatedList<Deck>(deckList, 2, 1, 6), viewPaginatedDeckList);
+            var viewPaginatedDeckList = Assert.IsAssignableFrom<PaginatedList<Deck>>(viewResult.ViewData.Model);
+            Assert.Equal(2, viewPaginatedDeckList.Count);
+            if (paginatedDeckList != null) // Avoid null warning
+            {
+                Assert.Equal(paginatedDeckList, viewPaginatedDeckList);
+            }
         }
 
         [Fact]
-        public async Task TestBrowseWithSearch()
+        public async Task TestBrowseDecksWithSearch()
         {
             // Arrange
             var deckList = new List<Deck>()
             {
                 deck1, deck2
             };
+            PaginatedList<Deck>? paginatedDeckList = PaginatedList<Deck>.Create(deckList, 1, 6);
 
             var searchString = "test";
 
@@ -94,32 +99,15 @@ namespace XunitTestCFlashcards.Controllers
             var deckController = CreateDeckController(mockDeckRepository);
 
             // Act
-            var result = await deckController.Browse(searchString);
+            var result = await deckController.BrowseDecks(searchString, null);
 
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
-            var viewDeckList = Assert.IsAssignableFrom<IEnumerable<Deck>>(viewResult.ViewData.Model);
-            Assert.Equal(2, viewDeckList.Count());
-            Assert.Equal(deckList, viewDeckList);
+            var viewPaginatedDeckList = Assert.IsAssignableFrom<PaginatedList<Deck>>(viewResult.ViewData.Model);
+            Assert.Equal(2, viewPaginatedDeckList.Count);
+            Assert.Equal(paginatedDeckList, viewPaginatedDeckList);
         }
 
-        [Fact]
-        public async Task TestCarousel()
-        {
-            var testId = 1;
-            // Arrange
-            var mockDeckRepository = new Mock<IDeckRepository>();
-            mockDeckRepository.Setup(repo => repo.GetDeckById(testId)).ReturnsAsync(deck1);
-            var deckController = CreateDeckController(mockDeckRepository);
-
-            // Act
-            var result = await deckController.Carousel(testId);
-
-            // Assert
-            var viewResult = Assert.IsType<ViewResult>(result);
-            var viewDeck = Assert.IsAssignableFrom<Deck>(viewResult.ViewData.Model);
-            Assert.Equal(deck1, viewDeck);
-        }
 
         [Fact]
         public async Task TestCreateDeckFunctionFails()
@@ -152,7 +140,7 @@ namespace XunitTestCFlashcards.Controllers
             // Assert
             var redirectToAction = Assert.IsType<RedirectToActionResult>(result);
             var resultAction = Assert.IsAssignableFrom<IActionResult>(result);
-            Assert.Equal("Browse", redirectToAction.ActionName);
+            Assert.Equal("BrowseDecks", redirectToAction.ActionName);
         }
 
         [Fact]
@@ -187,7 +175,7 @@ namespace XunitTestCFlashcards.Controllers
             // Assert
             var redirectToAction = Assert.IsType<RedirectToActionResult>(result);
             var resultAction = Assert.IsAssignableFrom<IActionResult>(result);
-            Assert.Equal("Browse", redirectToAction.ActionName);
+            Assert.Equal("BrowseDecks", redirectToAction.ActionName);
         }
 
         [Fact]
@@ -221,7 +209,7 @@ namespace XunitTestCFlashcards.Controllers
             // Assert
             var redirectToAction = Assert.IsType<RedirectToActionResult>(result);
             var resultAction = Assert.IsAssignableFrom<IActionResult>(result);
-            Assert.Equal("Browse", redirectToAction.ActionName);
+            Assert.Equal("BrowseDecks", redirectToAction.ActionName);
         }
     }
 }

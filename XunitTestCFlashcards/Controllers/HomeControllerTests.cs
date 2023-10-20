@@ -57,8 +57,7 @@ namespace XunitTestCFlashcards.Controllers
             // Assert
             var redirectToAction = Assert.IsType<RedirectToActionResult>(result);
             var resultAction = Assert.IsAssignableFrom<IActionResult>(result);
-            Assert.Equal("Deck", redirectToAction.ControllerName);
-            Assert.Equal("Browse", redirectToAction.ActionName);
+            Assert.Equal("Index1", redirectToAction.ActionName);
         }
 
         [Fact]
@@ -74,6 +73,17 @@ namespace XunitTestCFlashcards.Controllers
             var resultAction = Assert.IsAssignableFrom<IActionResult>(result);
             var viewResult = Assert.IsType<ViewResult>(result);
             Assert.Equal("Index", viewResult.ViewName);
+        }
+
+        [Fact]
+        public void TestIndex1()
+        {
+            // Act
+            var result = _homeController.Index1();
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            Assert.Equal("Index1", viewResult.ViewName);
         }
     }
 }
