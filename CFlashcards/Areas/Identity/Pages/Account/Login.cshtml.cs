@@ -116,6 +116,9 @@ namespace CFlashcards.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                /////////////////// IMPORTANT: The function below uses the Input.Email as username instead. This is a fault with the
+                /// scaffolded code such that we would have to write our own custom SignInManager as a workaround. Instead we introduce a new
+                /// variable NickName that is used instead of UserName.
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {

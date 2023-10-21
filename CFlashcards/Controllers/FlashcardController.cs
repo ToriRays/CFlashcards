@@ -8,17 +8,47 @@ using Microsoft.AspNetCore.Routing;
 
 namespace CFlashcards.Controllers
 {
-    public class FlashcardController : Controller
+        public class FlashcardController : Controller
     {
         private readonly IFlashcardRepository _flashcardRepository;
         private readonly IDeckRepository _deckRepository;
+        private readonly UserManager<FlashcardsUser> _userManager;
         private readonly ILogger<FlashcardController> _logger;
 
-        public FlashcardController(IFlashcardRepository flashcardRepository, IDeckRepository deckRepository, ILogger<FlashcardController> logger)
+        public FlashcardController(IFlashcardRepository flashcardRepository, IDeckRepository deckRepository, UserManager<FlashcardsUser> userManager, ILogger<FlashcardController> logger)
         {
             _flashcardRepository = flashcardRepository;
             _deckRepository = deckRepository;
             _logger = logger;
+            _userManager = userManager;
+        }
+
+        [Authorize]
+        public async Task<IActionResult> BrowseFlashcards(int deckId, int? pageNumber)
+        {
+            var flashcardUserId = _userManager.GetUserId(this.User) ?? "";
+
+            var flashcards = await _flashcardRepository.GetFlashcardsByDeckId(deckId);
+            if (flashcards == null)
+            {
+                _logger.LogError("[FlashcardController] Flashcards not found while executing _flashcardRepository.GetFlashcardsByDeckId() DeckId:{@id}", deckId);
+                var badRequest = "Flashcards not found for the DeckId: " + deckId;
+                return BadRequest(badRequest);
+            }
+
+            var pageSize = 4;
+
+            var paginatedFlashcards = PaginatedList<Flashcard>.Create(flashcards.ToList(), pageNumber ?? 1, pageSize);
+            if (paginatedFlashcards == null)
+            {
+                _logger.LogError("[FlashcardController] Paginated Flashcard list could not be created while executing PaginatedList<Flashcard>.Create().");
+                var badRequest = "PaginatedList creation failed.";
+                return BadRequest(badRequest);
+            }
+
+            var paginatedFlashcardsViewModel = new PaginatedFlashcardsViewModel(paginatedFlashcards, deckId, flashcardUserId);
+
+            return View(paginatedFlashcardsViewModel);
         }
 
         [Authorize]
@@ -59,7 +89,7 @@ namespace CFlashcards.Controllers
                 return RedirectToAction("Details", new { id = flashcard.FlashcardId }); //redirect to the detailed view of the newly created card
             }
             _logger.LogWarning("[FlashcardController] Flashcard creation failed {@flashcard}", flashcard);
-            return RedirectToAction("Carousel", "Deck", flashcard.DeckId); //redirect to the carousel view of the deck where card creation was started
+            return RedirectToAction("BrowseFlashcards", flashcard.DeckId); //redirect to the carousel view of the deck where card creation was started
         }
 
         [HttpGet]
@@ -113,7 +143,7 @@ namespace CFlashcards.Controllers
                 return BadRequest("Flashcard deletion failed.");
             }
             _logger.LogError("FlashcardId: {@id}, DeckId: {@deckId}", id, deckId);
-            return RedirectToAction("Carousel", "Deck", new { id = deckId });
+            return RedirectToAction("BrowseFlashcards", new { id = deckId });
         }
     }
 }

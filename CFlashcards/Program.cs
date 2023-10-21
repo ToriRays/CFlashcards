@@ -41,8 +41,9 @@ var logger = loggerConfiguration.CreateLogger();
 builder.Logging.AddSerilog(logger);
 
 //////////////////////////////////////////////////////  Identity /////////////////////////////////////////////////////////////////////////////////
-builder.Services.AddDefaultIdentity<FlashcardsUser>(options => options.SignIn.RequireConfirmedAccount = true) //options => options.SignIn.RequireConfirmedAccount = false
-    .AddEntityFrameworkStores<AuthDbContext>(); // I turned off confirmation/verification of the account
+builder.Services.AddDefaultIdentity<FlashcardsUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>() // Add roles to Identity
+    .AddEntityFrameworkStores<AuthDbContext>();
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 // builder.Services.AddTransient<IEmailSender, EmailSender>();
@@ -63,7 +64,20 @@ if (!app.Environment.IsDevelopment())
 }
 else
 {
-    DBInit.Seed(app);
+    using (var scope = app.Services.CreateScope()) // This lets us access the services that are configured above.
+    {
+        try
+        {
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<FlashcardsUser>>();
+            var userStore = scope.ServiceProvider.GetRequiredService<IUserStore<FlashcardsUser>>();
+            DBInit.Seed(app, roleManager, userManager, userStore);
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();

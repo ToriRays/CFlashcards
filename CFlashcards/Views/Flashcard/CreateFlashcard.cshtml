@@ -9,6 +9,17 @@
 <form asp-action="CreateFlashcard">
     <input type="hidden" asp-for="DeckId" value="@ViewBag.AdditionalData" />
     <div class="form-group">
+        <label>Do you want text-to-speech to be available for this card:</label>
+        <div class="form-check">
+            <label class="form-check-label" for="IsLanguageFlashcard">Yes</label>
+            <input class="form-check-input" type="radio" asp-for="IsLanguageFlashcard" value="@true" required/>
+        </div>
+        <div class="form-check">
+            <label class="form-check-label" for="IsLanguageFlashcard">No</label>
+            <input class="form-check-input" type="radio" asp-for="IsLanguageFlashcard" value="@false" required />
+        </div>
+    </div>
+    <div class="form-group">
         <label asp-for="Question"></label><span class="text-danger">*</span>
         <input asp-for="Question" class="form-control" />
         <span asp-validation-for="Question" class="text-danger"></span>
@@ -26,7 +37,7 @@
     <p>Aditional data: @ViewBag.AdditionalData</p>
     <button type="submit" class="btn btn-primary">Create</button>
 </form>
-<form asp-controller="Deck" asp-action="Carousel" method="get">
-    <input type="hidden" name="id" value="@ViewBag.AdditionalData" />
+<form asp-action="BrowseFlashcards" method="get">
+    <input type="hidden" name="deckId" value="@ViewBag.AdditionalData" />
     <button type="submit" class="btn btn-primary">Cancel</button>
 </form>

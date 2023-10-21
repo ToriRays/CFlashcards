@@ -4,7 +4,7 @@ namespace CFlashcards.Controllers
 {
     public class DemoController : Controller
     {
-        public IActionResult Index() 
+        public IActionResult Demo() 
         {
             return View("Demo");
         }

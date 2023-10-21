@@ -1,0 +1,58 @@
+﻿@model List<FlashcardsUser>
+
+<h1>Table of Flashcards Users</h1>
+
+<div style="overflow-x: auto;">
+    <table class='table table-striped'>
+        <tr>
+            <th>Id</th>
+            <th>NickName</th>
+            <th>UserName</th>
+            <th>NormalizedUserName</th>
+            <th>Email</th>
+            <th>NormalizedEmail</th>
+            <th>EmailConfirmed</th>
+            <th>PasswordHash</th>
+            <th>SecurityStamp</th>
+            <th>ConcurrencyStamp</th>
+            <th>PhoneNumber</th>
+            <th>PhoneNumberConfirmed</th>
+            <th>TwoFactorEnabled</th>
+            <th>LockoutEnd</th>
+            <th>LockoutEnabled</th>
+            <th>AccessFailCount</th>
+        </tr>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.NickName</td>
+                <td>@user.UserName</td>
+                <td>@user.NormalizedUserName</td>
+                <td>@user.Email</td>
+                <td>@user.NormalizedEmail</td>
+                <td>@user.EmailConfirmed</td>
+                <td>@user.PasswordHash</td>
+                <td>@user.SecurityStamp</td>
+                <td>@user.ConcurrencyStamp</td>
+                <td>@user.PhoneNumber</td>
+                <td>@user.PhoneNumberConfirmed</td>
+                <td>@user.TwoFactorEnabled</td>
+                <td>@user.LockoutEnd</td>
+                <td>@user.LockoutEnabled</td>
+                <td>@user.AccessFailedCount</td>
+                @* Maybe Create CRUD operations here if there is time.
+                <td>
+                    <a asp-action="Update" asp-route-id="@item.ItemId">Update</a>
+                    <a asp-action="Delete" asp-route-id="@item.ItemId">Delete</a>
+                </td>*@
+            </tr>
+        }
+    </table>
+    @* Maybe Create CRUD operations here if there is time.
+    <p>
+        <a class="btn btn-secondary"
+           asp-controller="Item"
+           asp-action="Create">Create New Item</a>
+    </p>*@
+</div>
