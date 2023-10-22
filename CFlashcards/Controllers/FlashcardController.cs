@@ -26,7 +26,6 @@ namespace CFlashcards.Controllers
         [Authorize]
         public async Task<IActionResult> BrowseFlashcards(int deckId, int? pageNumber)
         {
-            _logger.LogError("DeckId:{@id}", deckId);
             var flashcardUserId = _userManager.GetUserId(this.User) ?? "";
 
             var flashcards = await _flashcardRepository.GetFlashcardsByDeckId(deckId);
@@ -47,9 +46,9 @@ namespace CFlashcards.Controllers
                 return BadRequest(badRequest);
             }
 
-            var paginatedFlashcardsModelView = new PaginatedFlashcardsViewModel(paginatedFlashcards, deckId, flashcardUserId);
+            var paginatedFlashcardsViewModel = new PaginatedFlashcardsViewModel(paginatedFlashcards, deckId, flashcardUserId);
 
-            return View(paginatedFlashcardsModelView);
+            return View(paginatedFlashcardsViewModel);
         }
 
         [Authorize]

@@ -1,6 +1,7 @@
 ﻿using CFlashcards.Controllers;
 using CFlashcards.DAL;
 using CFlashcards.Models;
+using CFlashcards.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -34,6 +35,15 @@ namespace XunitTestCFlashcards.Controllers
             DeckId = 1,
         };
 
+        private readonly Flashcard flashcard2 = new()
+        {
+            FlashcardId = 2,
+            Question = "Test2",
+            Answer = "This is the second test card.",
+            Notes = "Test notes.",
+            DeckId = 1,
+        };
+
 
         // A function that will prevent reuse of code in the unit tests.
         private FlashcardController CreateFlashcardController(Mock<IFlashcardRepository> mockFlashcardRepository)
@@ -41,12 +51,40 @@ namespace XunitTestCFlashcards.Controllers
             var testDeckId = 1;
             // Create a mock UserStore that is needed to create a mock UserManager.
             var mockUserStore = new Mock<IUserStore<FlashcardsUser>>();
+            // Create a mock UserManager.
+            var mockUserManager = new Mock<UserManager<FlashcardsUser>>(
+                mockUserStore.Object, null, null, null, null, null, null, null, null);
             // Create a deck repository.
             var mockDeckRepository = new Mock<IDeckRepository>();
             mockDeckRepository.Setup(repo => repo.GetDeckById(testDeckId)).ReturnsAsync(deck1);
             // Create a mock logger
-            var loggerMock = new Mock<ILogger<FlashcardController>>();
-            return new FlashcardController(mockFlashcardRepository.Object, mockDeckRepository.Object, loggerMock.Object);
+            var mockLogger = new Mock<ILogger<FlashcardController>>();
+            return new FlashcardController(mockFlashcardRepository.Object, mockDeckRepository.Object, mockUserManager.Object, mockLogger.Object);
+        }
+
+        [Fact]
+        public async Task TestBrowseFlashcards()
+        {
+            var deckId = 1;
+            var flashcardList = new List<Flashcard>()
+            {
+                flashcard1,flashcard1
+            };
+            PaginatedList<Flashcard>? paginatedFlashcards = PaginatedList<Flashcard>.Create(flashcardList, 1, 4) 
+                ?? new PaginatedList<Flashcard>(flashcardList, 2, 1, 4);
+            PaginatedFlashcardsViewModel paginatedFlashcardsViewModel = new(paginatedFlashcards, deckId, "");
+            // Arrange
+            var mockFlashcardRepository = new Mock<IFlashcardRepository>();
+            mockFlashcardRepository.Setup(repo => repo.GetFlashcardsByDeckId(deckId)).ReturnsAsync(flashcardList);
+            var deckController = CreateFlashcardController(mockFlashcardRepository);
+
+            // Act
+            var result = await deckController.BrowseFlashcards(deckId, null);
+
+            // Assert
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var viewPaginatedFlashcardsViewModel = Assert.IsAssignableFrom<PaginatedFlashcardsViewModel>(viewResult.ViewData.Model);
+            Assert.Equal(paginatedFlashcardsViewModel.Flashcards, viewPaginatedFlashcardsViewModel.Flashcards);
         }
 
         [Fact]
@@ -83,8 +121,7 @@ namespace XunitTestCFlashcards.Controllers
             // Assert
             var redirectToAction = Assert.IsType<RedirectToActionResult>(result);
             var resultAction = Assert.IsAssignableFrom<IActionResult>(result);
-            Assert.Equal("Deck", redirectToAction.ControllerName);
-            Assert.Equal("Carousel", redirectToAction.ActionName);
+            Assert.Equal("BrowseFlashcards", redirectToAction.ActionName);
         }
 
         [Fact]
@@ -178,8 +215,7 @@ namespace XunitTestCFlashcards.Controllers
             // Assert
             var redirectToAction = Assert.IsType<RedirectToActionResult>(result);
             var resultAction = Assert.IsAssignableFrom<IActionResult>(result);
-            Assert.Equal("Deck", redirectToAction.ControllerName);
-            Assert.Equal("Carousel", redirectToAction.ActionName);
+            Assert.Equal("BrowseFlashcards", redirectToAction.ActionName);
         }
     }
 }
