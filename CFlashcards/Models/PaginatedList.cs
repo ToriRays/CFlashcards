@@ -19,7 +19,7 @@ namespace CFlashcards.Models
         {
             try
             {
-                var count = source.Count();
+                var count = source.Count;
                 var items = source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
                 return new PaginatedList<T>(items, count, pageIndex, pageSize);
             }
