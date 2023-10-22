@@ -34,8 +34,12 @@ namespace CFlashcards.Controllers
                 return BadRequest(badRequest);
             }
 
+            
             // Retrieve flashcardsUserId in one of two ways. The reason for this is such that the flashcardsUserId of the demo decks is retrieved correctly.
+#pragma warning disable CS8602 // Dereference of a possibly null reference. We disable this warning because it appears even though we check that the Deck object is not null.
+            // The reason for it appearing is that Deck is defined as nullable in the Flashcard Model.
             var flashcardsUserId = (flashcards.Any() && flashcards.First().Deck != null) ? flashcards.First().Deck.FlashcardUserId : _userManager.GetUserId(this.User) ?? "";
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
 
             var pageSize = 4;
             // The flashcards are wrapped using the PaginatedList<> class such that not all flashcards are displayed in the View at once.
@@ -68,6 +72,7 @@ namespace CFlashcards.Controllers
         [Authorize]
         public IActionResult CreateFlashcard(int deckId)
         {
+            // Use view bag to send additional data about the DeclId to the CreateFlashcard View.
             ViewBag.AdditionalData = deckId;
             return View();
         }
@@ -76,9 +81,9 @@ namespace CFlashcards.Controllers
         [Authorize]
         public async Task<IActionResult> CreateFlashcard(Flashcard flashcard)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) // Server side validation.
             {
-                var deck = await _deckRepository.GetDeckById(flashcard.DeckId);
+                var deck = await _deckRepository.GetDeckById(flashcard.DeckId); // Retrieve the deck that the flashcards belong to such that it can be assigned to the Deck attribute.
                 if (deck == null)
                 {
                     _logger.LogError("[FlashcardController] Deck not found when creating a new flashcard FlashcardId {@flashcardId}", flashcard.FlashcardId);
@@ -88,11 +93,12 @@ namespace CFlashcards.Controllers
                 bool returnOk = await _flashcardRepository.Create(flashcard);
                 if (returnOk)
                 {
-                    return RedirectToAction("Details", new { id = flashcard.FlashcardId }); //redirect to the detailed view of the newly created card
+                    return RedirectToAction("Details", new { id = flashcard.FlashcardId }); // Redirects to the Details View of the newly created card.
                 }
             }
+            // If the flashcard creation fails, log a warning and get redirected to the BrowseFlashcards View.
             _logger.LogWarning("[FlashcardController] Flashcard creation failed {@flashcard}", flashcard);
-            return RedirectToAction("BrowseFlashcards", flashcard.DeckId); //redirect to the carousel view of the deck where card creation was started
+            return RedirectToAction("BrowseFlashcards", flashcard.DeckId); // Redirects to the BrowseFlashcards view of the deck where card creation was started.
         }
 
         [HttpGet]
@@ -112,14 +118,15 @@ namespace CFlashcards.Controllers
         [Authorize]
         public async Task<IActionResult> UpdateFlashcard(Flashcard flashcard)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) // Server side validation.
             {
                 bool returnOk = await _flashcardRepository.Update(flashcard);
                 if (returnOk)
                 {
-                    return RedirectToAction("Details", new { id = flashcard.FlashcardId }); //redirect to the detailed view of the edited card
+                    return RedirectToAction("Details", new { id = flashcard.FlashcardId }); // Redirect to the Details View of the edited card.
                 }
             }
+            // If the flashcard update fails, log a warning and stay on the UpdateFlashcard View.
             _logger.LogWarning("[FlashcardController] Flashcard update failed {@flashcard}", flashcard);
             return View(flashcard);
         }
@@ -131,7 +138,7 @@ namespace CFlashcards.Controllers
             var flashcard = await _flashcardRepository.GetFlashcardById(id);
             if (flashcard == null)
             {
-                _logger.LogError("[FlashcardController] Flashcard not found when updating the FlashcardId {FlashcardId:0000}", id);
+                _logger.LogError("[FlashcardController] Flashcard not found when updating the FlashcardId {@id}", id);
                 return BadRequest("Flashcard not found for the FlashcardId.");
             }
             return View(flashcard);
@@ -147,7 +154,6 @@ namespace CFlashcards.Controllers
                 _logger.LogError("[FlashcardController] Flashcard deletion failed for the FlashcardId: {@id}", id);
                 return BadRequest("Flashcard deletion failed.");
             }
-            _logger.LogError("FlashcardId: {@id}, DeckId: {@deckId}", id, deckId);
             return RedirectToAction("BrowseFlashcards", new { deckId, pageNumber = 1 });
         }
     }

@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CFlashcards.DAL;
-
 public static class DBInit
 {
 
@@ -103,19 +102,19 @@ public static class DBInit
             }
         }
     }
-
-    // Create an admin user and a normal user.
+    // Create an admin user and a regular user.
     public static async Task SeedUsersAsync(UserManager<FlashcardsUser> userManager, IUserStore<FlashcardsUser> userStore)
     {
         var adminEmail = "admin@example.com";
         var userEmail = "testUser@example.com";
 
-        if (await userManager.FindByEmailAsync(adminEmail) == null)
+        if (await userManager.FindByEmailAsync(adminEmail) == null) // If user does not exist.
         {
             var admin = CreateUser();
 
             var emailStore = (IUserEmailStore<FlashcardsUser>)userStore;
-
+            // Because of the way the scaffolded Indentity code is, we have to set the UserName to
+            // be equal to the email.
             await userStore.SetUserNameAsync(admin, adminEmail, CancellationToken.None);
             await emailStore.SetEmailAsync(admin, adminEmail, CancellationToken.None);
 
@@ -134,12 +133,13 @@ public static class DBInit
             }
         }
 
-        if (await userManager.FindByEmailAsync(userEmail) == null)
+        if (await userManager.FindByEmailAsync(userEmail) == null) // If user does not exist.
         {
             var user = CreateUser();
 
             var emailStore = (IUserEmailStore<FlashcardsUser>)userStore;
-
+            // Because of the way the scaffolded Indentity code is, we have to set the UserName to
+            // be equal to the email.
             await userStore.SetUserNameAsync(user, userEmail, CancellationToken.None);
             await emailStore.SetEmailAsync(user, userEmail, CancellationToken.None);
 

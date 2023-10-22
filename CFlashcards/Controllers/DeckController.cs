@@ -66,7 +66,7 @@ namespace CFlashcards.Controllers
         [Authorize]
         public async Task<IActionResult> CreateDeck(Deck deck)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) // Server side validation.
             {
                 deck.FlashcardUserId = _userManager.GetUserId(User) ?? ""; // If the flashcardsUserId cannot be retrieved, set it to "".
                 bool returnOk = await _deckRepository.Create(deck);
@@ -97,7 +97,7 @@ namespace CFlashcards.Controllers
         [Authorize]
         public async Task<IActionResult> UpdateDeck(Deck deck)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) // Server side validation.
             {
                 bool returnOk = await _deckRepository.Update(deck);
                 if (returnOk)

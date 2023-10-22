@@ -23,7 +23,7 @@ namespace CFlashcards.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[FlashcardRepository] ToListAsync() failed when GetAll() was called, error message:{e}", e.Message);
+                _logger.LogError("[FlashcardRepository] ToListAsync() failed when GetAll() was called, error message:{@e.Message}", e.Message);
                 return null;
             }
         }
@@ -36,7 +36,7 @@ namespace CFlashcards.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[FlashcardRepository] FindAsync() failed when GetFlashcardById() was called for FlashcardId {FlashcardId:0000} error message:{e}", id, e.Message);
+                _logger.LogError("[FlashcardRepository] FindAsync() failed when GetFlashcardById() was called for FlashcardId {@id} error message:{@e.Message}", id, e.Message);
                 return null;
             }
         }
@@ -54,7 +54,7 @@ namespace CFlashcards.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[FlashcardRepository] FindAsync() Where() failed when GetFlashcardsByDeckId() was called for DeckId {@deckId}, error message: {@e}", deckId, e.Message);
+                _logger.LogError("[FlashcardRepository] Where() failed when GetFlashcardsByDeckId() was called for DeckId {@deckId}, error message: {@e}", deckId, e.Message);
                 return null;
             }
         }
@@ -69,7 +69,7 @@ namespace CFlashcards.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[FlashcardRepository] flashcard creation failed for flashcard {@flashcard}, error message:{e}", e.Message);
+                _logger.LogError("[FlashcardRepository] Add() failed for flashcard {@flashcard}, error message:{@e.Message}", flashcard, e.Message);
                 return false;
             }
         }
@@ -84,7 +84,7 @@ namespace CFlashcards.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[FlashcardRepository] flashcard FindAsync(id) failed when updating the FlashcardId {FlashcardId:0000}, error message:{e}", flashcard.FlashcardId, e.Message); //Not same as lecture notes
+                _logger.LogError("[FlashcardRepository] Update() failed when updating the FlashcardId {@flashcard.FlashcardId}, error message:{@e.Message}", flashcard.FlashcardId, e.Message);
                 return false;
             }
         }
@@ -96,7 +96,7 @@ namespace CFlashcards.DAL
                 var flashcard = await _db.Flashcards.FindAsync(id);
                 if (flashcard == null)
                 {
-                    _logger.LogError("[FlashcardRepository] flashcard not found for the FlashcardId {FlashcardId:0000}", id);
+                    _logger.LogError("[FlashcardRepository] flashcard not found for the FlashcardId {@id}", id);
                     return false;
                 }
                 _db.Flashcards.Remove(flashcard);
@@ -105,7 +105,7 @@ namespace CFlashcards.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[FlashcardRepository] flashcard deletion failed for the FlashcardId {FlashcardId:0000}, error message:{e}", id, e.Message); //Not same as lecture notes
+                _logger.LogError("[FlashcardRepository] Remove() failed for the FlashcardId {@id}, error message:{@e.Message}", id, e.Message);
                 return false;
             }
         }
