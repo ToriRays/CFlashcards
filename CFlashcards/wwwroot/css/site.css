@@ -556,14 +556,16 @@ h1 {
         box-shadow: 25px 0 #f7770f;
     }
 
-    .eye, .eye:before {
-        height: 7px;
-        width: 10px;
-        border: 2px solid #2c2c2c;
-        position: absolute;
-        border-radius: 0 0 15px 15px;
-        border-top: none;
-    }
+.eye, .eye:before {
+    height: 7px;
+    width: 10px;
+    border: 2px solid #2c2c2c;
+    position: absolute;
+    border-radius: 0 0 15px 15px;
+    border-top: none;
+    /*
+    animation: open-eyes 0.3s forwards;*/
+}
 
     .eye {
         top: 18px;
@@ -697,7 +699,7 @@ h1 {
             transform: translate(-50%, -50%) rotate(45deg);
         } 
         .cat-bubble::after{
-            transform: translate(-50%, -50%) rotate(-45deg);
+            transform: translate(-50%, -20%) rotate(-60deg);
         }
 
 
@@ -740,26 +742,27 @@ h1 {
     margin-right: 10px;
 }
 
-/*.practice-btn:hover + .cat-wakeup .cat-container .eye,
-.practice-btn:hover + .cat-wakeup .cat-container .eye:before {
-    height: 14px;
-    border-radius: 50%;
-    top: 10px;
-    background-color: #2c2c2c;
-    border: none;
-}*/
+.practice-btn:hover ~ .cat-wakeup .cat-container .cat .eye,
+.practice-btn:hover ~ .cat-wakeup .cat-container .cat .eye:before {
+    animation: open-eyes 0.3s forwards;
+}
 
-.eye:hover,
-.eye:before:hover {
-    height: 14px;
-    width: 10px;
-    border: 2px solid #2c2c2c;
-    position: absolute;
-    border-radius: 5px 5px 5px 5px;
+@keyframes open-eyes {
+    from {
+        height: 7px;
+        width: 10px;
+        border-radius: 0 0 15px 15px;
+    }
+    to {
+        height: 10px;
+        width: 10px;
+        border: 2px solid #ffeb00;
+        background-color: #ffeb00;
+        border-radius: 5px 5px 5px 5px;
+    }
 }
 
 .cat-bubble:hover {
-   /* transform: scale(1.2);*/
     opacity: 0;
 }
 
@@ -772,18 +775,5 @@ h1 {
     }
     
     .cat-bubble:hover::after {
-        transform: translate(-50%, -50%) rotate(45deg) scale(2);
+        transform: translate(-50%, -30%) rotate(65deg) scale(2);
     }
-
-/*
-    
-.eye {
-    top: 18px;
-    left: 15px;
-}
-
-    .eye:before {
-        content: "";
-        left: 30px;
-    }
-*/
