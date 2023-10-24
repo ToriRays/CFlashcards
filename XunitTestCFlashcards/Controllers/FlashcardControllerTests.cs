@@ -47,6 +47,8 @@ namespace XunitTestCFlashcards.Controllers
 
         // A function that will prevent reuse of code in the unit tests.
         private FlashcardController CreateFlashcardController(Mock<IFlashcardRepository> mockFlashcardRepository)
+        // This function created a FlashcardController instance and is used to prevent
+        // reuse of code in the unit tests.
         {
             var testDeckId = 1;
             // Create a mock UserStore that is needed to create a mock UserManager.
@@ -54,9 +56,9 @@ namespace XunitTestCFlashcards.Controllers
             // Create a mock UserManager.
             var mockUserManager = new Mock<UserManager<FlashcardsUser>>(
                 mockUserStore.Object, null, null, null, null, null, null, null, null);
-            // Create a deck repository.
+            // Create and setup a deck repository for testing.
             var mockDeckRepository = new Mock<IDeckRepository>();
-            mockDeckRepository.Setup(repo => repo.GetDeckById(testDeckId)).ReturnsAsync(deck1);
+            mockDeckRepository.Setup(repo => repo.GetDeckById(testDeckId)).ReturnsAsync(deck1); // Setup the deck repository such that deck1 is returned given the testDeckId.
             // Create a mock logger
             var mockLogger = new Mock<ILogger<FlashcardController>>();
             return new FlashcardController(mockFlashcardRepository.Object, mockDeckRepository.Object, mockUserManager.Object, mockLogger.Object);
@@ -65,6 +67,7 @@ namespace XunitTestCFlashcards.Controllers
         [Fact]
         public async Task TestBrowseFlashcards()
         {
+            // Arrange
             var deckId = 1;
             var flashcardList = new List<Flashcard>()
             {
@@ -73,7 +76,7 @@ namespace XunitTestCFlashcards.Controllers
             PaginatedList<Flashcard>? paginatedFlashcards = PaginatedList<Flashcard>.Create(flashcardList, 1, 4) 
                 ?? new PaginatedList<Flashcard>(flashcardList, 2, 1, 4);
             PaginatedFlashcardsViewModel paginatedFlashcardsViewModel = new(paginatedFlashcards, deckId, "");
-            // Arrange
+            
             var mockFlashcardRepository = new Mock<IFlashcardRepository>();
             mockFlashcardRepository.Setup(repo => repo.GetFlashcardsByDeckId(deckId)).ReturnsAsync(flashcardList);
             var deckController = CreateFlashcardController(mockFlashcardRepository);
@@ -84,14 +87,17 @@ namespace XunitTestCFlashcards.Controllers
             // Assert
             var viewResult = Assert.IsType<ViewResult>(result);
             var viewPaginatedFlashcardsViewModel = Assert.IsAssignableFrom<PaginatedFlashcardsViewModel>(viewResult.ViewData.Model);
+            // Below we check that the Flashcards inside the model are equal because the two models will always be pointers
+            // to two different objects and the assert will fail, meanwhile the Flashcards should be the same object.
             Assert.Equal(paginatedFlashcardsViewModel.Flashcards, viewPaginatedFlashcardsViewModel.Flashcards);
         }
 
         [Fact]
         public async Task TestDetails()
         {
-            var testId = 1;
             // Arrange
+            var testId = 1;
+
             var mockFlashcardRepository = new Mock<IFlashcardRepository>();
             mockFlashcardRepository.Setup(repo => repo.GetFlashcardById(testId)).ReturnsAsync(flashcard1);
             var flashcardController = CreateFlashcardController(mockFlashcardRepository);
@@ -111,6 +117,7 @@ namespace XunitTestCFlashcards.Controllers
             // Arrange
             var testFlashcard = flashcard1;
             testFlashcard.Deck = deck1;
+
             var mockFlashcardRepository = new Mock<IFlashcardRepository>();
             mockFlashcardRepository.Setup(repo => repo.Create(testFlashcard)).ReturnsAsync(false);
             var flashcardController = CreateFlashcardController(mockFlashcardRepository);
@@ -146,9 +153,10 @@ namespace XunitTestCFlashcards.Controllers
         [Fact]
         public async Task TestUpdateFlashcardFunctionFails()
         {
+            // Arrange
             var testFlashcard = flashcard1;
             testFlashcard.Deck = deck1;
-            // Arrange
+            
             var mockFlashcardRepository = new Mock<IFlashcardRepository>();
             mockFlashcardRepository.Setup(repo => repo.Update(testFlashcard)).ReturnsAsync(false);
             var flashcardController = CreateFlashcardController(mockFlashcardRepository);
@@ -166,8 +174,9 @@ namespace XunitTestCFlashcards.Controllers
         [Fact]
         public async Task TestUpdateFlashcardFunctionPasses()
         {
-            var flashcard = flashcard1;
             // Arrange
+            var flashcard = flashcard1;
+            
             var mockFlashcardRepository = new Mock<IFlashcardRepository>();
             mockFlashcardRepository.Setup(repo => repo.Update(flashcard1)).ReturnsAsync(true);
             var flashcardController = CreateFlashcardController(mockFlashcardRepository);
@@ -179,15 +188,15 @@ namespace XunitTestCFlashcards.Controllers
             var redirectToAction = Assert.IsType<RedirectToActionResult>(result);
             var resultAction = Assert.IsAssignableFrom<IActionResult>(result);
             Assert.Equal("Details", redirectToAction.ActionName);
-            //Assert.Equal(flashcard1.FlashcardId, redirectToAction.RouteValues);
         }
 
         [Fact]
         public async Task TestDeleteFlashcardConfirmedFunctionFails()
         {
+            // Arrange
             var testFlashcardId = 1;
             var testDeckId = 1;
-            // Arrange
+            
             var mockFlashcardRepository = new Mock<IFlashcardRepository>();
             mockFlashcardRepository.Setup(repo => repo.Delete(testFlashcardId)).ReturnsAsync(false);
             var flashcardController = CreateFlashcardController(mockFlashcardRepository);
@@ -202,9 +211,10 @@ namespace XunitTestCFlashcards.Controllers
         [Fact]
         public async Task TestDeleteFlashcardConfirmedFunctionPasses()
         {
+            // Arrange
             var testFlashcardId = 1;
             var testDeckId = 1;
-            // Arrange
+            
             var mockFlashcardRepository = new Mock<IFlashcardRepository>();
             mockFlashcardRepository.Setup(repo => repo.Delete(testFlashcardId)).ReturnsAsync(true);
             var flashcardController = CreateFlashcardController(mockFlashcardRepository);
