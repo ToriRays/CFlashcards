@@ -25,6 +25,8 @@ namespace CFlashcards.Controllers
 
         [Authorize]
         public async Task<IActionResult> BrowseFlashcards(int deckId, int? pageNumber)
+        // The BrowseFlashcards View that this function returns allows the use to browse through the existing flashcards inside of a deck,
+        // create new flashcards, and implements the pagination functonality using the PaginatedList<> class.
         {
             var flashcards = await _flashcardRepository.GetFlashcardsByDeckId(deckId);
             if (flashcards == null)
@@ -58,6 +60,7 @@ namespace CFlashcards.Controllers
 
         [Authorize]
         public async Task<IActionResult> Details(int id)
+            // The Details View that his function returns provides a more detailed view of a single chosen flashcard in a deck.
         {
             var flashcard = await _flashcardRepository.GetFlashcardById(id);
             if (flashcard == null)

@@ -21,8 +21,11 @@ namespace CFlashcards.Controllers
             _userManager = userManager;
         }
 
+        
         [Authorize]
         public async Task<IActionResult> BrowseDecks(string searchString, int? pageNumber)
+            // The BrowseDecks View that this function returns allows the use to browse through the existing decks, create new decks and
+            // search for specific decks using searchString. In addition, pagination functonality is implemented using the PaginatedList<> class.
         {
             var flashcardsUserId = _userManager.GetUserId(this.User) ?? ""; // If the flashcardsUserId cannot be retrieved, set it to "".
             IEnumerable<Deck>? decks; // Initiate the deck list.
