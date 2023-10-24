@@ -26,12 +26,14 @@ body {
     font-family: 'Prompt',sans-serif;
     color: #712c66;
     background: #FFFAF0;
-    overflow-x: hidden;
+    
     /*****/
+    overflow-x: hidden;
     width: 100%;
     min-height: 100vh;
+    display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
 }
 
 h1 {
@@ -56,8 +58,13 @@ h1 {
     padding: 60px 5vw;
 }
 
-#visual {
+#waves-top {
     /*display: block;*/
+    width: 100%;
+    height: auto;
+}
+
+#waves-bottom {
     width: 100%;
     height: auto;
 }
@@ -161,7 +168,7 @@ h1 {
 }
 
 
-/* part of Cat animation*/
+/* part of Cat animation on default landing page*/
 
 .blob-motion {
     width: 100%;
@@ -278,20 +285,12 @@ h1 {
 
 /* Modifications for deck create form */
 
-.deck-form {   
-   
+.deck-form {     
     min-height: 80vh;
 }
 
 
 /* Animations on user landing page */
-
-.cont {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
 
 .heading {
     flex: 1;
@@ -299,47 +298,18 @@ h1 {
     color: white;  
 }
 
-.bulb-and-cat {
-    flex: 2;
-    display: flex;
-
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.string {
-    border: none;
-    border-bottom: 1px solid white;
-    width: 200%;
-    height: 300px;
-    border-bottom-left-radius: 50%;
-    border-bottom-right-radius: 50%;
-    margin-top: -100px;
-    margin-left: -50px;
-    margin-right: -50px;
-    position: static;
-    z-index: 1;
-}
-
-.bulb-container {
-    width: 300px;
-    height: 500px;
-    position: absolute;
+.bulb-cont {
     display: flex;
     flex-direction: column;
+    align-content: flex-start;
     align-items: center;
-    z-index: 1;
-    transform-origin: top;
-    border-top: solid black;
-    animation: swing 0s ease-in-out infinite;
+    border-top: 5px solid black;
 }
 
 .wire {
-
     left: auto;
     width: 2px;
-    height: 250px;
+    height: 150px;
     background: black;
     position: relative;
     z-index: 1;
@@ -363,22 +333,35 @@ h1 {
     height: 3px;
     z-index: 3;
 }
+.bulb-container {
+    width: 300px;
+    height: 400px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    transform-origin: top;
+    animation: swing 0s ease-in-out infinite;
+}
 
 .bulb {
     margin-top: -2px;
-    width: 70px;
+    width: 60px;
     aspect-ratio: 1;
     border-radius: 50%;
-    background: #ffeb00;
     border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0px 0px 150px 75px rgba(245,223,77,1);
+    
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     gap: -1px;
     z-index: 1;
-    animation: flash 15s linear infinite;
+    /**/
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0px 0px 0px 0px transparent;
+    transition: box-shadow 1s ease, background 1s ease;
 }
 
 .metal-wire {
@@ -402,27 +385,27 @@ h1 {
         top: -13px;
     }
 
-@keyframes swing {
-    0% {
-        transform: rotate(5deg);
-    }
-
-    50% {
-        transform: rotate(-5deg);
-    }
-
-    100% {
-        transform: rotate(5deg);
-    }
+.bulb:hover {
+    background: #ffeb00;
+    box-shadow: 0px 0px 150px 75px rgba(245,223,77,1);
+    animation: flash 15s linear infinite;
 }
 
-@keyframes flash {
-    0% {
+/*.cat-wakeup:hover .bulb {*/
+    /*background: #ffeb00;
+    box-shadow: 0px 0px 150px 75px rgba(245,223,77,1);*/
+    /*background: rgba(255,255,255,0.1);
+    box-shadow: 0px 0px 0px 0px transparent;
+    animation: flash 15s linear infinite;
+}*/
+
+/*@keyframes flash {*/
+    /*0% {
         background: rgba(255,255,255,0.1);
         box-shadow: 0px 0px 0px 0px transparent;
-    }
+    }*/
 
-    1% {
+    /*1% {
         background: rgba(255,235,0,1);
         box-shadow: 0px 0px 150px 75px rgba(245,223,77,1);
     }
@@ -430,66 +413,64 @@ h1 {
     1.001% {
         background: rgba(255,255,255,0.1);
         box-shadow: 0px 0px 0px 0px transparent;
-    }
+    }*/
 
-    10% {
+    /*10% {
         background: rgba(255,255,255,0.1);
         box-shadow: 0px 0px 0px 0px transparent;
-    }
+    }*/
 
-    11.001% {
+    /*11.001% {
+        background: rgba(255,235,0,1);
+        box-shadow: 0px 0px 150px 75px rgba(245,223,77,1);
+    }*/
+
+    /*11.002% {
+        background: rgba(255,255,255,0.1);
+        box-shadow: 0px 0px 0px 0px transparent;
+    }*/
+
+    /*12% {
         background: rgba(255,235,0,1);
         box-shadow: 0px 0px 150px 75px rgba(245,223,77,1);
     }
 
-    11.002% {
-        background: rgba(255,255,255,0.1);
-        box-shadow: 0px 0px 0px 0px transparent;
-    }
-
-    12% {
-        background: rgba(255,235,0,1);
-        box-shadow: 0px 0px 150px 75px rgba(245,223,77,1);
-    }
-    /*    */
     39.999% {
         background: rgba(255,235,0,1);
         box-shadow: 0px 0px 150px 75px rgba(245,223,77,1);
-    }
+    }*/
 
-    40% {
+    /*40% {
         background: rgba(255,255,255,0.1);
         box-shadow: 0px 0px 0px 0px transparent;
-    }
+    }*/
 
-    41% {
+    /*41% {
         background: rgba(255,235,0,1);
         box-shadow: 0px 0px 150px 75px rgba(245,223,77,1);
-    }
+    }*/
 
-    41.001% {
+    /*41.001% {
         background: rgba(255,255,255,0.1);
         box-shadow: 0px 0px 0px 0px transparent;
-    }
-    /*    */
+    }*/
 
-    75% {
+    /*75% {
         background: rgba(255,255,255,0.1);
         box-shadow: 0px 0px 0px 0px transparent;
-    }
+    }*/
 
-    75.5% {
+    /*75.5% {
         background: rgba(255,235,0,1);
         box-shadow: 0px 0px 150px 75px rgba(245,223,77,1);
-    }
+    }*/
 
-    75.501% {
+    /*75.501% {
         background: rgba(255,255,255,0.1);
         box-shadow: 0px 0px 0px 0px transparent;
-    }
-    /*    */
+    }*/
 
-    80% {
+    /*80% {
         background: rgba(255,255,255,0.1);
         box-shadow: 0px 0px 0px 0px transparent;
     }
@@ -542,18 +523,18 @@ h1 {
     88% {
         background: rgba(255,235,0,1);
         box-shadow: 0px 0px 150px 75px rgba(245,223,77,1);
-    }
-}
-    /* */
+    }*/
+/*}*/
 
 .cat-container {
-    height: 600px;
+    height: 500px;
     width: 350px;
     position: relative;
     transform: translate(-50%, 10%);
     left: 48%;
     bottom: 0;
 }
+
 
     .cat {
         background-color: #f7770f;
@@ -711,10 +692,26 @@ h1 {
     bottom: 52px;
     left: 60px;
     animation: shadow 2s infinite;
+    
 }
 
 @keyframes shadow {
     50% {
         transform: scaleX(0.7);
     }
+}
+
+.practice-btn {
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+#sleepy-cat-btn{
+    font-size: 15px;
+    width: 30%;
+    padding: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
 }

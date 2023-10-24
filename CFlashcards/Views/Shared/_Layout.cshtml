@@ -35,9 +35,6 @@
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Deck" asp-action="Browse">Decks</a>
                             </li>
                         }
@@ -57,7 +54,7 @@
         </nav>
     </header>
     <div>
-        <svg id="visual"
+        <svg id="waves-top"
              viewBox="0 0 960 170"
              width="960"
              height="170"
@@ -74,13 +71,15 @@
             <path id="orange" d="M0 14L22.8 12.8C45.7 11.7 91.3 9.3 137 9.3C182.7 9.3 228.3 11.7 274 13.2C319.7 14.7 365.3 15.3 411.2 15.7C457 16 503 16 548.8 14.8C594.7 13.7 640.3 11.3 686 9.8C731.7 8.3 777.3 7.7 823 8.7C868.7 9.7 914.3 12.3 937.2 13.7L960 15L960 0L937.2 0C914.3 0 868.7 0 823 0C777.3 0 731.7 0 686 0C640.3 0 594.7 0 548.8 0C503 0 457 0 411.2 0C365.3 0 319.7 0 274 0C228.3 0 182.7 0 137 0C91.3 0 45.7 0 22.8 0L0 0Z" fill="#001122"></path>
         </svg>
     </div>
-    <div class="container-fluid">
-        <main role="main" class="pb-5">
-            @RenderBody()
-        </main>
+    <div class="main-content">
+        <div class="container-fluid">
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
     </div>
-    <div>
-        <svg id="visual" 
+    <div class="footer-container">
+        <svg id="waves-bottom" 
             viewBox="0 0 960 150" 
             width="960" 
             height="150" 
@@ -103,13 +102,13 @@
         </div>
     </footer>
 
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script> <!--Bootstrap-->
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <!--Bootstrap-->
-    <script src="~/lib/jquery/dist/jquery.js"></script> <!--JQuery-->
+    @* <script src="~/lib/jquery/dist/jquery.js"></script> *@ <!--JQuery-->
     <script src="~/lib/jquery/dist/jquery.min.js"></script> <!--JQuery-->
+    @* <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script> *@ <!--Bootstrap-->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <!--Bootstrap-->
     <script src="~/lib/jquery-validate/jquery.validate.js"></script> <!--Validation-->
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script> <!--Validation-->
-    <script src="https://cdn.jsdelivr.net/npm/kute.js@2.2.4/dist/kute.min.js"></script> <!--KUTE.js animation-->
+    <script src="https://cdn.jsdelivr.net/npm/kute.js@2.2.4/dist/kute.min.js"></script> <!--KUTE.js animation-->    
     <script src="~/js/site.js" asp-append-version="true"></script> <!--Site.js-->
     @await RenderSectionAsync("Scripts", required: false)
 </body>
