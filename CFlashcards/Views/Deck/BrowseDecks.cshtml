@@ -27,7 +27,7 @@
                     <a class="btn btn-primary mt-2" asp-controller="Flashcard" asp-action="BrowseFlashcards" asp-route-deckId="@deck.DeckId">View
                         <i class="fas fa-arrow-alt-circle-right"></i></a>
                     @{
-                        if (deck.FlashcardUserId != "demo")
+                        if (deck.FlashcardUserId != "demo") // Check if the deck is a demo deck. This will mean that CRUD operations are disabled for this type of deck.
                         {
                             <a class="btn btn-secondary mt-2" asp-controller="Deck" asp-action="UpdateDeck" asp-route-id="@deck.DeckId">
                                 <i class="fas fa-pen-to-square"></i>
@@ -46,7 +46,7 @@
 <div class="create-deck-section">
     <a class="btn btn-outline-primary" asp-controller="Deck" asp-action="CreateDeck">Create New Deck</a>
 </div>
-@{
+@{ // Activate the Next and Previous buttons based on the boolean values from the PaginatedList model.
     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
