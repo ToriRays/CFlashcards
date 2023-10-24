@@ -7,9 +7,6 @@
     <h4>Flashcard</h4>
     <hr />
     <dl class="row">
-        <dt class="col-sm-2">Flashcard Id</dt>
-        <dd class="col-sm-10">@Model.FlashcardId</dd>
-
         <dt class="col-sm-2">Question</dt>
         <dd class="col-sm-10">@Model.Question</dd>
 
@@ -18,9 +15,6 @@
 
         <dt class="col-sm-2">Notes</dt>
         <dd class="col-sm-10">@Model.Notes</dd>
-
-        <dt class="col-sm-2">Deck Id</dt>
-        <dd class="col-sm-10">@Model.DeckId</dd>
     </dl>
     <form asp-action="DeleteFlashcardConfirmed" method="post">
         <input type="hidden" name="id" value="@Model.FlashcardId" />
