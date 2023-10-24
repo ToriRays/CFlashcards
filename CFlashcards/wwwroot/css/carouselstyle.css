@@ -57,8 +57,33 @@
     align-items: center;
 }
 
-.carousel-control-prev {
-    top: 30px;
-    color:black;
+/* Styles for the carousel navigation buttons */
+.carousel-control-prev,
+.carousel-control-next {
+    position: absolute;
+    top: 90%; /* Position buttons vertically at the center of the carousel */
+    font-size: 24px; /* Set the font size of the buttons */
+    color:black; /* Set the color of the buttons */
 }
+
+.carousel-control-prev {
+    left: 30px; /* Position the previous button 10px from the left edge of the carousel */
+}
+
+.carousel-control-next {
+    right: 30px; /* Position the next button 10px from the right edge of the carousel */
+}
+
+
+.settings{
+    justify-content: center;
+    position: center;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+$('.carousel').carousel({
+  interval: false,
+});
 
