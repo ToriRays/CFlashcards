@@ -154,10 +154,7 @@ namespace CFlashcards.Areas.Identity.Pages.Account
                         pageHandler: null,
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
-
-                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        //$"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-                    await SendEmailAsync(Input.Email, "Confirm your email",
+                    SendEmail(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
@@ -183,17 +180,17 @@ namespace CFlashcards.Areas.Identity.Pages.Account
                     }
                 }
             }
-
             // If we got this far, something failed, redisplay form
             return Page();
         }
 
         
-        private async Task<bool> SendEmailAsync(string email, string subject, string confirmLink)
-        // Function for sending confirmation email.
-        // inputs:
-        // returns:
-        // error handling:
+        private bool SendEmail(string email, string subject, string confirmLink)
+        // Function that uses the SMTP protocol for sending a email-confirmation.
+        // Inputs: 
+        // email: The email address to send the email to.
+        // subject: The subject of the email.
+        // confirmLink: The link in the email-confirmation message that the user needs to click to confirm their email.
         {
             try
             {

@@ -23,15 +23,16 @@ namespace CFlashcards.Controllers
             _signInManager = signInManager;
         }
 
-        //[Authorize]
+        
         public IActionResult Index()
+        // This function redirects the user to two different landing pages depending on if the user is logged in or not.
         {
             if (_signInManager.IsSignedIn(User))
             {
                 return RedirectToAction("Index1", "Home");
             }
 
-            ViewData["UserID"]= _userManager.GetUserId(this.User); //.User details of the user saved during login operation
+            ViewData["UserID"]= _userManager.GetUserId(this.User); // User details of the user saved during login operation
             // The name in the return view is needed for unit tests.
             return View("Index");
         }

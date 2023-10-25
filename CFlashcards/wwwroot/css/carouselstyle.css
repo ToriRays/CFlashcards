@@ -26,14 +26,17 @@
     background-color: transparent;
 }
 
-.card-body align-content-center{
-    display:flex;
-    flex-direction:column;
+.card-body align-content-center {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     padding: 10px 14px;
 }
+.carousel-item{
+    justify-content: center;
+}
 
-.btn.btn-secondary{
+.btn.btn-secondary {
     border: none;
     font-size: 16px;
     color: #FFF;
@@ -53,5 +56,37 @@
     justify-content: center;
     align-items: center;
 }
+.carousel-item {
+    overflow-y: auto; /* Allow content to scroll within the fixed height */
+    padding: 10px;
+    width: 100%; /* Set a fixed width (100% ensures each item takes up the full width of the carousel container) */
+    overflow: hidden;
+    height: 50%;
+}
+/* Styles for the carousel navigation buttons */
+.carousel-control-prev,
+.carousel-control-next {
+    position: fixed;
+    top: 50%; /* Position buttons vertically at the center of the carousel */
+    font-size: 24px; /* Set the font size of the buttons */
+    color: black; /* Set the color of the buttons */
+    padding: 0px;
+    transform: translateY(-50%);
+    width: 50px; /* Set the width of the buttons */
+    height: 50px; /* Set the height of the buttons */
+    border-radius: 50%; /* Make the buttons circular */
+}
 
+.carousel-control-prev {
+    left: 5px; /* Position the previous button 10px from the left edge of the carousel */
+}
+
+.carousel-control-next {
+    right: 5px; /* Position the next button 10px from the right edge of the carousel */
+}
+
+
+$('.carousel').carousel({
+  interval: false,
+});
 

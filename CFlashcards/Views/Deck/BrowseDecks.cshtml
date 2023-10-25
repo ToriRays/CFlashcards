@@ -1,0 +1,58 @@
+﻿@model PaginatedList<Deck>
+
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/test.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+}
+    
+<section class="search-bar">
+    <h1>Browse your decks</h1>
+    <form method="get" asp-action="BrowseDecks">
+        <input type="text" name="searchString" placeholder="search here" value="@ViewData["SearchString"]">
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+</section>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var deck in Model)
+    {
+        <div class="col">
+            <div class="card text-center" style="width: 18rem;">
+                <div class="card-body">
+                    <h2 class=" fs-3 card-title">@deck.Title</h2>
+                    <p class="card-text">@deck.Description</p>
+                    <a class="btn btn-primary mt-2" asp-controller="Flashcard" asp-action="BrowseFlashcards" asp-route-deckId="@deck.DeckId">View
+                        <i class="fas fa-arrow-alt-circle-right"></i></a>
+                    @{
+                        if (deck.FlashcardUserId != "demo") // Check if the deck is a demo deck. This will mean that CRUD operations are disabled for this type of deck.
+                        {
+                            <a class="btn btn-secondary mt-2" asp-controller="Deck" asp-action="UpdateDeck" asp-route-id="@deck.DeckId">
+                                <i class="fas fa-pen-to-square"></i>
+                            </a>
+
+                            <a class="btn btn-danger mt-2" asp-controller="Deck" asp-action="DeleteDeck" asp-route-id="@deck.DeckId">
+                                <i class="fa-solid fa-trash"></i>
+                            </a>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="create-deck-section">
+    <a class="btn btn-outline-primary" asp-controller="Deck" asp-action="CreateDeck">Create New Deck</a>
+</div>
+@{ // Activate the Next and Previous buttons based on the boolean values from the PaginatedList model.
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+<a asp-action="BrowseDecks" asp-route-pageNumber="@(Model.PageIndex-1)" class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="BrowseDecks" asp-route-pageNumber="@(Model.PageIndex+1)" class="btn btn-default @nextDisabled">
+    Next
+</a>
