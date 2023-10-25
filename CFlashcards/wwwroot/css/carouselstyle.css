@@ -85,8 +85,8 @@
     right: 5px; /* Position the next button 10px from the right edge of the carousel */
 }
 
-
+/*
 $('.carousel').carousel({
   interval: false,
 });
-
+    */

@@ -1,6 +1,7 @@
 ﻿@model Flashcard
 @section Styles{
-    <link rel="stylesheet" href="~/css/style.css" />
+    <link href="~/css/style.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
 }
 
 <div class="card">
@@ -8,6 +9,12 @@
         <p class="card-text">Question:@Model.Question</p>
         <p class="card-text">Answer:@Model.Answer</p>
         <p class="card-text">Notes:@Model.Notes</p>
+        @if (Model.IsLanguageFlashcard)
+        {
+            <button class="btn btn-primary speech-button-answer" data-answer="@Model.Answer">
+                <i class="fas fa-volume-up"></i>
+            </button>
+        }
     </div>
 </div>
 @{
