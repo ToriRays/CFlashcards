@@ -27,6 +27,7 @@ namespace XunitTestCFlashcards.Controllers
         private readonly HomeController _homeController;
         
         public HomeControllerTests()
+            // Below we initialize mock object to prevent reuse of code in the unit tests.
         {
             // Create a mock logger
             _mockLogger = new Mock<ILogger<HomeController>>();

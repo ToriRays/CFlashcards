@@ -9,7 +9,7 @@
 }
 
 
-@if (Model.Flashcards == null || !Model.Flashcards.Any()) //Check for flashcardlist being null to avoid warning
+@if (Model.Flashcards == null || !Model.Flashcards.Any()) //Check for flashcardlist being null to avoid warning. Display message if list is empty.
 {
     <h5 class="card-title">It looks like this deck is empty. Go ahead and create some cards :).</h5>
 }
@@ -133,7 +133,9 @@ else
     </form>
 }
 
+
 @{
+    // Activate the Next and Previous buttons based on the boolean values from the PaginatedList model.
     var prevDisabled = !Model.Flashcards.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.Flashcards.HasNextPage ? "disabled" : "";
 }

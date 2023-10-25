@@ -1,6 +1,7 @@
 ﻿using CFlashcards.Models;
 
 namespace CFlashcards.ViewModels
+    // ViewModel class for sending additional information into the BrowseFlashcards View.
 {
     public class PaginatedFlashcardsViewModel
     {

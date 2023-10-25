@@ -23,21 +23,20 @@ namespace CFlashcards.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[DeckRepository] ToListAsync() failed when GetAll() was called, error message:{e}", e.Message);
+                _logger.LogError("[DeckRepository] Where() failed when GetAll() was called, error message:{@e.Message}", e.Message);
                 return null;
             }
         }
 
         public async Task<Deck?> GetDeckById(int id)
         {
-            //implement check on flashcardUserId
             try
             {
                 return await _db.Decks.FindAsync(id);
             }
             catch (Exception e)
             {
-                _logger.LogError("[DeckRepository] FindAsync() failed when GetDeckById() was called for DeckId {DeckId:@id} error message:{e}", id, e.Message);
+                _logger.LogError("[DeckRepository] FindAsync() failed when GetDeckById() was called for DeckId {@id} error message:{@e.Message}", id, e.Message);
                 return null;
             }
         }
@@ -52,7 +51,7 @@ namespace CFlashcards.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[DeckRepository] deck creation failed for deck {@deck}, error message:{e}", e.Message);
+                _logger.LogError("[DeckRepository] Add() failed for deck {@deck}, error message:{@e.Message}", deck, e.Message);
                 return false;
             }
         }
@@ -67,7 +66,7 @@ namespace CFlashcards.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[DeckRepository] deck FindAsync(id) failed when updating the DeckId {DeckId:0000}, error message:{e}", deck.DeckId, e.Message); //Not same as lecture notes
+                _logger.LogError("[DeckRepository] Update() failed when updating the deck with DeckId {@deck.DeckId}, error message:{@e.Message}", deck.DeckId, e.Message);
                 return false;
             }
         }
@@ -79,7 +78,7 @@ namespace CFlashcards.DAL
                 var deck = await _db.Decks.FindAsync(id);
                 if (deck == null)
                 {
-                    _logger.LogError("[DeckRepository] deck not found for the DeckId {DeckId:0000}", id);
+                    _logger.LogError("[DeckRepository] deck not found for the DeckId {@id}", id);
                     return false;
                 }
                 _db.Decks.Remove(deck);
@@ -88,7 +87,7 @@ namespace CFlashcards.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[DeckRepository] deck deletion failed for the DeckId {DeckId:0000}, error message:{e}", id, e.Message); //Not same as lecture notes
+                _logger.LogError("[DeckRepository] Remove() failed for the DeckId {@id}, error message:{@e.Message}", id, e.Message);
                 return false;
             }
         }
@@ -104,7 +103,7 @@ namespace CFlashcards.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("[DeckRepository] SearchDecksByTitle() failed for UserId {UserId:@flashcardsUserId} with error message:{e}", flashcardsUserId, e.Message);
+                _logger.LogError("[DeckRepository] SearchDecksByTitle() failed for UserId {@flashcardsUserId} with error message:{@e.Message}", flashcardsUserId, e.Message);
                 return null;
             }
         }

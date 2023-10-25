@@ -37,9 +37,9 @@ namespace XunitTestCFlashcards.Controllers
             FlashcardUserId = ""
         };
 
-
-        // A function that will prevent reuse of code in the unit tests.
         private static DeckController CreateDeckController(Mock<IDeckRepository> mockDeckRepository)
+        // This function creates a DeckController instance and is used to prevent
+        // reuse of code in the unit tests.
         {
             // Create a mock UserStore that is needed to create a mock UserManager.
             var mockUserStore = new Mock<IUserStore<FlashcardsUser>>();
@@ -74,7 +74,7 @@ namespace XunitTestCFlashcards.Controllers
             var viewResult = Assert.IsType<ViewResult>(result);
             var viewPaginatedDeckList = Assert.IsAssignableFrom<PaginatedList<Deck>>(viewResult.ViewData.Model);
             Assert.Equal(2, viewPaginatedDeckList.Count);
-            if (paginatedDeckList != null) // Avoid null warning
+            if (paginatedDeckList != null) // Avoid null exception.
             {
                 Assert.Equal(paginatedDeckList, viewPaginatedDeckList);
             }
@@ -181,8 +181,9 @@ namespace XunitTestCFlashcards.Controllers
         [Fact]
         public async Task TestDeleteDeckConfirmedFunctionFails()
         {
-            var testId = 1;
             // Arrange
+            var testId = 1;
+
             var mockDeckRepository = new Mock<IDeckRepository>();
             mockDeckRepository.Setup(repo => repo.Delete(testId)).ReturnsAsync(false);
             var deckController = CreateDeckController(mockDeckRepository);
@@ -197,8 +198,9 @@ namespace XunitTestCFlashcards.Controllers
         [Fact]
         public async Task TestDeleteDeckConfirmedFunctionPasses()
         {
-            var testId = 1;
             // Arrange
+            var testId = 1;
+
             var mockDeckRepository = new Mock<IDeckRepository>();
             mockDeckRepository.Setup(repo => repo.Delete(testId)).ReturnsAsync(true);
             var deckController = CreateDeckController(mockDeckRepository);

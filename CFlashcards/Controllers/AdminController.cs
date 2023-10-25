@@ -8,6 +8,7 @@ namespace CFlashcards.Controllers
 {
     [Authorize(Roles = "admin")]
     public class AdminController : Controller
+    // This is a Controller with functions related to the admin role.
     {
         private readonly UserManager<FlashcardsUser> _userManager;
         private readonly ILogger<AdminController> _logger;

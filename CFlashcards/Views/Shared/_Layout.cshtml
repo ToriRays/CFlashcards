@@ -13,7 +13,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@200&display=swap" rel="stylesheet"><!--font-->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    @* <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" /> *@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CFlashcards.styles.css" asp-append-version="true" />
     <link rel="icon" type="image/svg" href="~/css/images/catIcon.svg">
@@ -34,7 +33,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         @{
-                        if (SignInManager.IsSignedIn(User))
+                        if (SignInManager.IsSignedIn(User)) // Check if user is signed in.
                         {
                             <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Deck" asp-action="BrowseDecks">Decks</a>
