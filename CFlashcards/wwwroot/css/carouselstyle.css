@@ -56,32 +56,35 @@
     justify-content: center;
     align-items: center;
 }
-
+.carousel-item {
+    overflow-y: auto; /* Allow content to scroll within the fixed height */
+    padding: 10px;
+    width: 100%; /* Set a fixed width (100% ensures each item takes up the full width of the carousel container) */
+    overflow: hidden;
+    height: 50%;
+}
 /* Styles for the carousel navigation buttons */
 .carousel-control-prev,
 .carousel-control-next {
-    position: absolute;
-    top: 90%; /* Position buttons vertically at the center of the carousel */
+    position: fixed;
+    top: 50%; /* Position buttons vertically at the center of the carousel */
     font-size: 24px; /* Set the font size of the buttons */
-    color:black; /* Set the color of the buttons */
+    color: black; /* Set the color of the buttons */
+    padding: 0px;
+    transform: translateY(-50%);
+    width: 50px; /* Set the width of the buttons */
+    height: 50px; /* Set the height of the buttons */
+    border-radius: 50%; /* Make the buttons circular */
 }
 
 .carousel-control-prev {
-    left: 30px; /* Position the previous button 10px from the left edge of the carousel */
+    left: 5px; /* Position the previous button 10px from the left edge of the carousel */
 }
 
 .carousel-control-next {
-    right: 30px; /* Position the next button 10px from the right edge of the carousel */
+    right: 5px; /* Position the next button 10px from the right edge of the carousel */
 }
 
-
-.settings{
-    justify-content: center;
-    position: center;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-}
 
 $('.carousel').carousel({
   interval: false,
