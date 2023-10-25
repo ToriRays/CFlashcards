@@ -11,9 +11,9 @@ html {
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 14px;
-  }
+    html {
+        font-size: 14px;
+    }
 
     .section-intro {
         padding: 60px 5vw;
@@ -26,7 +26,6 @@ body {
     font-family: 'Prompt',sans-serif;
     color: #712c66;
     background: #FFFAF0;
-    
     /*****/
     overflow-x: hidden;
     width: 100%;
@@ -118,6 +117,7 @@ h1 {
     /*border-color: #543770;*/
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
+
     .btn-primary:hover {
         color: #fff;
         /*border-color: #cc3557;*/
@@ -137,7 +137,7 @@ h1 {
     .btn-check:checked + .btn-primary, .btn-check:active + .btn-primary, .btn-primary:active, .btn-primary.active, .show > .btn-primary.dropdown-toggle {
         color: #fff;
         background-color: #543770;
-        border-color: #cc3557;      
+        border-color: #cc3557;
     }
 
 .btn-secondary {
@@ -209,11 +209,11 @@ h1 {
 
 
 /* Tab navigation */
-.login-logout-card .card-header{
+.login-logout-card .card-header {
     padding: 0px 0px 12px 0px;
 }
 
-.login-logout-card ul.nav-tabs{
+.login-logout-card ul.nav-tabs {
     margin: 0px 0px -12px 0px;
 }
 
@@ -229,7 +229,7 @@ h1 {
 }
 
 .login-logout-card .card-body {
-    padding:10px 20px;
+    padding: 10px 20px;
 }
 
 
@@ -285,7 +285,7 @@ h1 {
 
 /* Modifications for deck create form */
 
-.deck-form {     
+.deck-form {
     min-height: 80vh;
 }
 
@@ -295,7 +295,7 @@ h1 {
 .heading {
     flex: 1;
     padding-right: 20px;
-    color: white;  
+    color: white;
 }
 
 .bulb-cont {
@@ -333,6 +333,7 @@ h1 {
     height: 3px;
     z-index: 3;
 }
+
 .bulb-container {
     width: 300px;
     height: 400px;
@@ -351,7 +352,6 @@ h1 {
     aspect-ratio: 1;
     border-radius: 50%;
     border: 1px solid rgba(255,255,255,0.1);
-    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -392,9 +392,9 @@ h1 {
 }
 
 /*.cat-wakeup:hover .bulb {*/
-    /*background: #ffeb00;
+/*background: #ffeb00;
     box-shadow: 0px 0px 150px 75px rgba(245,223,77,1);*/
-    /*background: rgba(255,255,255,0.1);
+/*background: rgba(255,255,255,0.1);
     box-shadow: 0px 0px 0px 0px transparent;
     animation: flash 15s linear infinite;
 }*/
@@ -535,26 +535,26 @@ h1 {
     bottom: 0;
 }
 
-    .cat {
-        background-color: #f7770f;
-        height: 65px;
-        width: 80px;
-        border-radius: 0 80px 80px 0;
-        position: absolute;
-        bottom: 60px;
-        right: 50px;
-    }
+.cat {
+    background-color: #f7770f;
+    height: 65px;
+    width: 80px;
+    border-radius: 0 80px 80px 0;
+    position: absolute;
+    bottom: 60px;
+    right: 50px;
+}
 
-    .ear {
-        height: 15px;
-        width: 15px;
-        background-color: #f7770f;
-        position: absolute;
-        bottom: 64px;
-        left: 8px;
-        border-radius: 20px 0 0 0;
-        box-shadow: 25px 0 #f7770f;
-    }
+.ear {
+    height: 15px;
+    width: 15px;
+    background-color: #f7770f;
+    position: absolute;
+    bottom: 64px;
+    left: 8px;
+    border-radius: 20px 0 0 0;
+    box-shadow: 25px 0 #f7770f;
+}
 
 .eye, .eye:before {
     height: 7px;
@@ -567,26 +567,26 @@ h1 {
     animation: open-eyes 0.3s forwards;*/
 }
 
-    .eye {
-        top: 18px;
-        left: 15px;
-    }
+.eye {
+    top: 18px;
+    left: 15px;
+}
 
     .eye:before {
         content: "";
         left: 30px;
     }
 
-    .nose {
-        height: 12px;
-        width: 12px;
-        background-color: #ffffff;
-        border-radius: 50%;
-        position: absolute;
-        top: 32px;
-        left: 25px;
-        box-shadow: 12px 0 #ffffff;
-    }
+.nose {
+    height: 12px;
+    width: 12px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    position: absolute;
+    top: 32px;
+    left: 25px;
+    box-shadow: 12px 0 #ffffff;
+}
 
     .nose:before {
         content: "";
@@ -609,20 +609,20 @@ h1 {
         left: 6px;
     }
 
-    .mouth {
-        height: 15px;
-        width: 17px;
-        background-color: #2c2c2c;
-        border-radius: 0 0 5px 5px;
-        position: absolute;
-        top: 38px;
-        left: 27px;
-        animation: mouth-move 2s infinite;
-        transform-origin: top;
-    }
+.mouth {
+    height: 15px;
+    width: 17px;
+    background-color: #2c2c2c;
+    border-radius: 0 0 5px 5px;
+    position: absolute;
+    top: 38px;
+    left: 27px;
+    animation: mouth-move 2s infinite;
+    transform-origin: top;
+}
 
-    @keyframes mouth-move {
-        50% {
+@keyframes mouth-move {
+    50% {
         transform: scaleY(0.7);
     }
 }
@@ -695,16 +695,17 @@ h1 {
         transition: all 0.3s;
     }
 
-        .cat-bubble::before{
-            transform: translate(-50%, -50%) rotate(45deg);
-        } 
-        .cat-bubble::after{
-            transform: translate(-50%, -20%) rotate(-60deg);
-        }
+    .cat-bubble::before {
+        transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .cat-bubble::after {
+        transform: translate(-50%, -20%) rotate(-60deg);
+    }
 
 
-        @keyframes bubble-scale {
-            50% {
+@keyframes bubble-scale {
+    50% {
         transform: scale(1.6);
     }
 }
@@ -718,7 +719,6 @@ h1 {
     bottom: 52px;
     left: 60px;
     animation: shadow 2s infinite;
-    
 }
 
 @keyframes shadow {
@@ -734,7 +734,7 @@ h1 {
     position: relative;
 }
 
-#sleepy-cat-btn{
+#sleepy-cat-btn {
     font-size: 15px;
     width: 30%;
     padding: 5px;
@@ -753,6 +753,7 @@ h1 {
         width: 10px;
         border-radius: 0 0 15px 15px;
     }
+
     to {
         height: 10px;
         width: 10px;
@@ -773,7 +774,7 @@ h1 {
         height: 9px;
         transform: translate(-50%, -50%) rotate(45deg) scale(2);
     }
-    
+
     .cat-bubble:hover::after {
         transform: translate(-50%, -30%) rotate(65deg) scale(2);
     }
