@@ -73,10 +73,12 @@ else
                                 <p class="card-text">
                                     Answer: @flashcard.Answer
                                 </p>
+                                @if (flashcard.IsLanguageFlashcard)
+                                {
                                 <button class="btn btn-primary speech-button-answer" data-answer="@flashcard.Answer">
                                     <i class="fas fa-volume-up"></i>
                                 </button>
-
+                                }
 
                             </div>
 
