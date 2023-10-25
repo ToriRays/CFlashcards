@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/CFlashcards/CFlashcards.db
+/CFlashcards/CFlashcards.db-shm
+/CFlashcards/CFlashcards.db-wal
