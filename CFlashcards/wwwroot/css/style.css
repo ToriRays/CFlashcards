@@ -105,7 +105,7 @@
 
     .btn-check:checked + .btn-danger, .btn-check:active + .btn-danger, .btn-danger:active, .btn-danger.active, .show > .btn-danger.dropdown-toggle {
         color: #fff;
-        background-color: #b02a37;           
+        background-color: #b02a37;
     }
 
 .create-deck-section {
@@ -203,5 +203,3 @@
         .pagination a:hover:not(.active) {
             background-color: #ddd;
         }
-
-

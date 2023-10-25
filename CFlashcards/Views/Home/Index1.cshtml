@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿@{
     ViewData["Title"] = "User home page";
 }
 @section Styles{
@@ -9,36 +9,44 @@
         }
     </style>
 }
-<div class="cont">
-    <div class="bulb-and-cat">
-        <h1 class=" text-center mb-0 fs-1 heading">Ready to practice?</h1>
-        <div class="cat-container"> 
-            <div class="bulb-container">
-                <div class="wire"></div>
-                <div class="connector">
-                    <div class="grove"></div>
-                    <div class="grove"></div>
-                    <div class="grove"></div>
-                </div>
-                <div class="bulb">
-                    <div class="metal-wire"></div>
-                    <div class="metal-wire"></div>
-                    <div class="metal-wire"></div>
-                </div>
+
+<h1 class=" text-center mb-0 fs-1 heading">Ready to practice?</h1>
+<div class="cat-wakeup">
+    <div class="bulb-cont">
+        <div class="bulb-container">
+            <div class="wire"></div>
+            <div class="connector">
+                <div class="grove"></div>
+                <div class="grove"></div>
+                <div class="grove"></div>
             </div>
-            <div class="cat-shadow"></div>
-            <div class="cat">
-                <div class="ear"></div>
-                <div class="eye"></div>
-                <div class="mouth"></div>
-                <div class="nose"></div>
-                <div class="tail"></div>
-                <div class="cat-body"></div>
-                <div class="cat-bubble"></div>
+            <div class="bulb">
+                <div class="metal-wire"></div>
+                <div class="metal-wire"></div>
+                <div class="metal-wire"></div>
             </div>
         </div>
-    </div>  
+    </div>
+
+    <div class="cat-container">
+        <div class="cat-shadow"></div>
+        <div class="cat">
+            <div class="ear"></div>
+            <div class="eye"></div>
+            <div class="mouth"></div>
+            <div class="nose"></div>
+            <div class="tail"></div>
+            <div class="cat-body"></div>
+            <div class="cat-bubble"></div>
+        </div>
+    </div>
 </div>
+
+<div class="practice-btn">
+    <a id="sleepy-cat-btn" asp-area="" asp-controller="Deck" asp-action="BrowseDecks" class="btn btn-primary me-3">Lets go!</a>
+</div>
+
+
 
 @section Scripts{
     <script src="~/js/site.js" defer></script>

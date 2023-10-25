@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity;
+﻿﻿@using Microsoft.AspNetCore.Identity;
 @inject SignInManager<FlashcardsUser> SignInManager
 @inject UserManager<FlashcardsUser> UserManager
 
@@ -33,36 +33,36 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         @{
-                        if (SignInManager.IsSignedIn(User)) // Check if user is signed in.
-                        {
-                            <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Deck" asp-action="BrowseDecks">Decks</a>
-                            </li>
-                            if (User.IsInRole("admin"))
+                            if (SignInManager.IsSignedIn(User)) // Check if user is signed in.
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-light" asp-area="" asp-controller="Admin" asp-action="UserTable">UserTable</a>
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Deck" asp-action="BrowseDecks">Decks</a>
+                                </li>
+                                if (User.IsInRole("admin"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-light" asp-area="" asp-controller="Admin" asp-action="UserTable">UserTable</a>
+                                    </li>
+                                }
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-light" asp-area="" asp-controller="Demo" asp-action="Demo">Demo</a>
                                 </li>
                             }
-                        }      
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-light" asp-area="" asp-controller="Demo" asp-action="Demo">Demo</a>
-                            </li>
-                        }
                         }
 
                     </ul>
                 </div>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial.cshtml"/>
+                    <partial name="_LoginPartial.cshtml" />
                 </div>
             </div>
         </nav>
     </header>
     <div>
-        <svg id="visual"
+        <svg id="waves-top"
              viewBox="0 0 960 170"
              width="960"
              height="170"
@@ -79,19 +79,21 @@
             <path id="orange" d="M0 14L22.8 12.8C45.7 11.7 91.3 9.3 137 9.3C182.7 9.3 228.3 11.7 274 13.2C319.7 14.7 365.3 15.3 411.2 15.7C457 16 503 16 548.8 14.8C594.7 13.7 640.3 11.3 686 9.8C731.7 8.3 777.3 7.7 823 8.7C868.7 9.7 914.3 12.3 937.2 13.7L960 15L960 0L937.2 0C914.3 0 868.7 0 823 0C777.3 0 731.7 0 686 0C640.3 0 594.7 0 548.8 0C503 0 457 0 411.2 0C365.3 0 319.7 0 274 0C228.3 0 182.7 0 137 0C91.3 0 45.7 0 22.8 0L0 0Z" fill="#001122"></path>
         </svg>
     </div>
-    <div class="container-fluid">
-        <main role="main" class="pb-5">
-            @RenderBody()
-        </main>
+    <div class="main-content">
+        <div class="container-fluid">
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
     </div>
-    <div>
-        <svg id="visual" 
-            viewBox="0 0 960 150" 
-            width="960" 
-            height="150" 
-            xmlns="http://www.w3.org/2000/svg" 
-            xmlns:xlink="http://www.w3.org/1999/xlink" 
-            version="1.1">
+    <div class="footer-container">
+        <svg id="waves-bottom"
+             viewBox="0 0 960 150"
+             width="960"
+             height="150"
+             xmlns="http://www.w3.org/2000/svg"
+             xmlns:xlink="http://www.w3.org/1999/xlink"
+             version="1.1">
             <path id="red" d="M0 75L22.8 71.8C45.7 68.7 91.3 62.3 137 60.2C182.7 58 228.3 60 274 61.7C319.7 63.3 365.3 64.7 411.2 68.2C457 71.7 503 77.3 548.8 77.8C594.7 78.3 640.3 73.7 686 71.5C731.7 69.3 777.3 69.7 823 72.2C868.7 74.7 914.3 79.3 937.2 81.7L960 84L960 151L937.2 151C914.3 151 868.7 151 823 151C777.3 151 731.7 151 686 151C640.3 151 594.7 151 548.8 151C503 151 457 151 411.2 151C365.3 151 319.7 151 274 151C228.3 151 182.7 151 137 151C91.3 151 45.7 151 22.8 151L0 151Z" fill="#f7770f"></path>
             <path id="orange" d="M0 72L22.8 72.8C45.7 73.7 91.3 75.3 137 77.5C182.7 79.7 228.3 82.3 274 81.8C319.7 81.3 365.3 77.7 411.2 74C457 70.3 503 66.7 548.8 65C594.7 63.3 640.3 63.7 686 66.7C731.7 69.7 777.3 75.3 823 76.8C868.7 78.3 914.3 75.7 937.2 74.3L960 73L960 151L937.2 151C914.3 151 868.7 151 823 151C777.3 151 731.7 151 686 151C640.3 151 594.7 151 548.8 151C503 151 457 151 411.2 151C365.3 151 319.7 151 274 151C228.3 151 182.7 151 137 151C91.3 151 45.7 151 22.8 151L0 151Z" fill="#ea503e"></path>
             <path id="red" d="M0 87L22.8 89.2C45.7 91.3 91.3 95.7 137 94.7C182.7 93.7 228.3 87.3 274 83.3C319.7 79.3 365.3 77.7 411.2 76.3C457 75 503 74 548.8 77C594.7 80 640.3 87 686 89.2C731.7 91.3 777.3 88.7 823 89C868.7 89.3 914.3 92.7 937.2 94.3L960 96L960 151L937.2 151C914.3 151 868.7 151 823 151C777.3 151 731.7 151 686 151C640.3 151 594.7 151 548.8 151C503 151 457 151 411.2 151C365.3 151 319.7 151 274 151C228.3 151 182.7 151 137 151C91.3 151 45.7 151 22.8 151L0 151Z" fill="#cc3557"></path>
@@ -108,10 +110,10 @@
         </div>
     </footer>
 
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script> <!--Bootstrap-->
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <!--Bootstrap-->
-    <script src="~/lib/jquery/dist/jquery.js"></script> <!--JQuery-->
+    @* <script src="~/lib/jquery/dist/jquery.js"></script> *@ <!--JQuery-->
     <script src="~/lib/jquery/dist/jquery.min.js"></script> <!--JQuery-->
+    @* <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script> *@ <!--Bootstrap-->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <!--Bootstrap-->
     <script src="~/lib/jquery-validate/jquery.validate.js"></script> <!--Validation-->
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script> <!--Validation-->
     <script src="https://cdn.jsdelivr.net/npm/kute.js@2.2.4/dist/kute.min.js"></script> <!--KUTE.js animation-->

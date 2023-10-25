@@ -1,4 +1,4 @@
-﻿@using CFlashcards.Models
+﻿﻿@using CFlashcards.Models
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<FlashcardsUser> SignInManager
 
@@ -7,8 +7,10 @@
 }
 
 <section class="section-intro">
-    <div class="blob-content"><h1 class="text-center mb-4">Discover a free and fun path to effective learning!</h1>
-        <div class="d-flex justify-content-center mt-4 mb-4"> <!--Buttons will be centered and will have a space-->
+    <div class="blob-content">
+        <h1 class="text-center mb-4">Discover a free and fun path to effective learning!</h1>
+        <div class="d-flex justify-content-center mt-4 mb-4">
+            <!--Buttons will be centered and will have a space-->
             <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary me-3">GET STARTED</a>
             <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-secondary">ALREADY HAVE AN ACCOUNT</a>
         </div>
@@ -16,10 +18,12 @@
     <svg class="blob-motion"
          id="visual-cat"
          viewBox="0 0 800 500"
+    @* width="800"
+         height="500" *@
          xmlns="http://www.w3.org/2000/svg"
          xmlns:xlink="http://www.w3.org/1999/xlink"
          version="1.1">
-        <g transform ="translate(480 270)">
+        <g transform="translate(480 270)">
             <path id="blob1"
                   d="M52 -57.5C67.6 -48.9 80.6 -32.7 81.7 -15.9C82.9 0.8 72.2 18.2 62.6 37.4C53 56.6 44.4 77.6 29.3 85.2C14.1 92.7 -7.6 86.8 -21.2 74.7C-34.8 62.6 -40.1 44.4 -50.3 28.3C-60.5 12.2 -75.6 -1.9 -73.7 -13C-71.8 -24.2 -52.9 -32.4 -37.8 -41.1C-22.7 -49.7 -11.4 -58.9 3.4 -63C18.2 -67 36.4 -66.1 52 -57.5"
                   fill="#1a1a1a">
@@ -32,12 +36,4 @@
             </path>
         </g>
     </svg>
-</section>
-
-<section class="section-intro">
-    <div class="blob-content"><h1>Practice as much as you want</h1></div>
-</section>
-
-<section class="section-intro">
-    <div class="blob-content"><h1>Grow and stay motivated</h1></div>
 </section>
