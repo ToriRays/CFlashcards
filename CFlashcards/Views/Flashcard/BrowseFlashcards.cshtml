@@ -54,10 +54,9 @@ else
 
                 <div class="card text-center" style="width: 18rem;">
 
-                    <div id="flashcardCarousel_@(flashcard.FlashcardId)" class="carousel slide" data-bs-interval="false">
+                    <div id="flashcardCarousel_@(flashcard.FlashcardId)" class="carousel slide" data-bs-ride="false"data-bs-interval="false">
 
-
-
+                      
                         <div class="carousel-inner">
 
                             <div class="carousel-item active">
@@ -88,22 +87,19 @@ else
                             </div>
                         </div>
 
-
+                        <div>
                         <a class="carousel-control-prev" href="#flashcardCarousel_@(flashcard.FlashcardId)" role="button" data-bs-slide="prev" style="color:black">
-                            <span class="carousel-control-prev-icon" style="color:black" aria-hidden="true"></span>
-                            <span class="sr-only" style="font-size: 4vw">&lsaquo;</span>
+                            <span class="carousel-control-prev-icon" style="color:black"></span>
                         </a>
                         <a class="carousel-control-next" href="#flashcardCarousel_@(flashcard.FlashcardId)" role="button" data-bs-slide="next" style="color:black">
-                            <span class="carousel-control-next-icon" style="color:black" aria-hidden="true"></span>
-                            <span class="sr-only" style=" font-size: 4vw">&rsaquo;</span>
+                            <span class="carousel-control-next-icon" style="color:black"></span>
                         </a>
+                        </div>
 
 
-
-
-                        <p>
+                        <div class="inspect-card-button">
                             <a class="btn btn-secondary" asp-controller="Flashcard" asp-action="Details" asp-route-id="@flashcard.FlashcardId">Inspect card</a>
-                        </p>
+                        </div>
 
 
                     </div>
@@ -142,7 +138,7 @@ else
 <a asp-action="BrowseFlashcards" asp-route-deckId="@Model.DeckId" asp-route-pageNumber="@(Model.Flashcards.PageIndex-1)" class="btn btn-default @prevDisabled">
     Previous
 </a>
-<a asp-action="BrowseFlashcards" asp-route-deckId="@Model.DeckId"  asp-route-pageNumber="@(Model.Flashcards.PageIndex+1)" class="btn btn-default @nextDisabled">
+<a asp-action="BrowseFlashcards" asp-route-deckId="@Model.DeckId" asp-route-pageNumber="@(Model.Flashcards.PageIndex+1)" class="btn btn-default @nextDisabled">
     Next
 </a>
 

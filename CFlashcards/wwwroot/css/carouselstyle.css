@@ -66,23 +66,28 @@
 /* Styles for the carousel navigation buttons */
 .carousel-control-prev,
 .carousel-control-next {
-    position: fixed;
+    position: absolute;
     top: 50%; /* Position buttons vertically at the center of the carousel */
     font-size: 24px; /* Set the font size of the buttons */
     color: black; /* Set the color of the buttons */
-    padding: 0px;
     transform: translateY(-50%);
     width: 50px; /* Set the width of the buttons */
     height: 50px; /* Set the height of the buttons */
-    border-radius: 50%; /* Make the buttons circular */
+    margin-top:20px;
+    margin-bottom: 20px;
+    
 }
-
 .carousel-control-prev {
-    left: 5px; /* Position the previous button 10px from the left edge of the carousel */
+    margin-left: -39px;
+}
+.carousel-control-next {
+    margin-right: -39px; 
 }
 
-.carousel-control-next {
-    right: 5px; /* Position the next button 10px from the right edge of the carousel */
+.inspect-card-button {
+    
+    margin-top: 50px;
+    
 }
 
 
