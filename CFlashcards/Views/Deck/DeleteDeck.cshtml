@@ -12,17 +12,22 @@
 
 <section class="center-container">
     @* <h2 class=" fs-4 mx-3 mt-5">Item</h2> *@
-    <hr />
-    <dl class="row mx-4">
-        <dt class="col-sm-2">Title</dt>
-        <dd class="col-sm-10">@Model.Title</dd>
-
-        <dt class="col-sm-2">Description</dt>
-        <dd class="col-sm-10">@Model.Description</dd>
+    @* <hr /> *@
+    <dl class ="deck-info row">
+        <div class="info-pair">
+            <dt class="col-sm-6 custom-dt">Title</dt>
+            <dd class="col-sm-6">@Model.Title</dd>
+        </div>
+    </dl>
+    <dl class ="deck-info row">
+        <div class="info-pair">
+            <dt class="col-sm-6 custom-dt">Description</dt>
+            <dd class="col-sm-6">@Model.Description</dd>
+        </div>
     </dl>
 
     <form asp-action="DeleteDeckConfirmed" asp-route-id="@Model.DeckId" method="post" class="mx-4">
-        <button type="submit" class="btn btn-danger">Delete</button>
+        <button type="submit" class="btn btn-danger mx-3">Delete</button>
         <a asp-action="BrowseDecks" class="btn btn-secondary">Cancel</a>
     </form>
 </section>

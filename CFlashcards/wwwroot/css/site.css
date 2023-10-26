@@ -313,7 +313,27 @@ h1 {
 
 .center-container {
     height: 20vh;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
 }
+
+.deck-info {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.info-pair{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.custom-dt {
+    margin-right: 30px;
+}
+
+
 
 
 /* Animations on user landing page */
