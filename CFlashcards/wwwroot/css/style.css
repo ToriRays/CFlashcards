@@ -222,3 +222,11 @@
     padding-left: 20px;
     padding-right: 20px;
 }
+
+/* Custom design for delete Flashcard */
+
+.display-card-container {
+    min-height: 100px;
+    margin-top: 5%;
+    margin-left: 5%;
+}
