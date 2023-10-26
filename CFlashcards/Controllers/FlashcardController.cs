@@ -7,18 +7,48 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
 namespace CFlashcards.Controllers
-{
-    public class FlashcardController : Controller
+a    public class FlashcardController : Controller
     {
         private readonly IFlashcardRepository _flashcardRepository;
         private readonly IDeckRepository _deckRepository;
+        private readonly UserManager<FlashcardsUser> _userManager;
         private readonly ILogger<FlashcardController> _logger;
 
-        public FlashcardController(IFlashcardRepository flashcardRepository, IDeckRepository deckRepository, ILogger<FlashcardController> logger)
+        public FlashcardController(IFlashcardRepository flashcardRepository, IDeckRepository deckRepository, UserManager<FlashcardsUser> userManager, ILogger<FlashcardController> logger)
         {
             _flashcardRepository = flashcardRepository;
             _deckRepository = deckRepository;
             _logger = logger;
+            _userManager = userManager;
+        }
+
+        [Authorize]
+        public async Task<IActionResult> BrowseFlashcards(int deckId, int? pageNumber)
+        {
+            _logger.LogError("DeckId:{@id}", deckId);
+            var flashcardUserId = _userManager.GetUserId(this.User) ?? "";
+
+            var flashcards = await _flashcardRepository.GetFlashcardsByDeckId(deckId);
+            if (flashcards == null)
+            {
+                _logger.LogError("[FlashcardController] Flashcards not found while executing _flashcardRepository.GetFlashcardsByDeckId() DeckId:{@id}", deckId);
+                var badRequest = "Flashcards not found for the DeckId: " + deckId;
+                return BadRequest(badRequest);
+            }
+
+            var pageSize = 4;
+
+            var paginatedFlashcards = PaginatedList<Flashcard>.Create(flashcards.ToList(), pageNumber ?? 1, pageSize);
+            if (paginatedFlashcards == null)
+            {
+                _logger.LogError("[FlashcardController] Paginated Flashcard list could not be created while executing PaginatedList<Flashcard>.Create().");
+                var badRequest = "PaginatedList creation failed.";
+                return BadRequest(badRequest);
+            }
+
+            var paginatedFlashcardsModelView = new PaginatedFlashcardsViewModel(paginatedFlashcards, deckId, flashcardUserId);
+
+            return View(paginatedFlashcardsModelView);
         }
 
         [Authorize]
@@ -52,27 +82,19 @@ namespace CFlashcards.Controllers
                 _logger.LogError("[FlashcardController] Deck not found when creating a new flashcard FlashcardId {@flashcardId}", flashcard.FlashcardId);
                 return BadRequest("Deck not found when creating the flashcard.");
             }
-            var newFlashcard = new Flashcard
-            {
-                FlashcardId = flashcard.FlashcardId,
-                Question = flashcard.Question,
-                Answer = flashcard.Answer,
-                Notes = flashcard.Notes,
-                DeckId = flashcard.DeckId,
-                Deck = deck
-            };
-            bool returnOk = await _flashcardRepository.Create(newFlashcard);
+            flashcard.Deck = deck;
+            bool returnOk = await _flashcardRepository.Create(flashcard);
             if (returnOk)
             {
-                return RedirectToAction("Details", new { id = newFlashcard.FlashcardId }); //redirect to the detailed view of the newly created card
+                return RedirectToAction("Details", new { id = flashcard.FlashcardId }); //redirect to the detailed view of the newly created card
             }
-            _logger.LogWarning("[FlashcardController] Flashcard creation failed {@newFlashcard}", newFlashcard);
-            return RedirectToAction("Carousel", "Deck", newFlashcard.DeckId); //redirect to the carousel view of the deck where card creation was started
+            _logger.LogWarning("[FlashcardController] Flashcard creation failed {@flashcard}", flashcard);
+            return RedirectToAction("BrowseFlashcards", flashcard.DeckId); //redirect to the carousel view of the deck where card creation was started
         }
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> EditFlashcard(int id)
+        public async Task<IActionResult> UpdateFlashcard(int id)
         {
             var flashcard = await _flashcardRepository.GetFlashcardById(id);
             if (flashcard == null)
@@ -85,7 +107,7 @@ namespace CFlashcards.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> EditFlashcard(Flashcard flashcard)
+        public async Task<IActionResult> UpdateFlashcard(Flashcard flashcard)
         {
             //Had to remove if(ModelState.IsValid) for this to work. Need to find out why
             bool returnOk = await _flashcardRepository.Update(flashcard);
@@ -121,7 +143,7 @@ namespace CFlashcards.Controllers
                 return BadRequest("Flashcard deletion failed.");
             }
             _logger.LogError("FlashcardId: {@id}, DeckId: {@deckId}", id, deckId);
-            return RedirectToAction("Carousel", "Deck", new { id = deckId });
+            return RedirectToAction("BrowseFlashcards", new { id = deckId });
         }
     }
 }

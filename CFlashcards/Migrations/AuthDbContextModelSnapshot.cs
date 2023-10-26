@@ -28,6 +28,7 @@ namespace CFlashcards.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
+                        .HasMaxLength(300)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("FlashcardUserId")
@@ -54,6 +55,9 @@ namespace CFlashcards.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("DeckId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("IsLanguageFlashcard")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Notes")
@@ -89,19 +93,15 @@ namespace CFlashcards.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("TEXT");
+
+                    b.Property<string>("NickName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)

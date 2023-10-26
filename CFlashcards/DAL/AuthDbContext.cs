@@ -11,7 +11,9 @@ public class AuthDbContext : IdentityDbContext<FlashcardsUser>
         : base(options)
     {
     }
+    // Add Flashcard entity
     public DbSet<Flashcard> Flashcards { get; set; }
+    // Add Deck entity
     public DbSet<Deck> Decks { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -12,8 +12,8 @@
 @{
     if(Model.Deck.FlashcardUserId != "demo")
     {
-        <a class="btn btn-secondary" asp-controller="Flashcard" asp-action="EditFlashcard" asp-route-id="@Model.FlashcardId">Edit the card</a>
+        <a class="btn btn-secondary" asp-controller="Flashcard" asp-action="UpdateFlashcard" asp-route-id="@Model.FlashcardId">Edit the card</a>
         <a class="btn btn-danger" asp-controller="Flashcard" asp-action="DeleteFlashcard" asp-route-id="@Model.FlashcardId">Delete the card</a>
     } //Note to myself: Maybe grey out the buttons instead.
 }
-<a class="btn btn-primary" asp-controller="Deck" asp-action="Carousel" asp-route-id="@Model.DeckId">Browse other cards</a>
+<a class="btn btn-primary" asp-action="BrowseFlashcards" asp-route-deckId="@Model.DeckId">Browse other cards</a>

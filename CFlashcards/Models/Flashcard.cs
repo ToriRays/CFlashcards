@@ -9,6 +9,7 @@
         public int DeckId { get; set; }
         //navigation property
         public virtual Deck Deck { get; set; } = default!; //Virtual keyword used for lazy loading
+        public bool IsLanguageFlashcard { get; set; } = false;
     }
 }
 
