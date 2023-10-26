@@ -105,7 +105,7 @@
 
     .btn-check:checked + .btn-danger, .btn-check:active + .btn-danger, .btn-danger:active, .btn-danger.active, .show > .btn-danger.dropdown-toggle {
         color: #fff;
-        background-color: #b02a37;           
+        background-color: #b02a37;
     }
 
 .create-deck-section {
@@ -180,28 +180,37 @@
 }*/
 
 /* Pagination links */
-
-.pagination {
-    display: flex;
-    justify-content: center;
+.controller-pagination {
+    position: relative;
+    bottom: 15%;
+    margin-top: auto;
 }
 
-    .pagination a {
-        color: black;
-        padding: 8px 16px;
-        text-decoration: none;
-        transition: background-color .3s;
+.custom-pagination-btn {
+    position: relative;
+    align-content: space-around;
+    justify-content: space-around;
+    color: #fff;
+    background: linear-gradient(45deg, #6610f2, #4a038e);
+    border-color: #543770;
+}
+
+    .custom-pagination-btn:hover {
+        color: #fff;
+        background: linear-gradient(45deg, #FF0080, #a22c65 );
+        border: none;
     }
 
-        /* Style the active/current link */
-        .pagination a.active {
-            background-color: rgb(169, 30, 255);
-            color: white;
-        }
+    .custom-pagination-btn:focus {
+        box-shadow: 0 0 0 0.25rem rgba(255, 0, 255, 0.5);
+    }
 
-        /* grey background color on mouse-over */
-        .pagination a:hover:not(.active) {
-            background-color: #ddd;
-        }
+.p-obj {
+    position: absolute;
+    margin-left: 40%;
+}
 
-
+.n-obj {
+    position: absolute;
+    margin-left: 60%;
+}
