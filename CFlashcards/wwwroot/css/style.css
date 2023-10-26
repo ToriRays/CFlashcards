@@ -163,21 +163,13 @@
 }
 
 
-/* Custrom design of decks bottom buttons on Browse decks page */
+/* Custom design of decks bottom buttons on Browse decks page */
 
 .buttons-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-}
-
-.decks-bottom-buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
 }
 
 .create-deck-section {
@@ -204,6 +196,7 @@
 /*.my-flex-modifications {
     align-items: center;
 }*/
+
 
 /* Pagination links */
 
@@ -240,7 +233,7 @@
 
     .custom-pagination-btn:hover {
         color: #fff;
-        background: linear-gradient(85deg, #ea503e, #d43b51 );
+        background: linear-gradient(65deg, #cc3557, #db0031 );
         border: none;
     }
 
@@ -258,8 +251,6 @@
     position: absolute;
     margin-left: 60%;
 }*/
-
-
 
 
 /* Custom design for Create Flashcard Form */
