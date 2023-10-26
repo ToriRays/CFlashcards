@@ -1,8 +1,11 @@
 ﻿@model List<FlashcardsUser>
+@section Styles{
+    <link rel="stylesheet" href="~/css/style.css" />
+}
 
-<h1>Table of Flashcards Users</h1>
+<h1 class="fs-3 text-center mb-5">Table of Flashcards Users</h1>
 
-<div style="overflow-x: auto;">
+<div class="admin-page">
     <table class='table table-striped'>
         <tr>
             <th>Id</th>

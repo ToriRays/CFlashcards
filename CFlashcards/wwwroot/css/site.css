@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+a {
+    color: #501d48;
+    text-decoration: underline;
+}
+
 html {
     font-size: 12px;
     position: relative;
