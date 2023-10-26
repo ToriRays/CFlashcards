@@ -1,10 +1,13 @@
 ﻿@model Flashcard
+@section Styles{
+    <link rel="stylesheet" href="~/css/style.css" />
+}
 
-<h2>Create a New Flashcard!</h2>
+<h1 class="fs-3 text-center">Create a New Flashcard!</h1>
 
 <div asp-validation-summary="All" class="text-danger"></div>
 
-<form asp-action="CreateFlashcard">
+<form asp-action="CreateFlashcard" class="new-flashcard-form">
     <input type="hidden" asp-for="DeckId" value="@ViewBag.AdditionalData" />
     <div class="form-group">
         <label>Do you want text-to-speech to be available for this card:</label>
@@ -17,24 +20,36 @@
             <input class="form-check-input" type="radio" asp-for="IsLanguageFlashcard" value="@false" required />
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group mt-2">
         <label asp-for="Question"></label><span class="text-danger">*</span>
-        <input asp-for="Question" class="form-control" />
+        <div class="row">
+            <div class="col-md-6">
+                <input asp-for="Question" class="form-control" />
+            </div>
+        </div>
         <span asp-validation-for="Question" class="text-danger"></span>
     </div>
-    <div class="form-group">
+    <div class="form-group mt-2">
         <label asp-for="Answer"></label><span class="text-danger">*</span>
-        <input asp-for="Answer" class="form-control" />
+        <div class="row">
+            <div class="col-md-6">
+                <input asp-for="Answer" class="form-control" />
+            </div>
+        </div>
         <span asp-validation-for="Answer" class="text-danger"></span>
     </div>
-    <div class="form-group">
+    <div class="form-group mt-2">
         <label asp-for="Notes"></label>
-        <input asp-for="Notes" class="form-control" />
+        <div class="row">
+            <div class="col-md-6">
+                <input asp-for="Notes" class="form-control" />
+            </div>
+        </div>
         <span asp-validation-for="Notes" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Create</button>
+    <button type="submit" class="btn btn-primary mt-5 mb-2">Create</button>
 </form>
-<form asp-action="BrowseFlashcards" method="get">
+<form asp-action="BrowseFlashcards" method="get" class="new-flashcard-form">
     <input type="hidden" name="deckId" value="@ViewBag.AdditionalData" />
-    <button type="submit" class="btn btn-primary">Cancel</button>
+    <button type="submit" class="btn btn-secondary">Cancel</button>
 </form>

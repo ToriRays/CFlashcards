@@ -120,8 +120,7 @@ else
     </div>
 }
 
-<br>
-<br>
+
 <a class="btn btn-primary mx-5 mt-5" asp-controller="Deck" asp-action="BrowseDecks">Back To Decks</a>
 
 @if (Model.FlashcardsUserId != "demo")// Let the user create new flashcard only if the deck is not a demo deck.
@@ -132,20 +131,25 @@ else
     </form>
 }
 
-
 @{
     // Activate the Next and Previous buttons based on the boolean values from the PaginatedList model.
     var prevDisabled = !Model.Flashcards.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.Flashcards.HasNextPage ? "disabled" : "";
 }
-<div class="controller-pagination">
-<a asp-action="BrowseFlashcards" asp-route-deckId="@Model.DeckId" asp-route-pageNumber="@(Model.Flashcards.PageIndex-1)" class="btn custom-pagination-btn p-obj @prevDisabled">
-    Previous
-</a>
-<a asp-action="BrowseFlashcards" asp-route-deckId="@Model.DeckId" asp-route-pageNumber="@(Model.Flashcards.PageIndex+1)" class="btn custom-pagination-btn n-obj @nextDisabled">
-    Next
-</a>
-</div>
+
+@if (Model.Flashcards != null)
+{
+   
+    <div class="controller-pagination">
+    <a asp-action="BrowseFlashcards" asp-route-deckId="@Model.DeckId" asp-route-pageNumber="@(Model.Flashcards.PageIndex-1)" class="btn custom-pagination-btn p-obj @prevDisabled">
+        Previous
+    </a>
+    <a asp-action="BrowseFlashcards" asp-route-deckId="@Model.DeckId" asp-route-pageNumber="@(Model.Flashcards.PageIndex+1)" class="btn custom-pagination-btn n-obj @nextDisabled">
+        Next
+    </a>
+    </div>
+}
+
 
 @section Scripts{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/langdetect/1.0.8/langdetect.min.js"></script>
