@@ -11,7 +11,10 @@
 
 @if (Model.Flashcards == null || !Model.Flashcards.Any()) //Check for flashcardlist being null to avoid warning. Display message if list is empty.
 {
-    <h5 class="card-title">It looks like this deck is empty. Go ahead and create some cards :).</h5>
+    <div class="empty-deck-image">
+    <h1 class="card-title fs-3 mt-5">It looks like this deck is empty. Go ahead and create some cards :)</h1>
+    <img src="~/css/images/missingdeck-cat-better (1).svg"/>
+    </div>
 }
 else
 {
@@ -119,13 +122,13 @@ else
 
 <br>
 <br>
-<a class="btn btn-primary" asp-controller="Deck" asp-action="BrowseDecks">Back to deck browsing.</a>
+<a class="btn btn-primary mx-5 mt-5" asp-controller="Deck" asp-action="BrowseDecks">Back To Decks</a>
 
 @if (Model.FlashcardsUserId != "demo")// Let the user create new flashcard only if the deck is not a demo deck.
 {
     <form asp-controller="Flashcard" asp-action="CreateFlashcard" method="get">
         <input type="hidden" name="deckId" value="@Model.DeckId" />
-        <button type="submit" class="btn btn-primary">Create Flashcard</button>
+        <button type="submit" class="btn btn-primary mx-5 mt-2">Create Flashcard</button>
     </form>
 }
 
@@ -144,12 +147,9 @@ else
 </a>
 </div>
 
-
 @section Scripts{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/langdetect/1.0.8/langdetect.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="~/js/site.js" defer></script>
 }
-
-
