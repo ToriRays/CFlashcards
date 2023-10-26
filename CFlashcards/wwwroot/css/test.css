@@ -7,7 +7,7 @@
 
 .settings {
     position: relative;
-    width: 300px;
+    width: 280px;
     height: 70px;
     background: linear-gradient(45deg, #437ee2, #c71b42);
     display: flex;
@@ -18,20 +18,23 @@
 }
 
     .settings ul {
-        display: flex;
-        width: 350px;
+        display:contents;
+        width: 280px;
+        padding:10px;
+        margin:5px;
+       
     }
 
         .settings ul li {
             position: relative;
-            width: 55px;
+            width: 80px;
             height: 55px;
             list-style: none;
-            z-index: 1;
+            
         }
 
             .settings ul li a {
-                position: relative;
+                position: absolute;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -46,7 +49,6 @@
                     display: block;
                     line-height: 75px;
                     font-size: 1.5em;
-                    text-align: center;
                     color: #fff;
                     transition: .5s; /*icon's speed animation transition*/
                 }
