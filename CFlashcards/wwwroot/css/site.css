@@ -309,6 +309,12 @@ h1 {
     justify-content: center;
 }
 
+/* Modifications for delete deck page */
+
+.center-container {
+    height: 20vh;
+}
+
 
 /* Animations on user landing page */
 .heading {
