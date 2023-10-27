@@ -33,7 +33,9 @@ h1 {
     padding: 3px;
 }
 
-
+.nav-link {
+    color: #712c66;
+}
 
 
 /* ********** Targetting Extra Small Devices ********** */
