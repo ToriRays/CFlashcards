@@ -15,19 +15,19 @@
     @* <hr /> *@
     <dl class ="deck-info row">
         <div class="info-pair">
-            <dt class="col-sm-6 custom-dt">Title</dt>
-            <dd class="col-sm-6">@Model.Title</dd>
+            <dt class="col-xl-5 col-lg-6 col-md-7 col-sm-8 col-10 custom-dt">Title</dt>
+            <dd class="col-xl-8 col-lg-9 col-md-10 col-sm-10 col-10">@Model.Title</dd>
         </div>
     </dl>
     <dl class ="deck-info row">
         <div class="info-pair">
-            <dt class="col-sm-6 custom-dt">Description</dt>
-            <dd class="col-sm-6">@Model.Description</dd>
+            <dt class="col-xl-5 col-lg-6 col-md-7 col-sm-8 col-10 custom-dt">Description</dt>
+            <dd class="col-xl-8 col-lg-9 col-md-10 col-sm-10 col-10">@Model.Description</dd>
         </div>
     </dl>
 
     <form asp-action="DeleteDeckConfirmed" asp-route-id="@Model.DeckId" method="post" class="mx-4">
-        <button type="submit" class="btn btn-danger mx-3">Delete</button>
-        <a asp-action="BrowseDecks" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-danger mx-3 mt-5">Delete</button>
+        <a asp-action="BrowseDecks" class="btn btn-secondary mt-5">Cancel</a>
     </form>
 </section>

@@ -16,7 +16,7 @@
 }
 
 
-/* Heading and search bar on Deck page */
+/* Heading And Search Bar On Deck Page */
 
 .search-bar {
     /*width: 100%;
@@ -124,7 +124,7 @@
     }
 
 
-/* Flashcards design */
+/* Flashcards Design */
 
 .card {
     --b: 2px; /* border thickness */
@@ -163,7 +163,7 @@
 }
 
 
-/* Custom design of decks bottom buttons on Browse decks page */
+/* Custom Design Of Decks Bottom Buttons Nn Browse Decks Page */
 
 .buttons-container {
     display: flex;

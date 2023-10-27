@@ -22,7 +22,7 @@
     <form asp-action="DeleteFlashcardConfirmed" method="post">
         <input type="hidden" name="id" value="@Model.FlashcardId" />
         <input type="hidden" name="deckId" value="@Model.DeckId" />
-        <button type="submit" class="btn btn-danger">Delete</button>
-        <a asp-action="Details" asp-route-id="@Model.FlashcardId" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-danger mt-5 m-2">Delete</button>
+        <a asp-action="Details" asp-route-id="@Model.FlashcardId" class="btn btn-secondary mt-5 m-2">Cancel</a>
     </form>
 </section>
