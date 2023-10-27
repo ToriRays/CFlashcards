@@ -7,7 +7,7 @@
 }
 
 a {
-    color: #501d48;
+    color: #7c116b;
     text-decoration: underline;
 }
 
@@ -16,6 +16,24 @@ html {
     position: relative;
     min-height: 100%;
 }
+
+h1 {
+    font-size: calc(1.375rem + 1.1vw);
+}
+
+.text-info {
+    color: #712c66 !important;
+}
+
+.alert-success {
+    color: #712c66;
+    text-align: center;
+    background-color: #f7770f2b;
+    border-color: #ff572257;
+    padding: 3px;
+}
+
+
 
 
 /* ********** TARGETTING EXTRA SMALL DEVICES ********** */
@@ -31,6 +49,7 @@ html {
     .form-control {
         width: 100%;
     }
+
 }
 
 /* ********** TARGETTING MEDIUM DEVICES ********** */
@@ -76,11 +95,7 @@ body {
 }
 
 
-/* ********** SECTIONS AND HEADINGS ********** */
-
-h1 {
-    font-size: calc(1.375rem + 1.1vw);
-}
+/* ********** SECTIONS ON DIFFERENT PAGES ********** */
 
 .section-intro {
     position: relative;
@@ -112,6 +127,13 @@ h1 {
     width: 100%;
     margin: 0 auto;
     padding: 60px 5vw;
+}
+
+.email-confirm-section {
+    min-height: 250px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 40px 5vw;
 }
 
 
@@ -243,6 +265,16 @@ h1 {
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #fb25c9;
+}
+
+.alert-dismissible .btn-close {
+    position: absolute;
+    padding: 0.5rem 0.5rem;
+}
+.btn-close:hover {
+    color: #192040;
+    text-decoration: none;
+    opacity: .75;
 }
 
 
