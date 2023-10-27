@@ -1,8 +1,8 @@
 @media (min-width: 768px) {
-    html {
+    /*html {
         font-size: 14px;
     }
-
+    */
     .search-bar {
         padding: 60px 5vw;
     }

@@ -1,3 +1,5 @@
+/* ******************************  DEFAULT DESIGN FOR ALL HTML PAGES ****************************** */
+
 * {
     padding: 0;
     margin: 0;
@@ -15,13 +17,46 @@ html {
     min-height: 100%;
 }
 
+
+/* ********** TARGETTING EXTRA SMALL DEVICES ********** */
+
+@media (max-width: 576px) {
+
+    /* login form id */
+    #account {
+        max-width: 100%;
+    }
+
+    /* targetting input fields of the form */
+    .form-control {
+        width: 100%;
+    }
+}
+
+/* ********** TARGETTING MEDIUM DEVICES ********** */
+
 @media (min-width: 768px) {
+
+    .container {
+        width: 738px;
+    }
+
     html {
         font-size: 14px;
     }
 
     .section-intro {
         padding: 60px 5vw;
+    }
+}
+
+/* ********** TARGETTING LARGE DEVICES ********** */
+
+@media (min-width: 992px) {
+
+    .login-form-section {
+        padding-left: 10%;
+        padding-right: 10%;
     }
 }
 
@@ -40,12 +75,12 @@ body {
     /*justify-content: space-between;*/
 }
 
+
+/* ********** SECTIONS AND HEADINGS ********** */
+
 h1 {
     font-size: calc(1.375rem + 1.1vw);
 }
-
-
-/* Index page and animation realted to it */
 
 .section-intro {
     position: relative;
@@ -57,10 +92,31 @@ h1 {
     align-items: flex-start;
     min-height: 400px;
     width: 100%;
-    max-width: 1200px; /* to avoid stretched text on bg screens*/
+    /* to avoid stretched text on bg screens*/
+    max-width: 1200px;
     margin: 0 auto;
     padding: 60px 5vw;
 }
+
+.error-section {
+    min-height: 400px;
+    width: 100%;
+    /* to avoid stretched text on bg screens*/
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 5vw;
+}
+
+.login-form-section {
+    min-height: 250px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 60px 5vw;
+}
+
+
+/* ********** INDEX PAGE AND ITS ANIMATION ********** */
+
 
 #waves-top {
     /*display: block;*/
@@ -110,7 +166,24 @@ h1 {
 }
 
 
-/* Custom buttons modifications using Bootstrap classes */
+/* ********** CAT ANIMATION ON DEFAULT LANDING PAGE ********** */
+
+.blob-motion {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    position: absolute;
+    transform: translateY(-70%);
+    z-index: 0;
+    margin: 10px;
+}
+
+.blob-content {
+    z-index: 1;
+}
+
+
+/* ********** CUSTOM MODIFICATIONS ON BOOTSTRAP BUTTON CLASSES ********** */
 
 .btn {
     border-radius: 0.85rem;
@@ -173,24 +246,7 @@ h1 {
 }
 
 
-/* part of Cat animation on default landing page*/
-
-.blob-motion {
-    width: 100%;
-    max-width: 800px;
-    height: auto;
-    position: absolute;
-    transform: translateY(-70%);
-    z-index: 0;
-    margin: 10px;
-}
-
-.blob-content {
-    z-index: 1;
-}
-
-
-/* Login form */
+/* ********** LOGIN FORM ********** */
 
 .form-control:focus {
     color: #212529;
@@ -212,8 +268,8 @@ h1 {
 }
 
 
+/* *** TAB NAVIGATION *** */
 
-/* Tab navigation */
 .login-logout-card .card-header {
     padding: 0px 0px 12px 0px;
 }
@@ -334,9 +390,8 @@ h1 {
 }
 
 
+/* *** USER LANDING PAGE ANIMATIONS *** */
 
-
-/* Animations on user landing page */
 .heading {
     flex: 1;
     padding-right: 20px;
