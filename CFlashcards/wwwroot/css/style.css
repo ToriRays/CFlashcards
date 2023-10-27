@@ -1,8 +1,8 @@
 @media (min-width: 768px) {
-    html {
+    /*html {
         font-size: 14px;
     }
-
+    */
     .search-bar {
         padding: 60px 5vw;
     }
@@ -16,7 +16,7 @@
 }
 
 
-/* Heading and search bar on Deck page */
+/* Heading And Search Bar On Deck Page */
 
 .search-bar {
     /*width: 100%;
@@ -117,18 +117,6 @@
         background-color: #b02a37;
     }
 
-.create-deck-section {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: space-around;
-    justify-content: space-around;
-    align-items: flex-start;
-    min-height: 200px;
-    width: 100%;
-}
-
 .btn-outline-primary {
     color: #543770;
     border-color: #543770;
@@ -145,7 +133,7 @@
     }
 
 
-/* Flashcards design */
+/* Flashcards Design */
 
 .card {
     --b: 2px; /* border thickness */
@@ -183,29 +171,77 @@
 }
 
 
+/* Custom Design Of Decks Bottom Buttons Nn Browse Decks Page */
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.create-deck-section {
+    /*position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: space-around;
+    align-items: flex-start;
+    min-height: 200px;
+    width: 100%;*/
+    /**/
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-height: 170px;
+    width: 100%;
+}
+
+
 /*.my-flex-modifications {
     align-items: center;
 }*/
 
+
 /* Pagination links */
+
 .controller-pagination {
-    position: relative;
+    /*position: relative;
     bottom: 15%;
-    margin-top: auto;
+    margin-top: auto;*/
+    /**/
+    display: flex;
+    justify-content: center;
 }
 
+
 .custom-pagination-btn {
-    position: relative;
+    /*position: relative;
     align-content: space-around;
     justify-content: space-around;
     color: #fff;
     background: linear-gradient(45deg, #6610f2, #4a038e);
+    border-color: #543770;*/
+    /**/
+    margin: 0 50px;
+    /*color: #fff;*/
+    /*background: linear-gradient(45deg, #6610f2, #4a038e);*/
     border-color: #543770;
+    color: #543770;
+    width: 80px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    
+    align-items: center;
 }
 
     .custom-pagination-btn:hover {
         color: #fff;
-        background: linear-gradient(45deg, #FF0080, #a22c65 );
+        background: linear-gradient(65deg, #cc3557, #db0031 );
         border: none;
     }
 
@@ -213,7 +249,8 @@
         box-shadow: 0 0 0 0.25rem rgba(255, 0, 255, 0.5);
     }
 
-.p-obj {
+
+/*.p-obj {
     position: absolute;
     margin-left: 40%;
 }
@@ -221,4 +258,41 @@
 .n-obj {
     position: absolute;
     margin-left: 60%;
+}*/
+
+
+/* Custom design for Create Flashcard Form */
+.new-flashcard-form {
+    padding-left: 20px;
+    padding-right: 20px;
 }
+
+/* Custom design for delete Flashcard */
+
+.display-card-container {
+    min-height: 100px;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+/* Custom desgin on admin page. Some of the properties are from the root */
+
+.admin-page {
+    overflow-x: auto;
+    margin-left: 2%;
+    margin-right: 2%;  
+}
+
+    .admin-page .table {
+        font-size: 12px;
+    }
+
+    .admin-page .table-striped > tbody {
+        color: #712c66;
+    }
+
+    .table-striped > tbody > tr:nth-of-type(odd) {
+        --bs-table-accent-bg: var(--bs-table-striped-bg);
+        color: #712c66;
+    }
+

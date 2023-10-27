@@ -1,10 +1,13 @@
 ﻿@model Flashcard
+@section Styles{
+    <link rel="stylesheet" href="~/css/style.css" />
+}
 
-<h2>Delete Item</h2>
+@* <h1 class="fs-3 text-center">Delete Item</h1> *@
 
-<h3>Are you sure you want to delete this flashcard?</h3>
-<div>
-    <h4>Flashcard</h4>
+<h1 class="fs-3 text-center">Are you sure you want to delete this flashcard?</h1>
+<section class="display-card-container">
+    <h2 class="fs-4 m-3">Flashcard</h2>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">Question</dt>
@@ -19,7 +22,7 @@
     <form asp-action="DeleteFlashcardConfirmed" method="post">
         <input type="hidden" name="id" value="@Model.FlashcardId" />
         <input type="hidden" name="deckId" value="@Model.DeckId" />
-        <button type="submit" class="btn btn-danger">Delete</button>
-        <a asp-action="Details" asp-route-id="@Model.FlashcardId" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-danger mt-5 m-2">Delete</button>
+        <a asp-action="Details" asp-route-id="@Model.FlashcardId" class="btn btn-secondary mt-5 m-2">Cancel</a>
     </form>
-</div>
+</section>

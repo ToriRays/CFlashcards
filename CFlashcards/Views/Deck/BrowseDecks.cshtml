@@ -9,7 +9,7 @@
 }
     
 <section class="search-bar">
-    <h1>Browse your decks</h1>
+    <h1 class="fs-2">Browse your decks</h1>
     <form method="get" asp-action="BrowseDecks">
         <input type="text" name="searchString" placeholder="search here" value="@ViewData["SearchString"]">
         <button type="submit"><i class="fa fa-search"></i></button>
@@ -43,19 +43,50 @@
         </div>
     }
 </div>
-<div class="create-deck-section">
-    <a class="btn btn-outline-primary" asp-controller="Deck" asp-action="CreateDeck">Create New Deck</a>
-</div>
-@{ // Activate the Next and Previous buttons based on the boolean values from the PaginatedList model.
+
+@* @{
+    // Activate the Next and Previous buttons based on the boolean values from the PaginatedList model.
     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
-<div class="controller-pagination">
-<a asp-action="BrowseDecks" asp-route-pageNumber="@(Model.PageIndex-1)" class="btn custom-pagination-btn p-obj @prevDisabled">
-    Previous
-</a>
-<a asp-action="BrowseDecks" asp-route-pageNumber="@(Model.PageIndex+1)" class="btn custom-pagination-btn n-obj @nextDisabled">
-    Next
-</a>
+
+<div class="decks-bottom-buttons">
+
+    <div class="create-deck-section"> 
+       
+        <a class="btn btn-outline-primary" asp-controller="deck" asp-action="createdeck">create new deck</a>
+   </div>
+
+   
+    <div class="controller-pagination">
+        
+    <a asp-action="browsedecks" asp-route-pagenumber="@(model.pageindex-1)" class="btn custom-pagination-btn p-obj @prevdisabled">
+                <i class="fas fa-angle-double-left"></i> previous
+            </a>
+    <a asp-action="browsedecks" asp-route-pagenumber="@(model.pageindex+1)" class="btn custom-pagination-btn n-obj @nextdisabled">
+                next <i class="fas fa-angle-double-right"></i>
+    </a>
+    </div>
+
+
+</div> *@
+
+<div class="buttons-container">
+    <div class="create-deck-section">
+        <a class="btn btn-outline-primary" asp-controller="Deck" asp-action="CreateDeck">Create New Deck</a>
+    </div>
+    @{
+        // Activate the Next and Previous buttons based on the boolean values from the PaginatedList model.
+        var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    }
+    <div class="controller-pagination">
+        <a asp-action="BrowseDecks" asp-route-pageNumber="@(Model.PageIndex-1)" class="btn custom-pagination-btn p-obj @prevDisabled">
+            <i style="font-size:10px; margin-right: 5px; " class="fas fa-angle-double-left"></i> Previous
+        </a>
+        <a asp-action="BrowseDecks" asp-route-pageNumber="@(Model.PageIndex+1)" class="btn custom-pagination-btn n-obj @nextDisabled">
+            Next <i style="font-size:10px; margin-left: 10px;" class="fas fa-angle-double-right"></i>
+        </a>
+    </div>
 </div>
 

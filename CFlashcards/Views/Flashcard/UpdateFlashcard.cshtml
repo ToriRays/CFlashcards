@@ -1,39 +1,46 @@
 ﻿@model Flashcard
+@section Styles{
+    <link rel="stylesheet" href="~/css/style.css" />
+}
 
-<h2>Update Item</h2>
+<section class="deck-form">
+    <h1 class="fs-2 mx-3 mb-5">Update Card</h1>
 
-<form asp-action="UpdateFlashcard">
-    <input type="hidden" asp-for="FlashcardId" />
-    <input type="hidden" asp-for="DeckId" />
-    <input type="hidden" asp-for="Deck" />
-    <div class="form-group">
-        <label>Do you want text-to-speech to be available for this card:</label>
-        <div class="form-check">
-            <label class="form-check-label" for="IsLanguageFlashcard">Language Flashcard</label>
-            <input class="form-check-input" type="radio" asp-for="IsLanguageFlashcard" value="true" 
-                checked="@Model.IsLanguageFlashcard" required/>
+    <form asp-action="UpdateFlashcard" class="mx-4">
+        <input type="hidden" asp-for="FlashcardId" />
+        <input type="hidden" asp-for="DeckId" />
+        <input type="hidden" asp-for="Deck" />
+        <div class="form-group">
+            <label>Do you want text-to-speech to be available for this card:</label>
+            <div class="form-check">
+                <label class="form-check-label" for="IsLanguageFlashcard">Language Flashcard</label>
+                <input class="form-check-input" type="radio" asp-for="IsLanguageFlashcard" value="true" 
+                    checked="@Model.IsLanguageFlashcard" required/>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label" for="IsLanguageFlashcard">Non-Language Flashcard</label>
+                <input class="form-check-input" type="radio" asp-for="IsLanguageFlashcard" value="false"
+                        checked="@(!Model.IsLanguageFlashcard)" required/>
+            </div>
         </div>
-        <div class="form-check">
-            <label class="form-check-label" for="IsLanguageFlashcard">Non-Language Flashcard</label>
-            <input class="form-check-input" type="radio" asp-for="IsLanguageFlashcard" value="false"
-                    checked="@(!Model.IsLanguageFlashcard)" required/>
+        <div class="form-group">
+            <label asp-for="Question" class="mt-2 mb-1"></label><span class="text-danger">*</span>
+            <input asp-for="Question" class="form-control" />
+            <span asp-validation-for="Question" class="text-danger"></span>
         </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="Question"></label><span class="text-danger">*</span>
-        <input asp-for="Question" class="form-control" />
-        <span asp-validation-for="Question" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Answer"></label><span class="text-danger">*</span>
-        <input asp-for="Answer" class="form-control" />
-        <span asp-validation-for="Answer" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Notes"></label>
-        <input asp-for="Notes" class="form-control" />
-        <span asp-validation-for="Notes" class="text-danger"></span>
-    </div>
-    <button type="submit" class="btn btn-primary">Save Changes</button>
-    <a asp-controller="Flashcard" asp-action="Details" asp-route-id="@Model.FlashcardId" class="btn btn-secondary">Cancel</a>
-</form>
+        <div class="form-group">
+            <label asp-for="Answer" class="mt-2 mb-1"></label><span class="text-danger">*</span>
+            <input asp-for="Answer" class="form-control" />
+            <span asp-validation-for="Answer" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Notes" class="mt-2 mb-1"></label>
+            <input asp-for="Notes" class="form-control" />
+            <span asp-validation-for="Notes" class="text-danger"></span>
+        </div>
+        <div class="form-buttons-container">
+            <button type="submit" class="btn btn-primary mt-4 m-2">Save Changes</button>
+            <a asp-controller="Flashcard" asp-action="Details" asp-route-id="@Model.FlashcardId" class="btn btn-secondary mt-4 m-2">Cancel</a>
+        </div>
+    </form>
+</section>

@@ -6,12 +6,17 @@
     <link href="~/css/carouselstyle.css" rel="stylesheet" />
     <link href="~/css/test.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 }
 
 
 @if (Model.Flashcards == null || !Model.Flashcards.Any()) //Check for flashcardlist being null to avoid warning. Display message if list is empty.
 {
-    <h5 class="card-title">It looks like this deck is empty. Go ahead and create some cards :).</h5>
+    <div class="empty-deck-image">
+    <h1 class="card-title fs-3 mt-5">It looks like this deck is empty. Go ahead and create some cards :)</h1>
+    <img src="~/css/images/missingdeck-cat-better (1).svg"/>
+    </div>
 }
 else
 {
@@ -119,32 +124,35 @@ else
     </div>
 }
 
-<br>
-<br>
-<a class="btn btn-primary" asp-controller="Deck" asp-action="BrowseDecks">Back to deck browsing.</a>
+
+<a class="btn btn-primary mx-5 mt-5" asp-controller="Deck" asp-action="BrowseDecks">Back To Decks</a>
 
 @if (Model.FlashcardsUserId != "demo")// Let the user create new flashcard only if the deck is not a demo deck.
 {
     <form asp-controller="Flashcard" asp-action="CreateFlashcard" method="get">
         <input type="hidden" name="deckId" value="@Model.DeckId" />
-        <button type="submit" class="btn btn-primary">Create Flashcard</button>
+        <button type="submit" class="btn btn-primary mx-5 mt-2 mb-5">Create Flashcard</button>
     </form>
 }
-
 
 @{
     // Activate the Next and Previous buttons based on the boolean values from the PaginatedList model.
     var prevDisabled = !Model.Flashcards.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.Flashcards.HasNextPage ? "disabled" : "";
 }
-<div class="controller-pagination">
-<a asp-action="BrowseFlashcards" asp-route-deckId="@Model.DeckId" asp-route-pageNumber="@(Model.Flashcards.PageIndex-1)" class="btn custom-pagination-btn p-obj @prevDisabled">
-    Previous
-</a>
-<a asp-action="BrowseFlashcards" asp-route-deckId="@Model.DeckId" asp-route-pageNumber="@(Model.Flashcards.PageIndex+1)" class="btn custom-pagination-btn n-obj @nextDisabled">
-    Next
-</a>
-</div>
+
+@if (Model.Flashcards.Any())
+{
+   
+    <div class="controller-pagination">
+    <a asp-action="BrowseFlashcards" asp-route-deckId="@Model.DeckId" asp-route-pageNumber="@(Model.Flashcards.PageIndex-1)" class="btn custom-pagination-btn p-obj @prevDisabled">
+            <i class="fas fa-angle-double-left"></i> Previous
+    </a>
+    <a asp-action="BrowseFlashcards" asp-route-deckId="@Model.DeckId" asp-route-pageNumber="@(Model.Flashcards.PageIndex+1)" class="btn custom-pagination-btn n-obj @nextDisabled">
+            Next <i class="fas fa-angle-double-right"></i>
+    </a>
+    </div>
+}
 
 
 @section Scripts{
@@ -153,5 +161,3 @@ else
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="~/js/site.js" defer></script>
 }
-
-

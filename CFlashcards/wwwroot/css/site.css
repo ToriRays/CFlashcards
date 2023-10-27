@@ -1,7 +1,14 @@
+/* ******************************  DEFAULT DESIGN FOR ALL HTML PAGES ****************************** */
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+
+a {
+    color: #7c116b;
+    text-decoration: underline;
 }
 
 html {
@@ -10,13 +17,67 @@ html {
     min-height: 100%;
 }
 
+h1 {
+    font-size: calc(1.375rem + 1.1vw);
+}
+
+.text-info {
+    color: #712c66 !important;
+}
+
+.alert-success {
+    color: #712c66;
+    text-align: center;
+    background-color: #f7770f2b;
+    border-color: #ff572257;
+    padding: 3px;
+}
+
+.nav-link {
+    color: #712c66;
+}
+
+
+/* ********** Targetting Extra Small Devices ********** */
+
+@media (max-width: 576px) {
+
+    /* login form id */
+    #account {
+        max-width: 100%;
+    }
+
+    /* targetting input fields of the form */
+    .form-control {
+        width: 100%;
+    }
+
+}
+
+/* ********** Targetting Medium Devices ********** */
+
 @media (min-width: 768px) {
+
+    .container {
+        width: 738px;
+    }
+
     html {
         font-size: 14px;
     }
 
     .section-intro {
         padding: 60px 5vw;
+    }
+}
+
+/* ********** Targetting Large Devices ********** */
+
+@media (min-width: 992px) {
+
+    .login-form-section {
+        padding-left: 10%;
+        padding-right: 10%;
     }
 }
 
@@ -35,12 +96,8 @@ body {
     /*justify-content: space-between;*/
 }
 
-h1 {
-    font-size: calc(1.375rem + 1.1vw);
-}
 
-
-/* Index page and animation realted to it */
+/* ********** Sections On Different Pages ********** */
 
 .section-intro {
     position: relative;
@@ -52,10 +109,38 @@ h1 {
     align-items: flex-start;
     min-height: 400px;
     width: 100%;
-    max-width: 1200px; /* to avoid stretched text on bg screens*/
+    /* to avoid stretched text on bg screens*/
+    max-width: 1200px;
     margin: 0 auto;
     padding: 60px 5vw;
 }
+
+.error-section {
+    min-height: 400px;
+    width: 100%;
+    /* to avoid stretched text on bg screens*/
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 5vw;
+}
+
+.login-form-section {
+    min-height: 250px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 60px 5vw;
+}
+
+.email-confirm-section {
+    min-height: 250px;
+    width: 90%;
+    margin: 0 auto;
+    padding: 40px 5vw;
+}
+
+
+/* ********** Index Page And Its Animation ********** */
+
 
 #waves-top {
     /*display: block;*/
@@ -105,7 +190,24 @@ h1 {
 }
 
 
-/* Custom buttons modifications using Bootstrap classes */
+/* ********** Cat Animation On Default Landing Page ********** */
+
+.blob-motion {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    position: absolute;
+    transform: translateY(-70%);
+    z-index: 0;
+    margin: 10px;
+}
+
+.blob-content {
+    z-index: 1;
+}
+
+
+/* ********** Custom Modifications On Bootstrap Button Classes ********** */
 
 .btn {
     border-radius: 0.85rem;
@@ -167,25 +269,18 @@ h1 {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #fb25c9;
 }
 
-
-/* part of Cat animation on default landing page*/
-
-.blob-motion {
-    width: 100%;
-    max-width: 800px;
-    height: auto;
+.alert-dismissible .btn-close {
     position: absolute;
-    transform: translateY(-70%);
-    z-index: 0;
-    margin: 10px;
+    padding: 0.5rem 0.5rem;
+}
+.btn-close:hover {
+    color: #192040;
+    text-decoration: none;
+    opacity: .75;
 }
 
-.blob-content {
-    z-index: 1;
-}
 
-
-/* Login form */
+/* ********** Login Form ********** */
 
 .form-control:focus {
     color: #212529;
@@ -207,8 +302,8 @@ h1 {
 }
 
 
+/* *** Tab Navigation *** */
 
-/* Tab navigation */
 .login-logout-card .card-header {
     padding: 0px 0px 12px 0px;
 }
@@ -285,12 +380,51 @@ h1 {
 
 /* Modifications for deck create form */
 
+.deck-form-container {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .deck-form {
-    min-height: 80vh;
+   max-width: 500px;
+   width: 100%;
+   margin: 0 auto;
+}
+
+.form-buttons-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/* Modifications for delete deck page */
+
+.center-container {
+    height: 20vh;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}
+
+.deck-info {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.info-pair{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.custom-dt {
+    margin-right: 30px;
 }
 
 
-/* Animations on user landing page */
+/* *** USER LANDING PAGE ANIMATIONS *** */
 
 .heading {
     flex: 1;
