@@ -1,14 +1,13 @@
-﻿
-const buttonAnswer = document.querySelectorAll(".speech-button-answer");
+﻿const buttonAnswer = document.querySelectorAll(".speech-button-answer");
 let isSpeaking = false;
 let speechSynthesis = window.speechSynthesis;
 let intervalId;
 
-const textToSpeech = (text, lang) => {
+const textToSpeech = (button, text, lang) => {
 if (isSpeaking) {
     speechSynthesis.cancel();
     isSpeaking = false;
-    buttonAnswer.innerText = "Convert to Speech";
+    button.innerText = "Convert to Speech";
     clearInterval(intervalId);
     return;
 }
@@ -27,16 +26,18 @@ button.addEventListener("click", () => {
     const answerText = button.getAttribute("data-answer");
     // Set the language code for Norwegian (Norway)
     const lang = 'no-NO';
-    textToSpeech(answerText, lang);
+    textToSpeech(button, answerText, lang);
 });
 });
 
 intervalId = setInterval(() => {
-if (!speechSynthesis.speaking && isSpeaking) {
-    isSpeaking = false;
-    buttonAnswer.innerText = "Convert to Speech";
-    clearInterval(intervalId);
-}
+    if (!speechSynthesis.speaking && isSpeaking) {
+        isSpeaking = false;
+        buttonAnswer.forEach((button) => {
+            button.innerText = "Convert to Speech";
+        });
+        clearInterval(intervalId);
+    }
 });
 
 
