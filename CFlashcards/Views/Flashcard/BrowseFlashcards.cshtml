@@ -139,7 +139,7 @@ else
     var nextDisabled = !Model.Flashcards.HasNextPage ? "disabled" : "";
 }
 
-@if (Model.Flashcards != null)
+@if (Model.Flashcards.Any())
 {
    
     <div class="controller-pagination">
