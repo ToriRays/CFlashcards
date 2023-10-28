@@ -9,10 +9,9 @@ using System.Diagnostics;
 
 namespace CFlashcards.Controllers
 {
-    // so the userID will be showned only when we looged in, otherwise redirection to LogReg box on the welcome page
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger; //for ILogger down there it is coresponding private readonly property which is assigned within parameter logger in brackets
+        private readonly ILogger<HomeController> _logger;
         private readonly UserManager<FlashcardsUser> _userManager;
         private readonly SignInManager<FlashcardsUser> _signInManager;
 

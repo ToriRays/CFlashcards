@@ -49,8 +49,6 @@ namespace CFlashcards.Controllers
             }
 
             var pageSize = 6;
-
-            ViewData["SearchTerm"] = searchString;
             // We return the decks through the PaginatedList<> class such that not all decks are displayed in the View at once.
             return View(PaginatedList<Deck>.Create(decks.ToList(), pageNumber ?? 1, pageSize));
         }
