@@ -7,14 +7,13 @@ const textToSpeech = (button, text, lang) => {
 if (isSpeaking) {
     speechSynthesis.cancel();
     isSpeaking = false;
-    button.innerText = "Convert to Speech";
     clearInterval(intervalId);
     return;
 }
 
 if (text && text.length > 0) {
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = lang; // Set the language of the utterance to Norwegian
+    utterance.lang = lang; // Set the language of the utterance to English
     speechSynthesis.speak(utterance);
     isSpeaking = true;
     buttonAnswer.innerText = "Pause";
@@ -24,8 +23,8 @@ if (text && text.length > 0) {
 buttonAnswer.forEach((button) => {
 button.addEventListener("click", () => {
     const answerText = button.getAttribute("data-answer");
-    // Set the language code for Norwegian (Norway)
-    const lang = 'no-NO';
+    // Set the language code for English 
+    const lang = 'en-En';
     textToSpeech(button, answerText, lang);
 });
 });
@@ -34,7 +33,6 @@ intervalId = setInterval(() => {
     if (!speechSynthesis.speaking && isSpeaking) {
         isSpeaking = false;
         buttonAnswer.forEach((button) => {
-            button.innerText = "Convert to Speech";
         });
         clearInterval(intervalId);
     }
