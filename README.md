@@ -7,7 +7,7 @@
 - **ASP.NET Identity**: For user authentication and management.
 - **Entity Framework Core**: To handle data access and database operations.
 - **HTML/CSS**: For web page structure and styling.
-- **Open-Source Libraries**: We're using the following open-source libraries and resources: [KUTE.JS] (https://thednp.github.io/kute.js/) -  animation engine, [Web Speech API] (https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API) to incorporate voice data into web app. 
+- **Open-Source Libraries**: We're using the following open-source libraries and resources: [KUTE.JS](https://thednp.github.io/kute.js/) -  animation engine, [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API) to incorporate voice data into web app. 
 - **SQLite Database**: Our application uses a [SQLite](https://www.sqlite.org/index.html) database for storage users' data. 
 
 
