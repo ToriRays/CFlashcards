@@ -39,24 +39,24 @@ public static class DBInit
             {
                 new Flashcard
                 {
-                    Question = "Fiskestang",
-                    Answer = "Fishing rod",
+                    Question = "Fishing rod",
+                    Answer = "Fiskestang",
                     Notes = "Important to know before going on a fishing trip. :)",
                     DeckId = 1,
                     IsLanguageFlashcard = true
                 },
                 new Flashcard
                 {
-                    Question = "Brunost",
-                    Answer = "Brown cheese",
+                    Question = "Brown cheese",
+                    Answer = "Brunost",
                     Notes = "A national Norwegian chewy cheese with a brown colour and sweet taste.",
                     DeckId = 1,
                     IsLanguageFlashcard = true
                 },
                 new Flashcard
                 {
-                    Question = "Benk",
-                    Answer = "Bench",
+                    Question = "Bench",
+                    Answer = "Benk",
                     Notes = "Just a Bench :O",
                     DeckId = 1,
                     IsLanguageFlashcard = true
