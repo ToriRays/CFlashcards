@@ -17,6 +17,7 @@
 > Please log in using the admin account for having access to all functions
 > **Admin email**: admin@example.com
 > **Password**: 123456#e
+> > It is also possible to log in with a normal user using the **testUser email**: testUser@example.com with the same password
 
 1. **Choosing Flashcard Category**: Upon launching the web page, users can select between language and non-language flashcards.
 
