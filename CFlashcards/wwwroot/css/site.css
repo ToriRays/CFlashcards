@@ -181,11 +181,11 @@ body {
     }
 }
 
-#orange {
+.orange {
     animation: move-up 22s infinite;
 }
 
-#red {
+.red {
     animation: move-down 22s infinite;
 }
 

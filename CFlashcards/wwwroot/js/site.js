@@ -23,8 +23,8 @@ if (text && text.length > 0) {
 buttonAnswer.forEach((button) => {
 button.addEventListener("click", () => {
     const answerText = button.getAttribute("data-answer");
-    // Set the language code for English 
-    const lang = 'en-En';
+    // Set the language code for Norwegian 
+    const lang = 'no-No';
     textToSpeech(button, answerText, lang);
 });
 });
